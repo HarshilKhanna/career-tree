@@ -1,0 +1,31 @@
+{
+  "ug_b_tech_computer_science_india": {
+    "treeViews": 3,
+    "nodes": {
+      "a9ece1b4-b9db-496f-870f-90e69dd8c474": {
+        "clicks": 6,
+        "expands": 6
+      },
+      "feac04f3-a18d-4a11-8ceb-0c6551b9e120": {
+        "clicks": 2,
+        "expands": 1
+      },
+      "bcd71f46-0b1e-4573-8a39-385075d5f2f5": {
+        "clicks": 1,
+        "expands": 0
+      }
+    }
+  },
+  "masters_mba_corporate_finance_india": {
+    "treeViews": 2,
+    "nodes": {}
+  },
+  "ug_b_sc_computer_science_usa": {
+    "treeViews": 1,
+    "nodes": {}
+  },
+  "ug_b_arch_interior_design_india": {
+    "treeViews": 1,
+    "nodes": {}
+  }
+}

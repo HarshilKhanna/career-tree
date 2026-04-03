@@ -1,65 +1,265 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Settings } from 'lucide-react';
+import SteppedSelector from '@/components/SteppedSelector';
+import { EducationLevel } from '@/lib/treeConfig';
+import { buildTreeId } from '@/lib/treeUtils';
+import { TreeMetadata } from '@/lib/types';
+import Link from 'next/link';
+import { useEffect } from 'react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: 'easeOut' as const, delay: i * 0.15 },
+  }),
+};
+
+export default function HomePage() {
+  const router = useRouter();
+  const [country, setCountry] = useState('');
+  const [level, setLevel] = useState<EducationLevel | ''>('');
+  const [degree, setDegree] = useState('');
+  const [stream, setStream] = useState<string | null | undefined>(undefined);
+  
+  const [status, setStatus] = useState<'idle' | 'loading' | 'not-found'>('idle');
+  const [treeData, setTreeData] = useState<TreeMetadata[]>([]);
+
+  useEffect(() => {
+    fetch('/api/trees')
+      .then(r => r.json())
+      .then((data: TreeMetadata[]) => setTreeData(data))
+      .catch(console.error);
+  }, []);
+
+  const isComplete = Boolean(country && level && degree && (stream !== undefined));
+
+  const handleExplore = async () => {
+    if (!isComplete) return;
+    setStatus('loading');
+    
+    // buildTreeId to get id, then fetch tree
+    const targetId = buildTreeId(level as string, degree, stream as string | null, country as string);
+    
+    try {
+      const res = await fetch(`/api/trees/${targetId}`);
+      if (!res.ok) throw new Error('Failed to fetch');
+      // If we find it, proceed
+      router.push(`/tree/${targetId}`);
+    } catch {
+      setStatus('not-found');
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main
+      style={{
+        minHeight: '100dvh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Subtle background texture */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `radial-gradient(circle at 20% 80%, rgba(45, 106, 79, 0.04) 0%, transparent 60%),
+            radial-gradient(circle at 80% 20%, rgba(45, 106, 79, 0.03) 0%, transparent 50%)`,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Content */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '32px',
+          maxWidth: '600px',
+          width: '100%',
+          textAlign: 'center',
+          position: 'relative',
+        }}
+      >
+        {/* Eyebrow */}
+        <motion.div
+          custom={0}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="will-change-transform"
+        >
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '4px 12px',
+              border: '1px solid var(--color-border)',
+              borderRadius: '100px',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--color-ink-muted)',
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <span
+              style={{
+                width: '5px',
+                height: '5px',
+                borderRadius: '50%',
+                background: 'var(--color-accent)',
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Career Path Visualizer
+          </span>
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h1
+          custom={1}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="will-change-transform"
+          style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(36px, 6vw, 60px)',
+            lineHeight: 1.1,
+            color: 'var(--color-ink)',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          Where does your degree{' '}
+          <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>
+            take you?
+          </em>
+        </motion.h1>
+
+        {/* Subheading */}
+        <motion.p
+          custom={2}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="will-change-transform"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '17px',
+            lineHeight: 1.65,
+            color: 'var(--color-ink-muted)',
+            maxWidth: '440px',
+          }}
+        >
+          Explore every career path available to you — from first job to career
+          peak — in an interactive, collapsible tree.
+        </motion.p>
+
+        {/* Selectors */}
+        <motion.div
+          custom={3}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="will-change-transform"
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
+          <SteppedSelector
+            country={country}
+            level={level as any}
+            degree={degree}
+            stream={stream}
+            treeData={treeData}
+            onCountryChange={(v) => { setCountry(v); setStatus('idle'); }}
+            onLevelChange={(v) => { setLevel(v); setStatus('idle'); }}
+            onDegreeChange={(v) => { setDegree(v); setStatus('idle'); }}
+            onStreamChange={(v) => { setStream(v); setStatus('idle'); }}
+          />
+        </motion.div>
+
+        {/* CTA */}
+        <AnimatePresence>
+          {isComplete && (
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ delay: 0.1 }}
+              style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}
+            >
+              <button
+                className="btn-primary"
+                onClick={handleExplore}
+                disabled={status === 'loading'}
+                id="explore-btn"
+                style={{
+                  fontSize: '16px',
+                  padding: '14px 36px',
+                  cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+                }}
+              >
+                {status === 'loading' ? 'Searching…' : 'Explore Paths'}
+                {status !== 'loading' && <ArrowRight size={16} />}
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Not-found message */}
+        {status === 'not-found' && (
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '13px',
+              color: '#B45309',
+              background: '#FFFBEB',
+              border: '1px solid #FDE68A',
+              borderRadius: '6px',
+              padding: '10px 16px',
+            }}
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            This path isn&apos;t mapped yet. Check back soon.
+          </motion.p>
+        )}
+      </div>
+
+      {/* Admin link */}
+      <Link
+        href="/admin"
+        className="btn-secondary"
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          left: '24px',
+          padding: '8px 16px',
+          fontSize: '12px',
+          textDecoration: 'none',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
+        <Settings size={14} />
+        Manage Content
+      </Link>
+    </main>
   );
 }

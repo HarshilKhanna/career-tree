@@ -1,0 +1,3596 @@
+[
+  {
+    "id": "ug_b_tech_computer_science_india",
+    "level": "undergraduate",
+    "degree": "B.Tech",
+    "stream": "Computer Science",
+    "country": "India",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "root": {
+      "id": "b0a631f4-3d6d-4952-b108-c89bdfcdb951",
+      "name": "B.Tech",
+      "description": "Career paths for B.Tech in India",
+      "children": [
+        {
+          "id": "eb349a1d-23f2-45e6-bd95-09d2bc1fb58d",
+          "name": "Software Development",
+          "description": "Core software engineering roles across frontend, backend, and full-stack.",
+          "children": [
+            {
+              "id": "ad250b92-bd0a-4fb4-a035-77b5a19a4e40",
+              "name": "Frontend Engineer",
+              "description": "Craft user interfaces using React, Vue, or Angular.",
+              "skills": [
+                "React",
+                "TypeScript",
+                "CSS",
+                "Web Performance"
+              ],
+              "salaryRange": "₹6L – ₹30L / yr",
+              "roadmap": "Learn HTML/CSS/JS deep dive. Master React and Next.js. Build a portfolio.",
+              "children": [
+                {
+                  "id": "1e506692-a164-44cc-87b6-f57ef51dfc95",
+                  "name": "UI/UX Developer",
+                  "description": "Bridge the gap between design and engineering.",
+                  "skills": [
+                    "Figma",
+                    "CSS Animations",
+                    "Accessibility"
+                  ],
+                  "salaryRange": "₹7L – ₹28L / yr",
+                  "roadmap": "Learn design principles alongside frontend code. Study WCAG guidelines.",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "90e6e8e8-d621-4ea6-bbe2-411a0ea4c424",
+              "name": "Backend Engineer",
+              "description": "Build APIs, microservices, and databases.",
+              "skills": [
+                "Node.js/Java/Go",
+                "PostgreSQL",
+                "System Design"
+              ],
+              "salaryRange": "₹8L – ₹40L / yr",
+              "roadmap": "Master one backend language. Understand relational databases and caching.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "a9ece1b4-b9db-496f-870f-90e69dd8c474",
+          "name": "AI & Data Science",
+          "description": "Extract insights and build models for machine learning.",
+          "children": [
+            {
+              "id": "67f10b75-1025-4c55-b4fe-c9dfad944293",
+              "name": "Data Scientist",
+              "description": "Analyze data and build predictive models.",
+              "skills": [
+                "Python",
+                "SQL",
+                "Pandas",
+                "Scikit-Learn"
+              ],
+              "salaryRange": "₹8L – ₹35L / yr",
+              "roadmap": "Learn Python data stack. Study statistics. Build portfolio on Kaggle.",
+              "children": []
+            },
+            {
+              "id": "901fa4bb-1cfa-4416-8968-07b9a5e4d1f2",
+              "name": "ML Engineer",
+              "description": "Deploy and maintain ML models in production.",
+              "skills": [
+                "Docker",
+                "Kubernetes",
+                "MLOps",
+                "PyTorch"
+              ],
+              "salaryRange": "₹12L – ₹45L / yr",
+              "roadmap": "Understand ML concepts and combine them with DevOps practices.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "feac04f3-a18d-4a11-8ceb-0c6551b9e120",
+          "name": "Product & Design",
+          "description": "Lead product development and user experience.",
+          "children": [
+            {
+              "id": "bcd71f46-0b1e-4573-8a39-385075d5f2f5",
+              "name": "Product Manager",
+              "description": "Own the product roadmap and user requirements.",
+              "skills": [
+                "Agile",
+                "Stakeholder Management",
+                "Data Analytics"
+              ],
+              "salaryRange": "₹10L – ₹40L / yr",
+              "roadmap": "Transition from engineering or get an MBA. Understand business metrics.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "0de14a84-ec40-4fe7-b710-18e404be09f7",
+          "name": "Cloud & DevOps",
+          "description": "Manage infrastructure and deployment pipelines.",
+          "children": [
+            {
+              "id": "771e8ba3-afcb-48dd-8c8f-2f1d16371e42",
+              "name": "DevOps Engineer",
+              "description": "Automate CI/CD and infrastructure.",
+              "skills": [
+                "AWS/GCP/Azure",
+                "Terraform",
+                "Jenkins/GitHub Actions"
+              ],
+              "salaryRange": "₹10L – ₹35L / yr",
+              "roadmap": "Learn Linux. Master containers (Docker/K8s). Get cloud certifications.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "b18b4561-8b06-4b13-88ee-4c5553e4ced1",
+          "name": "Research & Academia",
+          "description": "Pursue higher studies or research roles.",
+          "children": [
+            {
+              "id": "d0e14a2f-1a35-4303-9d10-e5ed081b8f1c",
+              "name": "M.Tech / M.S.",
+              "description": "Higher education in specialized fields.",
+              "skills": [
+                "GATE/GRE",
+                "Research",
+                "Thesis Writing"
+              ],
+              "salaryRange": "N/A (Stipend)",
+              "roadmap": "Prepare for exams. Maintain high CGPA. Select thesis topic carefully.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "c1f2e8c2-a9b0-45d6-bd6a-f111e1f1c2d3",
+          "name": "Entrepreneurship",
+          "description": "Start your own tech company.",
+          "children": [
+            {
+              "id": "8b08e2f1-6789-4bc2-8a90-345fbcdef123",
+              "name": "Tech Founder",
+              "description": "Build a product and acquire customers.",
+              "skills": [
+                "Sales",
+                "Product building",
+                "Fundraising"
+              ],
+              "salaryRange": "Highly Variable",
+              "roadmap": "Find a co-founder. Build MVP. Apply to YC or raise angel funds.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_b_tech_civil_india",
+    "level": "undergraduate",
+    "degree": "B.Tech",
+    "stream": "Civil",
+    "country": "India",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "root": {
+      "id": "ab75d9e1-2c0c-4fa6-bb98-c1fa930b2e2d",
+      "name": "B.Tech",
+      "description": "Career paths for B.Tech in India",
+      "children": [
+        {
+          "id": "cb149a1d-23f2-45e6-bd95-09d2bc1fb58d",
+          "name": "Structural Engineering",
+          "description": "Design and monitor structural integrity of buildings and bridges.",
+          "children": [
+            {
+              "id": "dd250b92-bd0a-4fb4-a035-77b5a19a4e40",
+              "name": "Design Engineer",
+              "description": "Use software to model structures.",
+              "skills": [
+                "AutoCAD",
+                "STAAD Pro",
+                "ETABS"
+              ],
+              "salaryRange": "₹4L – ₹18L / yr",
+              "roadmap": "Learn relevant CAD software. Understand structural load codes.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "a9ece1b4-bd9b-496f-870f-90e69dd8c474",
+          "name": "Construction Management",
+          "description": "Oversee construction projects.",
+          "children": [
+            {
+              "id": "67f10b75-1025-4c55-b4ee-c9dfad944293",
+              "name": "Project Manager",
+              "description": "Ensure projects are delivered on time and budget.",
+              "skills": [
+                "Primavera",
+                "MS Project",
+                "Contracts"
+              ],
+              "salaryRange": "₹6L – ₹25L / yr",
+              "roadmap": "Start as site engineer. Get PMP certification.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "ceac04f3-a18d-4a11-8ceb-0c6551b9e120",
+          "name": "Urban Planning",
+          "description": "Plan cities and infrastructure networks.",
+          "children": [
+            {
+              "id": "bcd71f46-0b1e-4573-8b39-385075d5f2f5",
+              "name": "Urban Planner",
+              "description": "Design sustainable city models.",
+              "skills": [
+                "GIS",
+                "Policy Analysis",
+                "AutoCAD"
+              ],
+              "salaryRange": "₹5L – ₹20L / yr",
+              "roadmap": "Get master's in urban planning. Work with municipal authorities.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1de14a84-ec40-4fe7-b710-18e404be09f7",
+          "name": "Environmental Engineering",
+          "description": "Manage water, waste, and sustainable infrastructure.",
+          "children": [
+            {
+              "id": "771e8ba3-afeb-48dd-8c8f-2f1d16371e42",
+              "name": "Environmental Consultant",
+              "description": "Ensure compliance with environmental standards.",
+              "skills": [
+                "EIA",
+                "Waste Management",
+                "Hydrology"
+              ],
+              "salaryRange": "₹5L – ₹18L / yr",
+              "roadmap": "Specialize in environmental systems. Join consulting firms.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "b18b4561-cb06-4b13-88ee-4c5553e4ced1",
+          "name": "Government & PSU",
+          "description": "Stable engineering roles in government sectors.",
+          "children": [
+            {
+              "id": "d0e14a2f-1b35-4303-9d10-e5ed081b8f1c",
+              "name": "IES Officer",
+              "description": "Serve in Indian Engineering Services.",
+              "skills": [
+                "IES Exam Prep",
+                "Civil Engineering Core"
+              ],
+              "salaryRange": "₹10L – ₹18L / yr",
+              "roadmap": "Prepare for UPSC ESE. Extremely competitive.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "c1f2e8c2-a9c0-45d6-bd6a-f111e1f1c2d3",
+          "name": "Consulting",
+          "description": "Advisory roles for infrastructure project investments.",
+          "children": [
+            {
+              "id": "8b08e2f1-6789-4bc2-8b90-345fbcdef123",
+              "name": "Infra Consultant",
+              "description": "Financial and structural advisory for large projects.",
+              "skills": [
+                "Financial Modeling",
+                "Due Diligence"
+              ],
+              "salaryRange": "₹8L – ₹30L / yr",
+              "roadmap": "MBA adds value. Join Big 4 or infrastructure advisory firms.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_b_tech_artificial_intelligence_data_science_india",
+    "level": "undergraduate",
+    "degree": "B.Tech",
+    "stream": "Artificial Intelligence & Data Science",
+    "country": "India",
+    "createdAt": "2026-04-02T14:13:56.555Z",
+    "updatedAt": "2026-04-02T14:13:56.555Z",
+    "root": {
+      "id": "8277ef76-3118-445b-a60e-b9f06c590b89",
+      "name": "Artificial Intelligence & Data Science",
+      "description": "Career paths for Artificial Intelligence & Data Science in India",
+      "children": [
+        {
+          "id": "a448fd60-7f7c-4809-9770-d42a586d1dc7",
+          "name": "Artificial Intelligence & Machine Learning",
+          "description": "Building intelligent systems that learn patterns from data and make automated decisions.",
+          "children": [
+            {
+              "id": "2abef5e4-d01a-48f1-96b1-a5c462348d96",
+              "name": "Machine Learning Engineer",
+              "description": "Design, train, and deploy ML models into production systems.",
+              "children": [
+                {
+                  "id": "47602786-55a1-4d14-844a-36fd061e6ee9",
+                  "name": "Deep Learning Engineer",
+                  "description": "Work on neural networks for complex problems like vision and speech.",
+                  "children": [
+                    {
+                      "id": "72f8c1f0-991a-4859-a1a6-44097bc154c9",
+                      "name": "Computer Vision Engineer",
+                      "description": "Specialize in image and video-based AI systems.",
+                      "children": [],
+                      "skills": [
+                        "OpenCV",
+                        "CNNs",
+                        "Image Processing"
+                      ],
+                      "salaryRange": "14L - 40L / yr",
+                      "roadmap": "Learn CV basics -> Build projects -> Optimize models"
+                    },
+                    {
+                      "id": "6be71955-bd81-416a-87d4-c41eb5338600",
+                      "name": "NLP Engineer",
+                      "description": "Build systems that understand and generate human language.",
+                      "children": [],
+                      "skills": [
+                        "NLP",
+                        "Transformers",
+                        "HuggingFace",
+                        "Python"
+                      ],
+                      "salaryRange": "14L - 42L / yr",
+                      "roadmap": "Learn text processing -> NLP -> Build chatbots/summarizers"
+                    }
+                  ],
+                  "skills": [
+                    "CNN",
+                    "RNN",
+                    "Transformers",
+                    "PyTorch",
+                    "CUDA"
+                  ],
+                  "salaryRange": "15L - 45L / yr",
+                  "roadmap": "Learn ML basics -> Deep learning -> Work on real datasets -> Optimize models"
+                },
+                {
+                  "id": "333d53b1-dd18-4561-8d29-4983a9669897",
+                  "name": "MLOps Engineer",
+                  "description": "Manage deployment, scaling, and monitoring of ML systems.",
+                  "children": [],
+                  "skills": [
+                    "Docker",
+                    "Kubernetes",
+                    "CI/CD",
+                    "AWS",
+                    "ML pipelines"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "Learn ML basics -> Learn DevOps -> Build pipelines"
+                }
+              ],
+              "skills": [
+                "Python",
+                "Scikit-learn",
+                "TensorFlow",
+                "PyTorch",
+                "Data Structures",
+                "APIs"
+              ],
+              "salaryRange": "12L - 35L / yr",
+              "roadmap": "Learn Python -> Study ML algorithms -> Build projects -> Learn deployment (Flask/Docker)"
+            },
+            {
+              "id": "0ef5ca33-8fef-4832-9712-b3b181cf9cf2",
+              "name": "AI Researcher",
+              "description": "Conduct research to push boundaries of AI.",
+              "children": [
+                {
+                  "id": "cedc922f-b669-4ea3-9338-8e996dd3839a",
+                  "name": "Applied AI Researcher",
+                  "description": "Apply research ideas to real-world problems.",
+                  "children": [],
+                  "skills": [
+                    "ML",
+                    "DL",
+                    "Experimentation",
+                    "Papers"
+                  ],
+                  "salaryRange": "18L - 50L / yr",
+                  "roadmap": "Study papers -> Implement ideas -> Build research portfolio"
+                },
+                {
+                  "id": "8ad06f0b-bc40-4e45-8ee2-6eb33264c71c",
+                  "name": "Theoretical AI Researcher",
+                  "description": "Focus on mathematical foundations of AI.",
+                  "children": [],
+                  "skills": [
+                    "Linear Algebra",
+                    "Probability",
+                    "Optimization"
+                  ],
+                  "salaryRange": "20L - 60L / yr",
+                  "roadmap": "Strong math -> Higher studies -> Research labs"
+                }
+              ],
+              "skills": [
+                "Mathematics",
+                "Statistics",
+                "Python",
+                "Research Papers"
+              ],
+              "salaryRange": "15L - 50L / yr",
+              "roadmap": "Strong math -> Research internships -> Publish papers -> Masters/PhD"
+            }
+          ]
+        },
+        {
+          "id": "ef37848b-20ed-42b7-a35d-a3ba5748685f",
+          "name": "Data Science & Analytics",
+          "description": "Extracting insights and building predictive systems using structured and unstructured data.",
+          "children": [
+            {
+              "id": "07044a07-d8a7-4a81-af76-14057ea3ad47",
+              "name": "Data Scientist",
+              "description": "Analyze data and build predictive models.",
+              "children": [
+                {
+                  "id": "458ff825-2134-480a-accb-cd6f16ede46d",
+                  "name": "Applied Data Scientist",
+                  "description": "Build production-ready data science systems.",
+                  "children": [],
+                  "skills": [
+                    "ML",
+                    "APIs",
+                    "Deployment",
+                    "Cloud"
+                  ],
+                  "salaryRange": "12L - 32L / yr",
+                  "roadmap": "Learn ML -> Build APIs -> Deploy models"
+                },
+                {
+                  "id": "a06c9938-3526-48b4-aea4-de5a3fe33356",
+                  "name": "Business Data Scientist",
+                  "description": "Focus on insights for business decision making.",
+                  "children": [
+                    {
+                      "id": "ff86aa51-a30e-4b9a-aa71-563b88e6bb5e",
+                      "name": "Product Analyst",
+                      "description": "Analyze product usage and user behavior.",
+                      "children": [],
+                      "skills": [
+                        "SQL",
+                        "A/B Testing",
+                        "Metrics"
+                      ],
+                      "salaryRange": "10L - 28L / yr",
+                      "roadmap": "Learn SQL -> Product metrics -> Experimentation"
+                    }
+                  ],
+                  "skills": [
+                    "SQL",
+                    "Excel",
+                    "Power BI",
+                    "Python"
+                  ],
+                  "salaryRange": "8L - 25L / yr",
+                  "roadmap": "Learn analytics -> Business understanding -> Dashboarding"
+                }
+              ],
+              "skills": [
+                "Python",
+                "Pandas",
+                "SQL",
+                "Statistics",
+                "Visualization"
+              ],
+              "salaryRange": "10L - 30L / yr",
+              "roadmap": "Learn Python -> Statistics -> ML -> Build projects -> Kaggle"
+            },
+            {
+              "id": "356c73d8-2778-48f7-b38c-83a34d56a3c5",
+              "name": "Data Analyst",
+              "description": "Interpret data and create reports for decision making.",
+              "children": [
+                {
+                  "id": "54e957dc-f78d-458d-afec-44f10279e821",
+                  "name": "BI Analyst",
+                  "description": "Build dashboards and reporting systems.",
+                  "children": [],
+                  "skills": [
+                    "Power BI",
+                    "Tableau",
+                    "SQL"
+                  ],
+                  "salaryRange": "7L - 20L / yr",
+                  "roadmap": "Learn BI tools -> Build dashboards"
+                }
+              ],
+              "skills": [
+                "SQL",
+                "Excel",
+                "Power BI",
+                "Tableau"
+              ],
+              "salaryRange": "6L - 18L / yr",
+              "roadmap": "Learn SQL -> Visualization tools -> Business cases"
+            }
+          ]
+        },
+        {
+          "id": "85b0af24-71ec-4119-8f53-a46efec05d32",
+          "name": "Software Engineering",
+          "description": "Building scalable applications and backend systems.",
+          "children": [
+            {
+              "id": "a29bb786-2655-4eac-ba95-509810f9600c",
+              "name": "Backend Developer",
+              "description": "Develop server-side logic and APIs.",
+              "children": [
+                {
+                  "id": "31004cef-4ea7-44ee-aacb-83816818ed84",
+                  "name": "Cloud Backend Engineer",
+                  "description": "Build scalable backend systems on cloud platforms.",
+                  "children": [
+                    {
+                      "id": "a5ee535b-0615-48fe-bce0-82ada8cc543a",
+                      "name": "Distributed Systems Engineer",
+                      "description": "Work on large-scale system design.",
+                      "children": [],
+                      "skills": [
+                        "System Design",
+                        "Kafka",
+                        "Scaling"
+                      ],
+                      "salaryRange": "18L - 45L / yr",
+                      "roadmap": "Learn system design -> Build scalable systems"
+                    }
+                  ],
+                  "skills": [
+                    "AWS",
+                    "Docker",
+                    "Kubernetes",
+                    "Microservices"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "Learn backend -> Learn cloud -> Deploy apps"
+                }
+              ],
+              "skills": [
+                "Node.js",
+                "Python",
+                "Databases",
+                "REST APIs"
+              ],
+              "salaryRange": "10L - 28L / yr",
+              "roadmap": "Learn backend language -> Build APIs -> Work with DB"
+            },
+            {
+              "id": "4d9a635d-ca54-46d1-bca0-c53bc89deddc",
+              "name": "Full Stack Developer",
+              "description": "Work across frontend and backend.",
+              "children": [
+                {
+                  "id": "aebb8328-2994-4956-ad5c-c73acd566ce9",
+                  "name": "MERN Stack Developer",
+                  "description": "Specialize in MongoDB, Express, React, Node.",
+                  "children": [],
+                  "skills": [
+                    "MERN",
+                    "REST APIs"
+                  ],
+                  "salaryRange": "10L - 28L / yr",
+                  "roadmap": "Learn JS -> React -> Node -> Build apps"
+                }
+              ],
+              "skills": [
+                "React",
+                "Node.js",
+                "MongoDB",
+                "HTML/CSS"
+              ],
+              "salaryRange": "10L - 30L / yr",
+              "roadmap": "Learn frontend -> Backend -> Build full projects"
+            }
+          ]
+        },
+        {
+          "id": "2db51a71-9d6d-43cd-ae7d-3721a3a21f20",
+          "name": "Cloud & DevOps",
+          "description": "Managing infrastructure, deployment, and system reliability.",
+          "children": [
+            {
+              "id": "3208082d-6844-4c40-8236-c52594cbd4cc",
+              "name": "DevOps Engineer",
+              "description": "Automate deployment pipelines and infrastructure.",
+              "children": [
+                {
+                  "id": "b98aff7f-7329-4866-94f5-100f5036bde3",
+                  "name": "Site Reliability Engineer",
+                  "description": "Ensure system uptime and performance.",
+                  "children": [],
+                  "skills": [
+                    "Monitoring",
+                    "Kubernetes",
+                    "Cloud"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "Learn DevOps -> Monitoring -> Scaling"
+                },
+                {
+                  "id": "f45797ec-ea8d-47bb-adc1-b3e51f6e1ed7",
+                  "name": "Platform Engineer",
+                  "description": "Build internal developer platforms.",
+                  "children": [],
+                  "skills": [
+                    "Kubernetes",
+                    "Infra as Code",
+                    "Cloud"
+                  ],
+                  "salaryRange": "18L - 45L / yr",
+                  "roadmap": "Learn infra -> Automate systems -> Build platforms"
+                }
+              ],
+              "skills": [
+                "Docker",
+                "Jenkins",
+                "AWS",
+                "Linux"
+              ],
+              "salaryRange": "12L - 35L / yr",
+              "roadmap": "Learn Linux -> Docker -> CI/CD -> Cloud"
+            }
+          ]
+        },
+        {
+          "id": "978e54e3-2156-42d2-872c-d11cfa31c2de",
+          "name": "Cybersecurity",
+          "description": "Protecting systems, networks, and data from cyber threats.",
+          "children": [
+            {
+              "id": "2a14c88e-8a52-4c39-8255-1fca19040e4b",
+              "name": "Security Engineer",
+              "description": "Build secure systems and prevent vulnerabilities.",
+              "children": [
+                {
+                  "id": "05f64ca7-8317-4147-9dce-3b00caa6719c",
+                  "name": "Ethical Hacker",
+                  "description": "Perform penetration testing to find vulnerabilities.",
+                  "children": [
+                    {
+                      "id": "2ce93082-e6b8-47ea-ae10-423067bcf156",
+                      "name": "Bug Bounty Hunter",
+                      "description": "Find and report real-world vulnerabilities.",
+                      "children": [],
+                      "skills": [
+                        "Web Security",
+                        "Recon",
+                        "Exploitation"
+                      ],
+                      "salaryRange": "Variable (5L - 50L+)",
+                      "roadmap": "Learn web security -> Practice -> Participate in bounties"
+                    }
+                  ],
+                  "skills": [
+                    "Kali Linux",
+                    "Metasploit",
+                    "Networking"
+                  ],
+                  "salaryRange": "8L - 25L / yr",
+                  "roadmap": "Learn hacking basics -> Practice CTFs -> Certifications"
+                }
+              ],
+              "skills": [
+                "Networking",
+                "Cryptography",
+                "Linux"
+              ],
+              "salaryRange": "10L - 30L / yr",
+              "roadmap": "Learn networking -> Security basics -> Practice labs"
+            }
+          ]
+        },
+        {
+          "id": "203a25a0-ee22-4b10-9410-209a21a5d291",
+          "name": "Finance & Quant",
+          "description": "Applying AI and data science in financial markets and investments.",
+          "children": [
+            {
+              "id": "32cef136-1c1a-4c73-8a0c-505840d661e7",
+              "name": "Quantitative Analyst",
+              "description": "Build mathematical models for trading and risk.",
+              "children": [
+                {
+                  "id": "ffa4ebc4-7cfe-42d4-bd2d-554be4024968",
+                  "name": "Algorithmic Trader",
+                  "description": "Develop automated trading systems.",
+                  "children": [
+                    {
+                      "id": "4a918ea7-4929-4683-a50c-784e1b3f25be",
+                      "name": "Portfolio Quant",
+                      "description": "Optimize portfolios and manage risk.",
+                      "children": [],
+                      "skills": [
+                        "Optimization",
+                        "Risk Models"
+                      ],
+                      "salaryRange": "18L - 55L / yr",
+                      "roadmap": "Learn portfolio theory -> Build tools"
+                    }
+                  ],
+                  "skills": [
+                    "Python",
+                    "APIs",
+                    "Data Analysis"
+                  ],
+                  "salaryRange": "20L - 60L / yr",
+                  "roadmap": "Learn trading -> Build strategies -> Backtest"
+                }
+              ],
+              "skills": [
+                "Python",
+                "Statistics",
+                "Finance",
+                "ML"
+              ],
+              "salaryRange": "15L - 50L / yr",
+              "roadmap": "Learn math -> Finance basics -> Build models"
+            }
+          ]
+        },
+        {
+          "id": "abc5b4be-4ca4-4b3a-9977-2b07eef73779",
+          "name": "Product & Management",
+          "description": "Leading product strategy, development, and execution.",
+          "children": [
+            {
+              "id": "af916fcb-6218-438b-a504-d0d08697f0b5",
+              "name": "Product Manager",
+              "description": "Define product vision and coordinate teams.",
+              "children": [
+                {
+                  "id": "9f6291d7-6035-46ea-936b-d81d31527bed",
+                  "name": "AI Product Manager",
+                  "description": "Manage AI-based products.",
+                  "children": [
+                    {
+                      "id": "43dd5e78-9dec-4a9a-b725-62afa12898a2",
+                      "name": "Technical Product Manager",
+                      "description": "Focus on deeply technical products.",
+                      "children": [],
+                      "skills": [
+                        "System Design",
+                        "APIs",
+                        "Tech understanding"
+                      ],
+                      "salaryRange": "18L - 45L / yr",
+                      "roadmap": "Learn tech -> Product thinking -> Lead projects"
+                    }
+                  ],
+                  "skills": [
+                    "AI basics",
+                    "Product thinking",
+                    "Data understanding"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "Learn AI + Product -> Build AI products"
+                }
+              ],
+              "skills": [
+                "Communication",
+                "Analytics",
+                "UX",
+                "Business"
+              ],
+              "salaryRange": "12L - 35L / yr",
+              "roadmap": "Learn product basics -> Work on projects -> Internships"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_b_arch_interior_design_india",
+    "level": "undergraduate",
+    "degree": "B.Arch",
+    "stream": "Interior Design",
+    "country": "India",
+    "createdAt": "2026-04-02T16:05:37.961Z",
+    "updatedAt": "2026-04-02T16:05:37.961Z",
+    "root": {
+      "id": "7f557e05-26c3-48f5-81a4-fd81804b8eec",
+      "name": "Interior Design",
+      "description": "Career paths for Interior Design in India",
+      "children": [
+        {
+          "id": "75a2ea05-9054-4dda-92b3-b9e86335933f",
+          "name": "Interior Design Practice",
+          "description": "Designing functional and aesthetic indoor spaces for residential and commercial environments.",
+          "children": [
+            {
+              "id": "982bf5e1-8478-4362-a238-40ec84444dd4",
+              "name": "Interior Designer",
+              "description": "Plan and design interior layouts, materials, lighting, and decor.",
+              "children": [
+                {
+                  "id": "100a3c65-2623-4318-997b-9c1f1e5888ed",
+                  "name": "Residential Interior Designer",
+                  "description": "Focus on homes, apartments, and living spaces.",
+                  "children": [
+                    {
+                      "id": "fdb6a6a7-5870-4b15-b281-e7d3eccf298c",
+                      "name": "Luxury Home Designer",
+                      "description": "Design high-end residences with premium aesthetics.",
+                      "children": [],
+                      "skills": [
+                        "High-end Materials",
+                        "Lighting Design",
+                        "Styling"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Gain experience -> Work with premium clients -> Build brand"
+                    }
+                  ],
+                  "skills": [
+                    "Space Planning",
+                    "Furniture Design",
+                    "Client Interaction"
+                  ],
+                  "salaryRange": "4L - 10L / yr",
+                  "roadmap": "Study residential layouts -> Work on small projects -> Build portfolio"
+                },
+                {
+                  "id": "8570679d-28b8-4a4a-be32-8a6801898ebc",
+                  "name": "Commercial Interior Designer",
+                  "description": "Design offices, retail stores, and public spaces.",
+                  "children": [
+                    {
+                      "id": "4e977335-2f6c-4ba8-8101-42938b8daf7e",
+                      "name": "Retail Space Designer",
+                      "description": "Design stores to enhance customer experience.",
+                      "children": [],
+                      "skills": [
+                        "Visual Merchandising",
+                        "Branding",
+                        "Layout Planning"
+                      ],
+                      "salaryRange": "6L - 18L / yr",
+                      "roadmap": "Study retail psychology -> Work on store layouts"
+                    }
+                  ],
+                  "skills": [
+                    "Space Optimization",
+                    "Branding",
+                    "Ergonomics"
+                  ],
+                  "salaryRange": "5L - 15L / yr",
+                  "roadmap": "Learn commercial layouts -> Work on office/retail projects"
+                }
+              ],
+              "skills": [
+                "AutoCAD",
+                "SketchUp",
+                "Space Planning",
+                "Color Theory",
+                "Materials Knowledge"
+              ],
+              "salaryRange": "4L - 12L / yr",
+              "roadmap": "Learn design fundamentals -> Master design tools -> Build portfolio -> Internships"
+            }
+          ]
+        },
+        {
+          "id": "cdad1501-28a3-447a-8d0a-e0790865622b",
+          "name": "Visualization & 3D Design",
+          "description": "Creating realistic visual representations of interior spaces before execution.",
+          "children": [
+            {
+              "id": "f019c49e-bfa9-4778-b0c3-f8fd0e157102",
+              "name": "3D Visualizer",
+              "description": "Develop 3D models and renderings of interior designs.",
+              "children": [
+                {
+                  "id": "a0b8c93a-6ced-4d59-89b6-6414adb26bdb",
+                  "name": "Architectural Visualizer",
+                  "description": "Create detailed 3D visuals for architectural and interior projects.",
+                  "children": [
+                    {
+                      "id": "f6856724-95b1-4078-bdfb-447613257704",
+                      "name": "Animation Visualizer",
+                      "description": "Create walkthrough animations for projects.",
+                      "children": [],
+                      "skills": [
+                        "Animation",
+                        "Unreal Engine",
+                        "Lumion"
+                      ],
+                      "salaryRange": "7L - 18L / yr",
+                      "roadmap": "Learn animation tools -> Build walkthroughs"
+                    }
+                  ],
+                  "skills": [
+                    "3ds Max",
+                    "Lumion",
+                    "V-Ray",
+                    "Lighting"
+                  ],
+                  "salaryRange": "6L - 16L / yr",
+                  "roadmap": "Learn rendering -> Work on real projects -> Improve realism"
+                },
+                {
+                  "id": "5babc224-7044-4497-b2e8-0c7d1714b20f",
+                  "name": "VR/AR Designer",
+                  "description": "Design immersive interior experiences using virtual reality.",
+                  "children": [],
+                  "skills": [
+                    "Unity",
+                    "Unreal Engine",
+                    "3D Modeling"
+                  ],
+                  "salaryRange": "8L - 20L / yr",
+                  "roadmap": "Learn XR tools -> Build immersive environments"
+                }
+              ],
+              "skills": [
+                "3ds Max",
+                "V-Ray",
+                "Blender",
+                "SketchUp",
+                "Rendering"
+              ],
+              "salaryRange": "5L - 14L / yr",
+              "roadmap": "Learn 3D tools -> Practice rendering -> Build portfolio"
+            }
+          ]
+        },
+        {
+          "id": "bed5375d-d1b8-49a8-a17a-d437e2abe876",
+          "name": "Furniture & Product Design",
+          "description": "Designing furniture and interior products for functionality and aesthetics.",
+          "children": [
+            {
+              "id": "ef5b1799-aaed-4f88-a94c-bdbc1a46048b",
+              "name": "Furniture Designer",
+              "description": "Design custom furniture pieces for interiors.",
+              "children": [
+                {
+                  "id": "0cc8528c-a1ad-4921-923d-b56cead2fcb4",
+                  "name": "Modular Furniture Designer",
+                  "description": "Design space-saving and modular furniture.",
+                  "children": [
+                    {
+                      "id": "66ad3e44-f63d-4e0c-b6ff-59eabd000360",
+                      "name": "Kitchen Designer",
+                      "description": "Specialize in modular kitchen layouts.",
+                      "children": [],
+                      "skills": [
+                        "Kitchen Planning",
+                        "Materials",
+                        "Appliances"
+                      ],
+                      "salaryRange": "5L - 14L / yr",
+                      "roadmap": "Learn kitchen ergonomics -> Work with vendors"
+                    }
+                  ],
+                  "skills": [
+                    "Space Optimization",
+                    "CAD",
+                    "Joinery"
+                  ],
+                  "salaryRange": "6L - 16L / yr",
+                  "roadmap": "Study modular systems -> Build practical designs"
+                },
+                {
+                  "id": "a51f0576-39ef-4b3d-8c41-d88247ce7d03",
+                  "name": "Industrial Furniture Designer",
+                  "description": "Design furniture for mass production.",
+                  "children": [],
+                  "skills": [
+                    "Manufacturing",
+                    "Materials",
+                    "CAD"
+                  ],
+                  "salaryRange": "7L - 18L / yr",
+                  "roadmap": "Learn manufacturing -> Work with factories"
+                }
+              ],
+              "skills": [
+                "CAD",
+                "Materials",
+                "Ergonomics",
+                "Prototyping"
+              ],
+              "salaryRange": "5L - 15L / yr",
+              "roadmap": "Learn design principles -> Build prototypes -> Work with manufacturers"
+            }
+          ]
+        },
+        {
+          "id": "eb869d86-a12e-459e-b914-75a73ed4432d",
+          "name": "Sustainable & Green Design",
+          "description": "Designing eco-friendly and energy-efficient interior spaces.",
+          "children": [
+            {
+              "id": "7f390128-d284-4644-b80d-f0640d1d2750",
+              "name": "Sustainable Interior Designer",
+              "description": "Create environmentally responsible interiors.",
+              "children": [
+                {
+                  "id": "5f95f74d-1624-47bf-8fd8-e611046ee21f",
+                  "name": "LEED Consultant",
+                  "description": "Help projects meet green building standards.",
+                  "children": [
+                    {
+                      "id": "2cab2918-d052-4889-8341-958356753d71",
+                      "name": "Energy Efficient Designer",
+                      "description": "Focus on optimizing lighting and energy use.",
+                      "children": [],
+                      "skills": [
+                        "Lighting Design",
+                        "HVAC Basics"
+                      ],
+                      "salaryRange": "7L - 20L / yr",
+                      "roadmap": "Learn energy systems -> Apply in projects"
+                    }
+                  ],
+                  "skills": [
+                    "LEED Certification",
+                    "Energy Analysis"
+                  ],
+                  "salaryRange": "8L - 22L / yr",
+                  "roadmap": "Get LEED certified -> Work on green projects"
+                }
+              ],
+              "skills": [
+                "Sustainable Materials",
+                "Energy Efficiency",
+                "Green Certifications"
+              ],
+              "salaryRange": "6L - 18L / yr",
+              "roadmap": "Learn sustainability -> Study materials -> Get certifications"
+            }
+          ]
+        },
+        {
+          "id": "d6c23691-076e-4019-975d-1578ebbb1377",
+          "name": "Project Management & Execution",
+          "description": "Managing execution of interior projects from concept to completion.",
+          "children": [
+            {
+              "id": "2d6f1c48-87c4-470d-a52b-7f14ef06c402",
+              "name": "Interior Project Manager",
+              "description": "Oversee project timelines, budgets, and execution.",
+              "children": [
+                {
+                  "id": "2abd3d9c-dc68-4090-855d-0fe12f88f133",
+                  "name": "Site Supervisor",
+                  "description": "Supervise on-site construction and implementation.",
+                  "children": [
+                    {
+                      "id": "9cd3eaf9-c591-4215-9d72-619fb3e6b0bc",
+                      "name": "Contractor / Freelancer",
+                      "description": "Handle independent interior execution projects.",
+                      "children": [],
+                      "skills": [
+                        "Vendor Network",
+                        "Budgeting",
+                        "Execution"
+                      ],
+                      "salaryRange": "Variable (6L - 30L+)",
+                      "roadmap": "Build network -> Take freelance projects"
+                    }
+                  ],
+                  "skills": [
+                    "Site Management",
+                    "Coordination",
+                    "Materials"
+                  ],
+                  "salaryRange": "5L - 12L / yr",
+                  "roadmap": "Work on sites -> Learn execution"
+                }
+              ],
+              "skills": [
+                "Project Management",
+                "Budgeting",
+                "Vendor Management"
+              ],
+              "salaryRange": "8L - 25L / yr",
+              "roadmap": "Gain design experience -> Learn management -> Lead projects"
+            }
+          ]
+        },
+        {
+          "id": "67e257db-e45b-442d-a2c0-9e86f0d53100",
+          "name": "Styling & Creative Direction",
+          "description": "Enhancing interiors through decor, styling, and aesthetics.",
+          "children": [
+            {
+              "id": "55a5fe15-84d4-4b57-a47b-8bc0a7c9f61f",
+              "name": "Interior Stylist",
+              "description": "Focus on decor elements like furniture, colors, and accessories.",
+              "children": [
+                {
+                  "id": "86512bb0-144e-4605-9afe-7720445fd37f",
+                  "name": "Set Designer",
+                  "description": "Design sets for films, TV, and events.",
+                  "children": [
+                    {
+                      "id": "e924721b-242c-42c6-b3e0-79af3ad9d3ec",
+                      "name": "Event Designer",
+                      "description": "Design interiors for events and exhibitions.",
+                      "children": [],
+                      "skills": [
+                        "Event Planning",
+                        "Decor",
+                        "Logistics"
+                      ],
+                      "salaryRange": "5L - 18L / yr",
+                      "roadmap": "Work on events -> Build portfolio"
+                    }
+                  ],
+                  "skills": [
+                    "Creativity",
+                    "Props",
+                    "Space Design"
+                  ],
+                  "salaryRange": "6L - 20L / yr",
+                  "roadmap": "Learn design -> Work in media industry"
+                }
+              ],
+              "skills": [
+                "Styling",
+                "Color Theory",
+                "Trends",
+                "Photography"
+              ],
+              "salaryRange": "4L - 12L / yr",
+              "roadmap": "Learn styling -> Build portfolio -> Work with brands"
+            }
+          ]
+        },
+        {
+          "id": "7def8fc9-3a51-49da-bf58-6e6eb6e19a3a",
+          "name": "Entrepreneurship & Freelancing",
+          "description": "Starting your own design firm or working independently.",
+          "children": [
+            {
+              "id": "aa6955ac-1cc3-4b45-8e7d-a8acca2a827f",
+              "name": "Interior Design Entrepreneur",
+              "description": "Run your own design studio or firm.",
+              "children": [
+                {
+                  "id": "c71c88ec-c573-42e5-982b-6e9d4c58dc4e",
+                  "name": "Freelance Interior Designer",
+                  "description": "Work independently on client projects.",
+                  "children": [
+                    {
+                      "id": "7365cdaa-ef61-4f1b-9fc9-0526839e3af3",
+                      "name": "Online Design Consultant",
+                      "description": "Provide remote interior design services.",
+                      "children": [],
+                      "skills": [
+                        "Communication",
+                        "Digital Tools",
+                        "Styling"
+                      ],
+                      "salaryRange": "Variable (4L - 20L+)",
+                      "roadmap": "Build online presence -> Offer virtual services"
+                    }
+                  ],
+                  "skills": [
+                    "Client Handling",
+                    "Design Tools",
+                    "Pricing"
+                  ],
+                  "salaryRange": "Variable (5L - 30L+)",
+                  "roadmap": "Build portfolio -> Get clients -> Scale projects"
+                }
+              ],
+              "skills": [
+                "Business",
+                "Marketing",
+                "Design",
+                "Client Management"
+              ],
+              "salaryRange": "Variable (8L - 50L+)",
+              "roadmap": "Gain experience -> Build network -> Start firm"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_b_sc_computer_science_usa",
+    "level": "undergraduate",
+    "degree": "B.Sc",
+    "stream": "Computer Science",
+    "country": "USA",
+    "createdAt": "2026-04-02T18:33:55.973Z",
+    "updatedAt": "2026-04-02T18:33:55.975Z",
+    "root": {
+      "id": "1a030c3c-174d-4003-801e-c4830d7c02ed",
+      "name": "Computer Science",
+      "description": "Career paths for Computer Science in USA",
+      "children": [
+        {
+          "id": "af19c660-21a9-4c67-966a-34d7cfef6c36",
+          "name": "Software Development & Engineering",
+          "description": "Designing, building, and maintaining software systems ranging from web apps to large-scale distributed systems.",
+          "children": [
+            {
+              "id": "753bf0d2-180d-4a57-9a83-a643c33a4790",
+              "name": "Full Stack Developer",
+              "description": "Develops both frontend interfaces and backend systems, enabling complete application development from UI to database.",
+              "children": [
+                {
+                  "id": "10d0e7e3-779e-4519-8e70-9794a0751b26",
+                  "name": "Frontend Engineering",
+                  "description": "Focuses on building user interfaces, improving UX, and ensuring responsive, accessible web applications.",
+                  "children": [
+                    {
+                      "id": "3a5256d7-244c-4640-ac1a-b0c4340dce32",
+                      "name": "UI Performance Specialist",
+                      "description": "Optimizes frontend applications for speed, responsiveness, and scalability across devices.",
+                      "children": [],
+                      "skills": [
+                        "Lighthouse",
+                        "Web Vitals",
+                        "Lazy Loading",
+                        "Code Splitting"
+                      ],
+                      "salaryRange": "$90,000 - $150,000 / yr",
+                      "roadmap": "Learn performance metrics -> Optimize real apps -> Study browser internals -> Work on large-scale apps"
+                    }
+                  ],
+                  "skills": [
+                    "React",
+                    "Next.js",
+                    "Tailwind CSS",
+                    "Web Performance",
+                    "Accessibility"
+                  ],
+                  "salaryRange": "$75,000 - $130,000 / yr",
+                  "roadmap": "Master JS fundamentals -> Learn React ecosystem -> Build UI-heavy projects -> Optimize performance"
+                },
+                {
+                  "id": "1942542f-e632-498e-98da-36552d69ab06",
+                  "name": "Backend Engineering",
+                  "description": "Builds server-side logic, APIs, and database architecture ensuring scalability and reliability.",
+                  "children": [
+                    {
+                      "id": "b94fe01d-f733-45a8-816b-8d3b77ff56ae",
+                      "name": "Distributed Systems Engineer",
+                      "description": "Designs scalable systems that handle millions of users using microservices and cloud infrastructure.",
+                      "children": [],
+                      "skills": [
+                        "Microservices",
+                        "Docker",
+                        "Kubernetes",
+                        "AWS",
+                        "Load Balancing"
+                      ],
+                      "salaryRange": "$110,000 - $180,000 / yr",
+                      "roadmap": "Learn backend deeply -> Study distributed systems -> Work with cloud infra -> Build scalable projects"
+                    }
+                  ],
+                  "skills": [
+                    "Node.js",
+                    "Express",
+                    "PostgreSQL",
+                    "MongoDB",
+                    "System Design"
+                  ],
+                  "salaryRange": "$85,000 - $145,000 / yr",
+                  "roadmap": "Learn backend basics -> Build APIs -> Study DB optimization -> Learn system design"
+                }
+              ],
+              "skills": [
+                "JavaScript",
+                "React",
+                "Node.js",
+                "REST APIs",
+                "SQL/NoSQL",
+                "Git"
+              ],
+              "salaryRange": "$80,000 - $140,000 / yr",
+              "roadmap": "Learn HTML/CSS/JS -> Master React + Node -> Build full-stack projects -> Deploy apps -> Apply for internships/jobs"
+            },
+            {
+              "id": "e9e3e6e4-7ca7-4183-ab5f-51e204298800",
+              "name": "Mobile App Developer",
+              "description": "Builds applications for iOS and Android platforms focusing on performance and user experience.",
+              "children": [
+                {
+                  "id": "2ed99b7b-e751-4229-8452-6b348340dd9c",
+                  "name": "iOS Development",
+                  "description": "Develops apps specifically for Apple devices using Swift and Apple frameworks.",
+                  "children": [
+                    {
+                      "id": "25634e88-6824-4b5b-815a-2953ecae5466",
+                      "name": "AR iOS Developer",
+                      "description": "Builds augmented reality experiences using Apple’s ARKit framework.",
+                      "children": [],
+                      "skills": [
+                        "ARKit",
+                        "3D Graphics",
+                        "Swift",
+                        "SceneKit"
+                      ],
+                      "salaryRange": "$100,000 - $160,000 / yr",
+                      "roadmap": "Learn AR basics -> Build AR apps -> Integrate 3D assets -> Optimize performance"
+                    }
+                  ],
+                  "skills": [
+                    "Swift",
+                    "UIKit",
+                    "SwiftUI",
+                    "Xcode"
+                  ],
+                  "salaryRange": "$85,000 - $140,000 / yr",
+                  "roadmap": "Learn Swift -> Build iOS apps -> Use Apple APIs -> Publish on App Store"
+                }
+              ],
+              "skills": [
+                "Swift",
+                "Kotlin",
+                "Flutter",
+                "React Native"
+              ],
+              "salaryRange": "$75,000 - $130,000 / yr",
+              "roadmap": "Learn platform basics -> Build mobile apps -> Publish apps -> Optimize performance"
+            }
+          ]
+        },
+        {
+          "id": "62eb7341-91d0-4035-9e75-025f4e08a704",
+          "name": "Data & Artificial Intelligence",
+          "description": "Extracting insights from data and building intelligent systems using machine learning and statistical methods.",
+          "children": [
+            {
+              "id": "d09add55-ebb3-497a-a328-25eaa107d200",
+              "name": "Data Scientist",
+              "description": "Analyzes large datasets to extract insights and build predictive models for decision-making.",
+              "children": [
+                {
+                  "id": "25999a64-1b1c-48b6-8153-f51d44fb6ae2",
+                  "name": "Machine Learning Engineer",
+                  "description": "Designs and deploys machine learning models into production systems.",
+                  "children": [
+                    {
+                      "id": "caf4c7cc-0cb9-4f62-a92d-3262d3a3db8a",
+                      "name": "AI Research Engineer",
+                      "description": "Works on cutting-edge AI models, often contributing to research papers and advanced innovations.",
+                      "children": [],
+                      "skills": [
+                        "Deep Learning",
+                        "NLP",
+                        "Research Methods",
+                        "Mathematics"
+                      ],
+                      "salaryRange": "$120,000 - $200,000 / yr",
+                      "roadmap": "Strong math foundation -> Study research papers -> Build novel models -> Publish work"
+                    }
+                  ],
+                  "skills": [
+                    "TensorFlow",
+                    "PyTorch",
+                    "MLOps",
+                    "Model Deployment"
+                  ],
+                  "salaryRange": "$110,000 - $170,000 / yr",
+                  "roadmap": "Learn ML theory -> Build models -> Learn deployment -> Work on real datasets"
+                },
+                {
+                  "id": "b5831f01-487d-4113-9a6f-2b28d020e54e",
+                  "name": "Data Analyst",
+                  "description": "Focuses on data visualization, reporting, and deriving business insights from structured datasets.",
+                  "children": [
+                    {
+                      "id": "c3f8c29a-acb2-4ebd-9860-1476ce88f71d",
+                      "name": "Business Intelligence Analyst",
+                      "description": "Bridges business and data by translating data insights into strategic decisions.",
+                      "children": [],
+                      "skills": [
+                        "BI Tools",
+                        "Data Modeling",
+                        "SQL",
+                        "Reporting"
+                      ],
+                      "salaryRange": "$80,000 - $120,000 / yr",
+                      "roadmap": "Learn BI tools -> Work on business datasets -> Build dashboards"
+                    }
+                  ],
+                  "skills": [
+                    "SQL",
+                    "Excel",
+                    "Tableau",
+                    "Power BI"
+                  ],
+                  "salaryRange": "$70,000 - $110,000 / yr",
+                  "roadmap": "Learn SQL + visualization tools -> Analyze datasets -> Create dashboards"
+                }
+              ],
+              "skills": [
+                "Python",
+                "Pandas",
+                "NumPy",
+                "Machine Learning",
+                "Statistics"
+              ],
+              "salaryRange": "$90,000 - $150,000 / yr",
+              "roadmap": "Learn Python + stats -> Work on datasets -> Build ML models -> Create portfolio projects"
+            }
+          ]
+        },
+        {
+          "id": "5ba6cdc2-2b03-4141-8751-cd9eebe9d815",
+          "name": "Cybersecurity",
+          "description": "Protecting systems, networks, and data from cyber threats and vulnerabilities.",
+          "children": [
+            {
+              "id": "26f7b6d8-b674-405d-bf73-b42444830463",
+              "name": "Security Analyst",
+              "description": "Monitors systems, detects threats, and ensures security compliance across networks.",
+              "children": [
+                {
+                  "id": "0b640081-599f-4fe4-93e3-0bae64805bfe",
+                  "name": "Ethical Hacker",
+                  "description": "Identifies vulnerabilities in systems by simulating attacks to improve security defenses.",
+                  "children": [
+                    {
+                      "id": "90f70781-12f8-416a-8c72-f6f5ea6e84d2",
+                      "name": "Red Team Specialist",
+                      "description": "Conducts advanced simulated cyberattacks to test organizational security defenses.",
+                      "children": [],
+                      "skills": [
+                        "Exploitation",
+                        "Social Engineering",
+                        "Advanced Pentesting"
+                      ],
+                      "salaryRange": "$110,000 - $170,000 / yr",
+                      "roadmap": "Master pentesting -> Simulate real attacks -> Work on enterprise security"
+                    }
+                  ],
+                  "skills": [
+                    "Penetration Testing",
+                    "Kali Linux",
+                    "Metasploit",
+                    "Networking"
+                  ],
+                  "salaryRange": "$90,000 - $140,000 / yr",
+                  "roadmap": "Learn networking deeply -> Practice hacking labs -> Earn CEH/OSCP"
+                },
+                {
+                  "id": "96f4d94b-815f-4134-b573-880d85892122",
+                  "name": "Security Engineer",
+                  "description": "Designs and implements secure systems and infrastructure to prevent attacks.",
+                  "children": [
+                    {
+                      "id": "9dbead74-0cae-4efb-b22d-5c448fd40d3b",
+                      "name": "Cloud Security Engineer",
+                      "description": "Secures cloud-based applications and infrastructure using modern security practices.",
+                      "children": [],
+                      "skills": [
+                        "AWS Security",
+                        "IAM",
+                        "Encryption",
+                        "Kubernetes Security"
+                      ],
+                      "salaryRange": "$120,000 - $180,000 / yr",
+                      "roadmap": "Learn cloud platforms -> Study security tools -> Implement secure architectures"
+                    }
+                  ],
+                  "skills": [
+                    "Cloud Security",
+                    "Encryption",
+                    "DevSecOps"
+                  ],
+                  "salaryRange": "$100,000 - $160,000 / yr",
+                  "roadmap": "Learn secure coding -> Study cloud security -> Implement security systems"
+                }
+              ],
+              "skills": [
+                "Network Security",
+                "SIEM Tools",
+                "Linux",
+                "Threat Analysis"
+              ],
+              "salaryRange": "$80,000 - $130,000 / yr",
+              "roadmap": "Learn networking -> Study security basics -> Practice labs -> Get certifications"
+            }
+          ]
+        },
+        {
+          "id": "26d93036-1c15-46f5-a4fe-fad04fad566d",
+          "name": "Systems & Infrastructure",
+          "description": "Managing hardware, operating systems, networks, and cloud infrastructure.",
+          "children": [
+            {
+              "id": "292403f5-f62c-47c6-922f-2738bf4a42c1",
+              "name": "DevOps Engineer",
+              "description": "Bridges development and operations by automating deployment, monitoring, and scaling systems.",
+              "children": [
+                {
+                  "id": "8b45ead7-09a4-4b9d-91a9-0fc8d73e442a",
+                  "name": "Site Reliability Engineer",
+                  "description": "Ensures high availability and performance of systems using automation and monitoring.",
+                  "children": [
+                    {
+                      "id": "2b123d9d-2dcc-46b1-ab9d-25541832f03c",
+                      "name": "Platform Engineer",
+                      "description": "Builds internal platforms and tooling to improve developer productivity and system scalability.",
+                      "children": [],
+                      "skills": [
+                        "Infrastructure as Code",
+                        "Kubernetes",
+                        "APIs"
+                      ],
+                      "salaryRange": "$120,000 - $180,000 / yr",
+                      "roadmap": "Learn infra deeply -> Build internal tools -> Optimize developer workflows"
+                    }
+                  ],
+                  "skills": [
+                    "Monitoring Tools",
+                    "Scripting",
+                    "Incident Management"
+                  ],
+                  "salaryRange": "$110,000 - $170,000 / yr",
+                  "roadmap": "Learn system reliability -> Build monitoring systems -> Handle incidents"
+                },
+                {
+                  "id": "96268ca3-b230-4935-b076-b954ed9ade6a",
+                  "name": "Cloud Engineer",
+                  "description": "Designs and manages cloud infrastructure and services for scalable applications.",
+                  "children": [
+                    {
+                      "id": "0d7ada25-4c4e-4837-ab8d-8b0b9abae1b1",
+                      "name": "Solutions Architect",
+                      "description": "Designs high-level cloud solutions tailored to business requirements.",
+                      "children": [],
+                      "skills": [
+                        "System Design",
+                        "Cloud Architecture",
+                        "Communication"
+                      ],
+                      "salaryRange": "$130,000 - $200,000 / yr",
+                      "roadmap": "Learn architecture patterns -> Work on large systems -> Design scalable solutions"
+                    }
+                  ],
+                  "skills": [
+                    "AWS",
+                    "Azure",
+                    "Terraform",
+                    "Networking"
+                  ],
+                  "salaryRange": "$95,000 - $150,000 / yr",
+                  "roadmap": "Learn cloud basics -> Get certifications -> Deploy apps on cloud"
+                }
+              ],
+              "skills": [
+                "Docker",
+                "Kubernetes",
+                "CI/CD",
+                "AWS"
+              ],
+              "salaryRange": "$100,000 - $160,000 / yr",
+              "roadmap": "Learn Linux -> Master Docker/K8s -> Build CI/CD pipelines -> Work on cloud"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_mbbs_neurology_india",
+    "level": "undergraduate",
+    "degree": "MBBS",
+    "stream": "Neurology",
+    "country": "India",
+    "createdAt": "2026-04-02T18:42:13.903Z",
+    "updatedAt": "2026-04-02T18:42:13.903Z",
+    "root": {
+      "id": "f280030d-4377-4cae-85f5-89bd74d83df7",
+      "name": "Neurology",
+      "description": "Career paths for Neurology in India",
+      "children": [
+        {
+          "id": "52500c7b-4044-4493-a6f7-9cbd460e2f9b",
+          "name": "Clinical Neurology",
+          "description": "The core clinical domain involving direct patient care, diagnosis, and treatment of neurological disorders. This is the primary path for MBBS graduates who wish to specialize in neurology through postgraduate training in India via NEET-PG and subsequent DM Neurology.",
+          "children": [
+            {
+              "id": "fe9b5893-0d66-462f-98e3-95fbc99d14cd",
+              "name": "General Neurologist",
+              "description": "A general neurologist diagnoses and manages a broad spectrum of neurological conditions including epilepsy, stroke, headache disorders, movement disorders, and neuromuscular diseases. Works in hospitals, clinics, or private practice.",
+              "children": [
+                {
+                  "id": "ce0655c5-0a72-4ed6-bf8c-5768fcd55803",
+                  "name": "Stroke Neurologist",
+                  "description": "Focuses exclusively on acute ischemic and hemorrhagic stroke management, thrombolysis, thrombectomy coordination, and stroke rehabilitation. Works in dedicated stroke units of tertiary hospitals.",
+                  "children": [
+                    {
+                      "id": "4927a321-6277-41c3-9f02-37c220f26b6c",
+                      "name": "Interventional Stroke Specialist",
+                      "description": "Works at the intersection of neurology and neuroradiology to perform mechanical thrombectomy and carotid stenting. Requires additional interventional training beyond DM Neurology.",
+                      "children": [],
+                      "skills": [
+                        "Catheter angiography",
+                        "Mechanical thrombectomy",
+                        "Carotid stenting",
+                        "Neuro-endovascular techniques",
+                        "Fluoroscopy",
+                        "Hemodynamic monitoring"
+                      ],
+                      "salaryRange": "40L - 1.2Cr / yr",
+                      "roadmap": "DM Neurology -> Fellowship in Neuro-intervention (SCTIMST/AIIMS) -> Join hybrid cath lab team -> Build independent caseload"
+                    },
+                    {
+                      "id": "a30f6ce0-4cae-4a05-ace7-e93f15ccee0b",
+                      "name": "Stroke Rehabilitation Specialist",
+                      "description": "Manages post-stroke recovery through coordinated multidisciplinary rehab involving physiotherapy, speech therapy, and occupational therapy. Often works in dedicated neuro-rehab centers.",
+                      "children": [],
+                      "skills": [
+                        "Functional outcome scoring (mRS",
+                        "Barthel)",
+                        "Spasticity management",
+                        "Botulinum toxin injections",
+                        "Neurorehabilitation protocols",
+                        "Team coordination"
+                      ],
+                      "salaryRange": "18L - 45L / yr",
+                      "roadmap": "DM Neurology -> Fellowship/training in Neurorehabilitation -> Join rehab center or set up integrated neuro-rehab clinic"
+                    }
+                  ],
+                  "skills": [
+                    "tPA administration",
+                    "NIHSS scoring",
+                    "Acute stroke imaging",
+                    "Thrombectomy coordination",
+                    "Stroke unit management",
+                    "Anticoagulation protocols"
+                  ],
+                  "salaryRange": "25L - 70L / yr",
+                  "roadmap": "DM Neurology -> Fellowship in Stroke/Vascular Neurology (NIMHANS/AIIMS) -> Join stroke unit -> Build expertise in mechanical thrombectomy coordination"
+                },
+                {
+                  "id": "ef4cea31-b69d-4c8f-a983-5eea56f172a2",
+                  "name": "Epileptologist",
+                  "description": "Specializes in the diagnosis and management of seizure disorders, including drug-resistant epilepsy, epilepsy surgery workup, and long-term EEG monitoring. Critical in tertiary epilepsy centers.",
+                  "children": [
+                    {
+                      "id": "00c7ad97-e1bb-40cb-98b4-556cd8483e3a",
+                      "name": "Pediatric Epileptologist",
+                      "description": "Manages seizure disorders specifically in children including infantile spasms, Dravet syndrome, and neonatal seizures. Works closely with pediatric neurology teams.",
+                      "children": [],
+                      "skills": [
+                        "Pediatric EEG interpretation",
+                        "ACTH therapy",
+                        "Ketogenic diet management",
+                        "Neonatal seizure protocols",
+                        "Child neurodevelopmental assessment"
+                      ],
+                      "salaryRange": "18L - 50L / yr",
+                      "roadmap": "DM Neurology or DM Pediatric Neurology -> Fellowship in Pediatric Epilepsy -> Join pediatric neurology department"
+                    },
+                    {
+                      "id": "89b6c96d-b0c4-4368-8321-323651d9a9dc",
+                      "name": "Epilepsy Surgery Coordinator",
+                      "description": "Coordinates pre-surgical epilepsy evaluation including SEEG, Wada test, and neuropsychological testing. Works as part of a multidisciplinary epilepsy surgery team.",
+                      "children": [],
+                      "skills": [
+                        "SEEG interpretation",
+                        "Phase II monitoring",
+                        "Neuropsychological testing basics",
+                        "Surgical candidacy evaluation",
+                        "Wada test coordination"
+                      ],
+                      "salaryRange": "22L - 55L / yr",
+                      "roadmap": "DM Neurology + Epilepsy Fellowship -> Join comprehensive epilepsy center -> Build multidisciplinary surgery team experience"
+                    }
+                  ],
+                  "skills": [
+                    "Advanced EEG interpretation",
+                    "Video-EEG monitoring",
+                    "Anti-epileptic drug management",
+                    "Epilepsy surgery workup",
+                    "Vagus nerve stimulator management",
+                    "Genetic counseling basics"
+                  ],
+                  "salaryRange": "20L - 60L / yr",
+                  "roadmap": "DM Neurology -> Fellowship in Epilepsy (NIMHANS/SGPGI) -> Join epilepsy monitoring unit -> Build surgical epilepsy program"
+                },
+                {
+                  "id": "0bdb6182-5bad-45ce-a685-905e92ba49ca",
+                  "name": "Movement Disorder Specialist",
+                  "description": "Focuses on Parkinson's disease, dystonia, tremors, chorea, and related conditions. Manages both medical and surgical (DBS) aspects of movement disorders in specialized clinics.",
+                  "children": [
+                    {
+                      "id": "06f900e7-f6ee-49a7-a28b-cda6a9fbe469",
+                      "name": "Deep Brain Stimulation (DBS) Specialist",
+                      "description": "Programs and manages patients with implanted DBS devices for Parkinson's, essential tremor, and dystonia. Works closely with neurosurgeons in a DBS program.",
+                      "children": [],
+                      "skills": [
+                        "DBS hardware knowledge",
+                        "Programming algorithms",
+                        "Impedance testing",
+                        "Battery management",
+                        "Patient selection criteria",
+                        "Complication management"
+                      ],
+                      "salaryRange": "30L - 80L / yr",
+                      "roadmap": "Movement Disorder Fellowship -> Training at DBS center (NIMHANS/Medanta) -> Independent DBS programming certification -> Build DBS clinic"
+                    }
+                  ],
+                  "skills": [
+                    "UPDRS scoring",
+                    "Botulinum toxin injections",
+                    "DBS programming",
+                    "Levodopa challenge test",
+                    "Gait analysis",
+                    "DATSCAN interpretation"
+                  ],
+                  "salaryRange": "22L - 65L / yr",
+                  "roadmap": "DM Neurology -> Fellowship in Movement Disorders (NIMHANS/CMC Vellore) -> Join movement disorder clinic -> Learn DBS programming"
+                }
+              ],
+              "skills": [
+                "Clinical examination",
+                "Lumbar puncture",
+                "EEG interpretation",
+                "EMG/NCS interpretation",
+                "Neuroimaging (CT/MRI) reading",
+                "Patient communication",
+                "Case documentation"
+              ],
+              "salaryRange": "15L - 40L / yr (government); 30L - 80L / yr (private)",
+              "roadmap": "Complete MBBS -> Clear NEET-PG -> MD General Medicine (3 yrs) -> Clear NEET-SS -> DM Neurology (3 yrs) -> Hospital posting or private practice"
+            },
+            {
+              "id": "c70f9c42-ded9-4832-b7ac-163f33ee1a7c",
+              "name": "Pediatric Neurologist",
+              "description": "Specializes in neurological conditions affecting infants, children, and adolescents including cerebral palsy, neurodevelopmental disorders, childhood epilepsy, and genetic neurological diseases.",
+              "children": [
+                {
+                  "id": "fe304c73-fb58-412c-a73d-812916d1cc43",
+                  "name": "Neonatal Neurologist",
+                  "description": "Manages brain injury in newborns including hypoxic-ischemic encephalopathy, neonatal seizures, and intraventricular hemorrhage. Works in NICUs of tertiary hospitals.",
+                  "children": [],
+                  "skills": [
+                    "Neonatal EEG/aEEG",
+                    "Therapeutic hypothermia protocols",
+                    "Neonatal neuroimaging",
+                    "HIE grading (Sarnat)",
+                    "NICU management",
+                    "MRI timing decisions"
+                  ],
+                  "salaryRange": "20L - 55L / yr",
+                  "roadmap": "DM Pediatric Neurology -> Neonatal Neurology Fellowship -> Join NICU team at tertiary center -> Build dedicated neonatal neurology service"
+                },
+                {
+                  "id": "493dae6c-65ab-438a-b7bc-2b8e915835fd",
+                  "name": "Neurodevelopmental Pediatrician",
+                  "description": "Evaluates and manages children with autism spectrum disorder, ADHD, intellectual disability, and learning disorders. Works in multidisciplinary developmental clinics.",
+                  "children": [],
+                  "skills": [
+                    "Developmental screening tools (DASII",
+                    "Vineland)",
+                    "Autism diagnostic tools (CARS",
+                    "ADOS basics)",
+                    "Behavioral intervention knowledge",
+                    "IEP coordination",
+                    "Neuropsychological testing"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "DM Pediatric Neurology -> Additional training in Neurodevelopment -> Join developmental clinic -> Build multidisciplinary team with psychologists and therapists"
+                }
+              ],
+              "skills": [
+                "Neurodevelopmental assessment",
+                "Pediatric EEG",
+                "Neonatal neurology",
+                "Genetic counseling",
+                "Feeding and swallowing assessment",
+                "Parent counseling"
+              ],
+              "salaryRange": "18L - 50L / yr",
+              "roadmap": "MBBS -> NEET-PG -> MD Pediatrics (3 yrs) -> NEET-SS -> DM Pediatric Neurology (3 yrs) -> Join pediatric hospital or academic center"
+            }
+          ]
+        },
+        {
+          "id": "d10d8274-91ac-4719-a680-c5720788ce86",
+          "name": "Academic and Research",
+          "description": "Careers focused on advancing neurological knowledge through research, teaching, and academic medicine. India has a growing neuroscience research ecosystem centered around NIMHANS, AIIMS, TIFR, and IISc.",
+          "children": [
+            {
+              "id": "e2b89feb-62de-4d42-b336-01a4f1dc6edd",
+              "name": "Academic Neurologist / Professor",
+              "description": "Combines clinical neurology with teaching and research at medical colleges. Responsible for training postgraduate students, conducting research, and contributing to clinical protocols.",
+              "children": [
+                {
+                  "id": "6d4a3f08-c94e-4116-bc32-bd30d25557e2",
+                  "name": "Clinician-Scientist",
+                  "description": "Conducts translational research bridging bedside observations with laboratory discoveries. Applies for extramural grants from DST, ICMR, DBT, and international bodies like NIH Fogarty.",
+                  "children": [
+                    {
+                      "id": "81daf3e9-05cb-49bb-a0df-cf792c7bb71e",
+                      "name": "Neurogenetics Researcher",
+                      "description": "Studies genetic underpinnings of neurological diseases like familial ALS, hereditary ataxias, and Huntington's disease. Uses next-generation sequencing and gene therapy approaches.",
+                      "children": [],
+                      "skills": [
+                        "NGS data interpretation",
+                        "Genetic counseling basics",
+                        "CRISPR basics",
+                        "Variant classification",
+                        "Pedigree analysis",
+                        "Bioinformatics tools"
+                      ],
+                      "salaryRange": "16L - 40L / yr",
+                      "roadmap": "DM Neurology -> PhD in Neurogenetics (IISc/NIMHANS) -> Postdoc -> Faculty or industry R&D position"
+                    },
+                    {
+                      "id": "1cb14a16-b2cf-485d-b043-812db3d2b690",
+                      "name": "Neuroimaging Researcher",
+                      "description": "Uses advanced MRI techniques (fMRI, DTI, spectroscopy) to study brain connectivity, neurodegeneration, and psychiatric-neurological overlap. Collaborates with physicists and engineers.",
+                      "children": [],
+                      "skills": [
+                        "FSL/SPM/FreeSurfer",
+                        "fMRI analysis",
+                        "DTI tractography",
+                        "Radiomics",
+                        "Python/MATLAB",
+                        "Scientific writing"
+                      ],
+                      "salaryRange": "15L - 38L / yr",
+                      "roadmap": "DM Neurology -> Research Fellowship in Neuroimaging -> PhD -> Join neuroimaging lab at NIMHANS/TIFR/IIT"
+                    }
+                  ],
+                  "skills": [
+                    "Clinical trial design",
+                    "Translational research",
+                    "Grant writing (ICMR/DBT formats)",
+                    "Biostatistics",
+                    "Manuscript preparation",
+                    "IRB/ethics submissions"
+                  ],
+                  "salaryRange": "14L - 35L / yr (salary) + grant overheads",
+                  "roadmap": "DM Neurology -> PhD or postdoctoral research -> Faculty position at AIIMS/NIMHANS/IISc -> Apply for ICMR/DST grants -> Build research lab"
+                }
+              ],
+              "skills": [
+                "Medical education",
+                "Research methodology",
+                "Grant writing",
+                "Scientific writing",
+                "Statistical analysis (SPSS/R)",
+                "Curriculum development",
+                "Mentorship"
+              ],
+              "salaryRange": "12L - 30L / yr (government medical college); 20L - 50L / yr (private deemed university)",
+              "roadmap": "DM Neurology -> Junior Residency/Senior Residency at medical college -> Assistant Professor -> Associate Professor -> Professor & HOD"
+            },
+            {
+              "id": "a2b1be03-a7c5-4ae9-ace5-ceda720fe1d3",
+              "name": "Basic Neuroscience Researcher",
+              "description": "Pursues fundamental research into brain function, neuronal circuits, synaptic biology, and neurodegenerative mechanisms. Typically requires a PhD and is based in research institutes rather than hospitals.",
+              "children": [
+                {
+                  "id": "a66d4f74-be15-4f61-a720-2e33b85e4afe",
+                  "name": "Cellular and Molecular Neurobiologist",
+                  "description": "Studies neuronal signaling, synaptic plasticity, and molecular mechanisms of diseases like Alzheimer's and Parkinson's using cell and animal models.",
+                  "children": [],
+                  "skills": [
+                    "Patch clamp electrophysiology",
+                    "Immunohistochemistry",
+                    "CRISPR-Cas9",
+                    "Flow cytometry",
+                    "Lentiviral vectors",
+                    "iPSC-derived neurons"
+                  ],
+                  "salaryRange": "10L - 28L / yr",
+                  "roadmap": "PhD in Neuroscience -> Postdoc at NCBS/TIFR -> Return fellowship (DBT/Ramanujan) -> Independent faculty position"
+                },
+                {
+                  "id": "e90ba4ce-ee57-48ac-9487-7e4787d39048",
+                  "name": "Computational Neuroscientist",
+                  "description": "Builds mathematical and computational models of neural circuits and brain function. Bridges neuroscience with physics, mathematics, and computer science.",
+                  "children": [],
+                  "skills": [
+                    "Python/Julia",
+                    "Neural ODEs",
+                    "Spiking neural networks",
+                    "NEURON simulator",
+                    "Machine learning",
+                    "Bayesian inference",
+                    "Signal processing"
+                  ],
+                  "salaryRange": "12L - 35L / yr (academia); 25L - 70L / yr (industry/neurotech)",
+                  "roadmap": "MBBS + strong math background -> PhD in Computational Neuroscience (TIFR/IISc/IMSc) -> Postdoc -> Faculty or neurotech industry"
+                }
+              ],
+              "skills": [
+                "Electrophysiology",
+                "Confocal microscopy",
+                "Cell culture",
+                "Western blot",
+                "PCR",
+                "Animal models of neurological disease",
+                "Scientific writing",
+                "Grant writing"
+              ],
+              "salaryRange": "8L - 25L / yr (postdoc/faculty in India); 40L - 80L / yr (abroad postdoc returning)",
+              "roadmap": "MBBS -> PhD in Neuroscience (TIFR/IISc/NBRC/CCMB) -> Postdoctoral fellowship (India or abroad) -> Faculty position at research institute"
+            }
+          ]
+        },
+        {
+          "id": "fdc2cb24-5429-42d7-9577-0dd911e7033c",
+          "name": "Neurosurgery Allied",
+          "description": "Although neurosurgery is a separate MCh specialty, neurologists and MBBS graduates can work in closely allied roles that support or complement neurosurgical practice, including neuro-critical care and neuromonitoring.",
+          "children": [
+            {
+              "id": "f72e5c37-833d-41ed-8dcc-95a8cc2a241f",
+              "name": "Neurointensivist",
+              "description": "Manages critically ill neurological and neurosurgical patients in the neuro-ICU. Handles raised intracranial pressure, status epilepticus, Guillain-Barre syndrome, and post-operative neurosurgical complications.",
+              "children": [
+                {
+                  "id": "d1965640-edd2-488c-9015-62b8a578ccb8",
+                  "name": "Neuro-ICU Director",
+                  "description": "Leads a dedicated neuro-intensive care unit, responsible for protocols, quality metrics, staff training, and complex case management in a tertiary neuroscience center.",
+                  "children": [],
+                  "skills": [
+                    "ICU administration",
+                    "Protocol development",
+                    "Mortality-morbidity review",
+                    "Team leadership",
+                    "Budget management",
+                    "Quality improvement"
+                  ],
+                  "salaryRange": "35L - 90L / yr",
+                  "roadmap": "DM Neurology + Neurocritical Care Fellowship -> Senior neurointensivist -> ICU director role at large hospital"
+                }
+              ],
+              "skills": [
+                "ICP monitoring",
+                "Multimodal neuromonitoring",
+                "Ventilator management",
+                "Vasopressor use",
+                "EEG in ICU",
+                "Brain death determination",
+                "CRRT basics"
+              ],
+              "salaryRange": "25L - 70L / yr",
+              "roadmap": "MBBS -> MD General Medicine or MD Anaesthesia -> DM Neurology or Fellowship in Neurocritical Care (NIMHANS/AIIMS) -> Join neuro-ICU"
+            },
+            {
+              "id": "51d1e05f-aa22-4363-8eb1-55ae768084b5",
+              "name": "Intraoperative Neurophysiologist (IONM)",
+              "description": "Monitors the functional integrity of the nervous system during neurosurgical, spinal, and vascular surgeries using real-time electrophysiological techniques to prevent intraoperative neurological injury.",
+              "children": [
+                {
+                  "id": "8194dc8d-2e89-4935-acac-b0d41a92c7d6",
+                  "name": "Spine Surgery Neurophysiologist",
+                  "description": "Specializes in IONM during complex spinal deformity corrections, spinal tumor resections, and spinal vascular surgeries where cord injury risk is high.",
+                  "children": [],
+                  "skills": [
+                    "D-wave monitoring",
+                    "Pedicle screw stimulation",
+                    "Dermatomal SSEP",
+                    "Threshold MEP",
+                    "Surgeon communication during alerts"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "IONM training -> Specialize in spine cases -> Join spine surgery center (Apollo/Medanta/Kokilaben) -> Build independent spine IONM practice"
+                }
+              ],
+              "skills": [
+                "SSEP",
+                "MEP",
+                "BAEP",
+                "EMG monitoring",
+                "EEG during carotid endarterectomy",
+                "Communication with surgical team",
+                "Artifact recognition",
+                "Equipment troubleshooting"
+              ],
+              "salaryRange": "12L - 35L / yr (employed); 20L - 60L / yr (independent/consulting)",
+              "roadmap": "MBBS -> DM Neurology or MD with neurophysiology training -> IONM certification (CNIM equivalent training) -> Join neurosurgery hospital team or start IONM consultancy"
+            }
+          ]
+        },
+        {
+          "id": "4f90bed7-7c99-44f4-8350-8804621306e0",
+          "name": "Neurodiagnostics and Technology",
+          "description": "Careers centered around operating, interpreting, and innovating neurophysiological diagnostic technologies. This is a growing field as EEG, EMG, and sleep labs expand across India.",
+          "children": [
+            {
+              "id": "3de1bfb9-57bf-4aaa-940b-afb139bf8e41",
+              "name": "Clinical Neurophysiologist",
+              "description": "Performs and interprets EEG, EMG/NCS, evoked potentials, and autonomic function tests. Works in hospital neurophysiology labs, diagnostic centers, or as a consultant.",
+              "children": [
+                {
+                  "id": "9e487d1a-cda3-48a1-8330-52772be64bab",
+                  "name": "Sleep Medicine Specialist",
+                  "description": "Diagnoses and manages sleep disorders including obstructive sleep apnea, narcolepsy, REM sleep behavior disorder, and insomnia. Conducts and interprets polysomnography.",
+                  "children": [
+                    {
+                      "id": "e2338801-19b1-490f-88ce-1a177f43903c",
+                      "name": "Pediatric Sleep Specialist",
+                      "description": "Manages sleep problems specific to children including childhood obstructive sleep apnea, parasomnias, and sleep in neurodevelopmental conditions like autism and ADHD.",
+                      "children": [],
+                      "skills": [
+                        "Pediatric PSG scoring",
+                        "Pediatric CPAP fitting",
+                        "Sleep hygiene counseling for children",
+                        "Parent education",
+                        "Developmental context of sleep"
+                      ],
+                      "salaryRange": "14L - 38L / yr",
+                      "roadmap": "DM Pediatric Neurology or DM Neurology -> Pediatric Sleep Fellowship -> Join pediatric sleep center"
+                    }
+                  ],
+                  "skills": [
+                    "PSG scoring (AASM guidelines)",
+                    "MSLT interpretation",
+                    "CPAP titration",
+                    "Actigraphy",
+                    "Insomnia CBT basics",
+                    "Circadian rhythm disorders"
+                  ],
+                  "salaryRange": "15L - 45L / yr",
+                  "roadmap": "DM Neurology -> Fellowship in Sleep Medicine (AIIMS/PGI) or Indian Sleep Disorders Association training -> Set up sleep lab -> Build integrated sleep clinic"
+                }
+              ],
+              "skills": [
+                "EEG recording and interpretation",
+                "EMG needle technique",
+                "NCS interpretation",
+                "Evoked potentials (VEP/BAEP/SSEP)",
+                "Autonomic testing",
+                "Report writing"
+              ],
+              "salaryRange": "12L - 35L / yr",
+              "roadmap": "MBBS -> DM Neurology with neurophysiology focus -> Join EEG/EMG lab -> Build expertise in advanced neurodiagnostics"
+            },
+            {
+              "id": "e7704cef-5a82-4d8f-8fd7-e50908e7fb58",
+              "name": "Neuroradiology (Diagnostic Support Role)",
+              "description": "MBBS graduates interested in neuroimaging can pursue MD Radiology followed by fellowship in Neuroradiology, reading brain and spine MRI/CT for neurological conditions.",
+              "children": [
+                {
+                  "id": "b068621c-3c5a-4af0-81a7-35bddebe156b",
+                  "name": "Interventional Neuroradiologist",
+                  "description": "Performs minimally invasive image-guided procedures including cerebral angiography, coiling of aneurysms, AVM embolization, and carotid angioplasty.",
+                  "children": [],
+                  "skills": [
+                    "Biplane DSA",
+                    "Coil embolization",
+                    "Flow diverters",
+                    "Liquid embolic agents",
+                    "Carotid stenting",
+                    "Stroke thrombectomy",
+                    "Radiation safety"
+                  ],
+                  "salaryRange": "35L - 1.5Cr / yr",
+                  "roadmap": "MD Radiodiagnosis -> Fellowship in Interventional Neuroradiology (SCTIMST/AIIMS/Bombay Hospital) -> Join hybrid neuro-intervention suite"
+                }
+              ],
+              "skills": [
+                "MRI brain/spine interpretation",
+                "CT perfusion",
+                "MR angiography",
+                "DWI/ADC maps",
+                "Functional MRI basics",
+                "Spine intervention basics"
+              ],
+              "salaryRange": "20L - 80L / yr",
+              "roadmap": "MBBS -> NEET-PG -> MD Radiodiagnosis (3 yrs) -> Fellowship in Neuroradiology (NIMHANS/AIIMS) -> Join neuroimaging department"
+            }
+          ]
+        },
+        {
+          "id": "66102516-bd8a-48bd-8080-eba7618e7122",
+          "name": "Industry and Non-Clinical",
+          "description": "Careers outside direct patient care that leverage the medical and neuroscience knowledge of MBBS graduates. These include pharma, medical devices, health technology, and regulatory roles.",
+          "children": [
+            {
+              "id": "99bf893e-94f6-4bf9-b787-7a21dc56c019",
+              "name": "Pharmaceutical Medical Affairs",
+              "description": "Works within the medical affairs division of pharma companies managing CNS drug portfolios. Provides scientific support to sales teams, liaises with key opinion leaders, and contributes to clinical trial design.",
+              "children": [
+                {
+                  "id": "955c86eb-7424-4ecd-88a2-c8812f09b865",
+                  "name": "CNS Clinical Trial Manager",
+                  "description": "Manages Phase II-IV clinical trials for CNS drugs including Alzheimer's, epilepsy, migraine, and MS therapeutics. Coordinates sites, monitors data, and ensures GCP compliance.",
+                  "children": [
+                    {
+                      "id": "4ce67388-89c8-47ae-a764-aebfff1dd48e",
+                      "name": "Regulatory Affairs Specialist (CNS)",
+                      "description": "Handles CDSCO submissions, IND/NDA dossier preparation, and ensures compliance for CNS drug approvals in India and international markets.",
+                      "children": [],
+                      "skills": [
+                        "CTD dossier preparation",
+                        "CDSCO guidelines",
+                        "ICH guidelines",
+                        "Pharmacovigilance",
+                        "Labeling regulations",
+                        "Import/export licensing"
+                      ],
+                      "salaryRange": "15L - 45L / yr",
+                      "roadmap": "MBBS -> Regulatory affairs certification (RAC) -> Join pharma regulatory team -> Senior regulatory manager -> Head of Regulatory Affairs"
+                    }
+                  ],
+                  "skills": [
+                    "ICH-GCP",
+                    "Protocol writing",
+                    "Site monitoring",
+                    "EDC systems (Medidata/Veeva)",
+                    "SAE reporting",
+                    "Regulatory submissions (CDSCO)",
+                    "Statistical analysis plans"
+                  ],
+                  "salaryRange": "18L - 50L / yr",
+                  "roadmap": "MBBS -> CRA/CRC role at CRO -> CNS-specific trial experience -> Clinical Trial Manager -> Head of Clinical Operations"
+                }
+              ],
+              "skills": [
+                "CNS pharmacology",
+                "Medical writing",
+                "Key opinion leader management",
+                "Clinical trial protocols",
+                "Regulatory submissions",
+                "Presentation skills",
+                "Market access"
+              ],
+              "salaryRange": "15L - 40L / yr (entry); 35L - 80L / yr (senior/director)",
+              "roadmap": "MBBS -> 1-2 yrs clinical experience -> Join pharma as Medical Advisor (CNS) -> MBA or regulatory certification optional -> Senior Medical Affairs Manager -> Director"
+            },
+            {
+              "id": "83f99096-3062-46b2-a6e9-fa2bc7d5ba48",
+              "name": "Neurotechnology and Health-Tech",
+              "description": "Works with companies developing brain-computer interfaces, AI-powered EEG devices, neurostimulation products, digital therapeutics for neurological conditions, and teleneurology platforms.",
+              "children": [
+                {
+                  "id": "3126fe39-2bb9-41cc-bb3b-ee2355137ed8",
+                  "name": "Clinical AI Developer (Neurology)",
+                  "description": "Designs and validates AI algorithms for neurological applications including automated EEG seizure detection, stroke imaging triage, and Parkinson's tremor monitoring via wearables.",
+                  "children": [
+                    {
+                      "id": "5f1dfc67-c21f-4c90-ae9c-56ee1c7bea7a",
+                      "name": "Digital Therapeutics Designer (Neurology)",
+                      "description": "Develops and validates software-based interventions for neurological conditions such as cognitive training apps for dementia, VR-based stroke rehab, or digital CBT for chronic pain.",
+                      "children": [],
+                      "skills": [
+                        "DTx regulatory pathway (FDA SaMD)",
+                        "Clinical study design for software",
+                        "UX research",
+                        "Unity/VR basics",
+                        "Evidence generation",
+                        "NICE evidence standards"
+                      ],
+                      "salaryRange": "18L - 50L / yr",
+                      "roadmap": "MBBS -> Product design or clinical research training -> Join DTx company -> Build clinical evidence for product -> Regulatory clearance pathway"
+                    }
+                  ],
+                  "skills": [
+                    "Deep learning (TensorFlow/PyTorch)",
+                    "EEG/fMRI preprocessing",
+                    "Clinical validation methodology",
+                    "IEC 62304",
+                    "DICOM standards",
+                    "Python",
+                    "Ethics in medical AI"
+                  ],
+                  "salaryRange": "25L - 70L / yr",
+                  "roadmap": "MBBS -> Online ML/AI courses (Coursera/fast.ai) -> Join AI health startup -> Build validated clinical AI product -> Senior AI Scientist or CTO"
+                }
+              ],
+              "skills": [
+                "Python/R programming basics",
+                "EEG signal processing",
+                "Machine learning for biosignals",
+                "Product management",
+                "Clinical validation design",
+                "FDA/CE marking basics",
+                "User research"
+              ],
+              "salaryRange": "20L - 60L / yr (startup); 30L - 90L / yr (MNC medtech)",
+              "roadmap": "MBBS -> Self-learn coding/ML basics -> Join neurotechnology startup as clinical lead -> MTech/MBA optional -> Product Manager or Clinical Science Director"
+            },
+            {
+              "id": "145ccf22-e853-4442-9732-ffb2eb7ce6f2",
+              "name": "Medical Writer / Science Communicator",
+              "description": "Creates scientific and medical content for journals, pharma companies, patient advocacy groups, health media, and educational platforms in the neurology space.",
+              "children": [
+                {
+                  "id": "c29e1b95-6030-495b-986f-d7a77c6989ee",
+                  "name": "Regulatory Medical Writer",
+                  "description": "Prepares clinical study reports, investigator brochures, and submission dossiers for CNS drugs for CDSCO, FDA, and EMA submissions. High attention to detail and regulatory knowledge essential.",
+                  "children": [],
+                  "skills": [
+                    "CTD Module 2 writing",
+                    "CSR writing",
+                    "IB preparation",
+                    "ICH E3/E6 guidelines",
+                    "Medical terminology",
+                    "Endnote/reference management"
+                  ],
+                  "salaryRange": "15L - 40L / yr",
+                  "roadmap": "MBBS -> Regulatory writing training -> Join CRO/pharma regulatory writing team -> Senior regulatory writer -> Principal writer"
+                }
+              ],
+              "skills": [
+                "Medical writing (regulatory/editorial)",
+                "AMA/Vancouver referencing",
+                "Systematic review methodology",
+                "ICMJE guidelines",
+                "SEO basics",
+                "Science communication",
+                "Video scripting"
+              ],
+              "salaryRange": "8L - 25L / yr (freelance/employed); 20L - 50L / yr (senior regulatory writer)",
+              "roadmap": "MBBS -> AMWA/EMWA certification or self-training -> Join CRO or pharma as medical writer -> Build neurology niche portfolio -> Senior writer or Editorial Director"
+            }
+          ]
+        },
+        {
+          "id": "bc89f232-88dc-4003-bcb2-91c2ebabf6f5",
+          "name": "Global and Public Health",
+          "description": "Careers addressing the burden of neurological disease at a population level through epidemiology, policy, global health programs, and international organizations.",
+          "children": [
+            {
+              "id": "02e965e2-2f96-4826-921a-22190a15c299",
+              "name": "Neuroepidemologist",
+              "description": "Studies the distribution and determinants of neurological diseases in populations. Works on burden of disease studies, risk factor analysis, and prevention programs for conditions like stroke, epilepsy, and dementia.",
+              "children": [
+                {
+                  "id": "a09f68e1-7c26-4ef6-a3d7-d7a5c956abd0",
+                  "name": "Global Neurology Advocate",
+                  "description": "Works with international organizations like WHO, World Federation of Neurology, and Epilepsy Foundation to improve access to neurological care in low-resource settings including India's rural areas.",
+                  "children": [],
+                  "skills": [
+                    "Global health frameworks",
+                    "Policy writing",
+                    "Program implementation",
+                    "Stakeholder engagement",
+                    "Grant writing (NIH Fogarty/Wellcome Trust)",
+                    "Data for advocacy"
+                  ],
+                  "salaryRange": "12L - 35L / yr (NGO India); 50L - 1Cr / yr (senior WHO/UN role)",
+                  "roadmap": "MBBS -> MPH (TISS/Johns Hopkins/London School) -> Join global neurology NGO -> Build field program experience -> Senior WHO technical officer"
+                }
+              ],
+              "skills": [
+                "Epidemiological study design",
+                "SPSS/STATA/R",
+                "Systematic reviews",
+                "Meta-analysis",
+                "Health surveys",
+                "GIS mapping",
+                "Policy brief writing"
+              ],
+              "salaryRange": "10L - 30L / yr (India); 40L - 80L / yr (WHO/international NGO)",
+              "roadmap": "MBBS -> MPH or MD Community Medicine -> Research fellowship in Neuroepidemiology -> Join ICMR/WHO/academic center -> Build national disease registry"
+            },
+            {
+              "id": "db2f27f0-f992-43d2-8b65-7c7bc2ce7cf4",
+              "name": "Health Policy Analyst (Neurology)",
+              "description": "Advises government bodies, think tanks, and health ministries on neurological disease burden, treatment gaps, insurance coverage, and drug access policy in India.",
+              "children": [
+                {
+                  "id": "03c9050d-87d5-4131-ae8d-a8155806a174",
+                  "name": "Health Technology Assessor",
+                  "description": "Evaluates the clinical and economic evidence for new neurological drugs, devices, and interventions to inform NPPA pricing decisions and insurance reimbursement under Ayushman Bharat.",
+                  "children": [],
+                  "skills": [
+                    "HTA methodology",
+                    "Systematic review",
+                    "Cost-effectiveness modelling (TreeAge)",
+                    "ICER calculation",
+                    "GRADE framework",
+                    "Reimbursement dossier preparation"
+                  ],
+                  "salaryRange": "12L - 35L / yr",
+                  "roadmap": "MBBS -> Masters in HTA or Health Economics -> Join HTAIn or NHSRC -> Build HTA dossiers for CNS drugs -> Senior HTA analyst or policy director"
+                }
+              ],
+              "skills": [
+                "Health economics",
+                "Policy analysis",
+                "DALY/QALY calculations",
+                "Budget impact modeling",
+                "Stakeholder interviews",
+                "Report writing",
+                "Parliamentary brief preparation"
+              ],
+              "salaryRange": "10L - 28L / yr (think tank); 20L - 50L / yr (government advisory/consultant)",
+              "roadmap": "MBBS -> MPH or Masters in Health Policy (IIM/IIPH/abroad) -> Join health policy think tank or NITI Aayog -> Contribute to National Health Policy neurology chapter -> Senior health advisor"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "masters_mba_corporate_finance_india",
+    "level": "masters",
+    "degree": "MBA",
+    "stream": "Corporate Finance",
+    "country": "India",
+    "createdAt": "2026-04-03T12:45:52.539Z",
+    "updatedAt": "2026-04-03T12:45:52.539Z",
+    "root": {
+      "id": "a90a6eb6-0f9a-48eb-b381-25a8e59eb9a8",
+      "name": "Corporate Finance",
+      "description": "Career paths for Corporate Finance in India",
+      "children": [
+        {
+          "id": "f22a27b2-7f0b-4cb7-9913-39197570df9f",
+          "name": "Core Corporate Finance",
+          "description": "Roles focused on managing a company’s financial health, including budgeting, forecasting, capital allocation, and strategic financial planning.",
+          "children": [
+            {
+              "id": "840928b5-983e-436a-8d68-3e9cbdea3b07",
+              "name": "Financial Planning & Analysis (FP&A)",
+              "description": "Involves budgeting, forecasting, variance analysis, and supporting management with strategic financial insights.",
+              "children": [
+                {
+                  "id": "b4250011-d97a-4145-9967-4a819ad4b56a",
+                  "name": "Corporate FP&A Specialist",
+                  "description": "Works within large enterprises to manage financial planning cycles and performance tracking.",
+                  "children": [
+                    {
+                      "id": "79e30d77-4ff6-4ad1-9d11-84217354a369",
+                      "name": "Strategic Finance Analyst",
+                      "description": "Supports long-term strategic decisions like expansion, pricing, and cost optimization using financial insights.",
+                      "children": [],
+                      "skills": [
+                        "Strategic thinking",
+                        "Financial modeling",
+                        "Data storytelling",
+                        "Scenario planning"
+                      ],
+                      "salaryRange": "15L - 35L / yr",
+                      "roadmap": "Gain FP&A experience -> Work on business strategy projects -> Build executive-level reports -> Transition to strategy roles"
+                    }
+                  ],
+                  "skills": [
+                    "Variance analysis",
+                    "Scenario modeling",
+                    "MIS reporting",
+                    "ERP systems (SAP/Oracle)"
+                  ],
+                  "salaryRange": "12L - 28L / yr",
+                  "roadmap": "Learn corporate finance concepts -> Work on monthly reports -> Automate dashboards -> Move into senior FP&A roles"
+                },
+                {
+                  "id": "9c7df277-06a6-4853-9843-c12978f9477e",
+                  "name": "Business Finance Partner",
+                  "description": "Works closely with business units to align financial goals with operational performance.",
+                  "children": [
+                    {
+                      "id": "78d5edb2-1421-4b7b-a3e7-557d9c543001",
+                      "name": "Commercial Finance Manager",
+                      "description": "Focuses on revenue, pricing strategies, and profitability optimization across products/services.",
+                      "children": [],
+                      "skills": [
+                        "Pricing models",
+                        "Profitability analysis",
+                        "Market understanding",
+                        "Negotiation"
+                      ],
+                      "salaryRange": "18L - 40L / yr",
+                      "roadmap": "Work in business finance -> Handle revenue streams -> Optimize pricing -> Transition to commercial leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Stakeholder management",
+                    "Financial planning",
+                    "Communication",
+                    "Business acumen"
+                  ],
+                  "salaryRange": "14L - 30L / yr",
+                  "roadmap": "Gain domain knowledge -> Work with cross-functional teams -> Provide decision support -> Move into leadership roles"
+                }
+              ],
+              "skills": [
+                "Advanced Excel",
+                "Financial modeling",
+                "Budgeting",
+                "Forecasting",
+                "Power BI",
+                "Business understanding"
+              ],
+              "salaryRange": "10L - 25L / yr",
+              "roadmap": "Build strong accounting base -> Learn financial modeling -> Gain internship in finance team -> Master forecasting tools -> Transition into FP&A roles"
+            }
+          ]
+        },
+        {
+          "id": "4c6be552-f71d-458f-8660-fbac5a65cb28",
+          "name": "Investment Banking & M&A",
+          "description": "High-impact finance roles dealing with capital raising, mergers, acquisitions, and corporate restructuring.",
+          "children": [
+            {
+              "id": "6066312d-c0b4-4d74-a1b5-a8920fad0259",
+              "name": "Investment Banking Analyst/Associate",
+              "description": "Works on financial modeling, pitch books, and deal execution for mergers, acquisitions, and capital raising.",
+              "children": [
+                {
+                  "id": "928bb397-14cf-4203-afab-6736ba10f732",
+                  "name": "Mergers & Acquisitions (M&A)",
+                  "description": "Focuses on advising companies on buying, selling, or merging businesses.",
+                  "children": [
+                    {
+                      "id": "f64d6dd3-88ca-43fe-a560-64d55cbfae3e",
+                      "name": "Deal Advisory Specialist",
+                      "description": "Executes transactions including financial structuring, valuation, and documentation.",
+                      "children": [],
+                      "skills": [
+                        "Advanced modeling",
+                        "Legal basics",
+                        "Risk assessment",
+                        "Communication"
+                      ],
+                      "salaryRange": "30L - 70L / yr",
+                      "roadmap": "Gain IB experience -> Handle deal execution -> Build client relationships -> Move into leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Due diligence",
+                    "Valuation",
+                    "Negotiation",
+                    "Financial analysis"
+                  ],
+                  "salaryRange": "25L - 60L / yr",
+                  "roadmap": "Learn deal lifecycle -> Work on transactions -> Handle due diligence -> Move into senior M&A roles"
+                },
+                {
+                  "id": "ac272672-65dd-47ed-b59f-d8b35e00c486",
+                  "name": "Capital Markets",
+                  "description": "Deals with equity and debt issuance, IPOs, and investor relations.",
+                  "children": [
+                    {
+                      "id": "833a074c-42e3-4ba8-9e41-df5b73a8574d",
+                      "name": "Equity Capital Markets (ECM) Analyst",
+                      "description": "Works on IPOs and equity offerings, advising clients on raising funds through equity.",
+                      "children": [],
+                      "skills": [
+                        "Valuation",
+                        "Market timing",
+                        "Investor communication",
+                        "Financial analysis"
+                      ],
+                      "salaryRange": "22L - 55L / yr",
+                      "roadmap": "Assist in IPO deals -> Learn regulatory processes -> Build expertise in equity markets -> Advance to ECM lead"
+                    }
+                  ],
+                  "skills": [
+                    "Market analysis",
+                    "Pricing strategies",
+                    "Regulatory knowledge",
+                    "Communication"
+                  ],
+                  "salaryRange": "20L - 50L / yr",
+                  "roadmap": "Learn capital markets -> Work on IPOs/bond issuance -> Build investor relations expertise -> Advance to senior roles"
+                }
+              ],
+              "skills": [
+                "Financial modeling",
+                "Valuation (DCF",
+                "comps)",
+                "Excel",
+                "PowerPoint",
+                "Deal structuring"
+              ],
+              "salaryRange": "18L - 45L / yr",
+              "roadmap": "Master valuation -> Build strong modeling skills -> Intern in IB firms -> Network aggressively -> Join IB roles"
+            }
+          ]
+        },
+        {
+          "id": "9e333334-0fc5-4442-a213-2c7f50dc91de",
+          "name": "Corporate Treasury & Risk",
+          "description": "Focuses on managing liquidity, cash flow, financial risks, and capital structure within organizations.",
+          "children": [
+            {
+              "id": "caacf19d-30c6-434d-8ce2-fcc3f694410c",
+              "name": "Treasury Analyst",
+              "description": "Manages company cash flows, banking relationships, and short-term investments.",
+              "children": [
+                {
+                  "id": "8e2e1027-e00e-4566-94ba-83d546bf35c2",
+                  "name": "Corporate Treasury Manager",
+                  "description": "Oversees liquidity planning, funding strategies, and risk hedging for large organizations.",
+                  "children": [
+                    {
+                      "id": "ac33791c-9bc4-4ddf-aa06-f91a5fc28c7a",
+                      "name": "FX & Derivatives Specialist",
+                      "description": "Manages foreign exchange risk and derivative instruments for hedging exposures.",
+                      "children": [],
+                      "skills": [
+                        "Forex markets",
+                        "Derivatives (options/futures)",
+                        "Risk modeling"
+                      ],
+                      "salaryRange": "20L - 45L / yr",
+                      "roadmap": "Learn financial instruments -> Work in treasury teams -> Specialize in risk hedging -> Move into global treasury"
+                    }
+                  ],
+                  "skills": [
+                    "Liquidity management",
+                    "Hedging strategies",
+                    "Financial instruments",
+                    "Risk control"
+                  ],
+                  "salaryRange": "18L - 40L / yr",
+                  "roadmap": "Gain treasury experience -> Handle cash management -> Learn derivatives -> Move into managerial roles"
+                },
+                {
+                  "id": "39313ea7-1595-41db-bd05-1df7e658043b",
+                  "name": "Risk Management",
+                  "description": "Identifies and mitigates financial risks related to market, credit, and operations.",
+                  "children": [
+                    {
+                      "id": "75521f63-fa18-4512-b9ee-eb0a4756e51b",
+                      "name": "Enterprise Risk Manager",
+                      "description": "Oversees organization-wide risk strategies and ensures regulatory compliance.",
+                      "children": [],
+                      "skills": [
+                        "Risk frameworks",
+                        "Governance",
+                        "Strategic thinking",
+                        "Compliance"
+                      ],
+                      "salaryRange": "20L - 50L / yr",
+                      "roadmap": "Gain risk experience -> Handle cross-functional risks -> Move into enterprise-level roles"
+                    }
+                  ],
+                  "skills": [
+                    "Risk analysis",
+                    "Financial modeling",
+                    "Regulatory frameworks",
+                    "Data analysis"
+                  ],
+                  "salaryRange": "12L - 28L / yr",
+                  "roadmap": "Learn risk frameworks -> Work in risk teams -> Build models -> Move into senior risk roles"
+                }
+              ],
+              "skills": [
+                "Cash flow management",
+                "Banking systems",
+                "Risk management",
+                "Excel"
+              ],
+              "salaryRange": "10L - 22L / yr",
+              "roadmap": "Learn treasury basics -> Work with banking operations -> Manage liquidity -> Move into treasury leadership"
+            }
+          ]
+        },
+        {
+          "id": "18fc3140-d05a-444f-8be0-f582a953ca0c",
+          "name": "Private Equity & Venture Capital",
+          "description": "Involves investing in private companies or startups, driving growth, and generating high returns.",
+          "children": [
+            {
+              "id": "16115376-4781-4756-9131-e32b947e6d88",
+              "name": "Private Equity Analyst/Associate",
+              "description": "Evaluates investment opportunities, conducts due diligence, and manages portfolio companies.",
+              "children": [
+                {
+                  "id": "8af725b7-23f1-4ec3-b312-15ad38cd1cad",
+                  "name": "Growth Equity",
+                  "description": "Invests in scaling companies with high growth potential.",
+                  "children": [
+                    {
+                      "id": "f990b26c-f83b-40ea-9538-154bf792cddd",
+                      "name": "Portfolio Manager (PE)",
+                      "description": "Works with invested companies to drive growth and improve performance.",
+                      "children": [],
+                      "skills": [
+                        "Strategy",
+                        "Operations",
+                        "Financial analysis",
+                        "Leadership"
+                      ],
+                      "salaryRange": "35L - 1Cr+ / yr",
+                      "roadmap": "Gain PE experience -> Manage investments -> Drive business growth -> Move to partner roles"
+                    }
+                  ],
+                  "skills": [
+                    "Market analysis",
+                    "Valuation",
+                    "Strategy",
+                    "Financial modeling"
+                  ],
+                  "salaryRange": "25L - 70L / yr",
+                  "roadmap": "Learn startup ecosystem -> Work on growth deals -> Build investment thesis -> Move into senior PE roles"
+                },
+                {
+                  "id": "b3ea0c49-7f6e-4607-907d-fcec380eb7e1",
+                  "name": "Venture Capital",
+                  "description": "Focuses on early-stage startup investments and innovation-driven businesses.",
+                  "children": [
+                    {
+                      "id": "c854793b-7233-42d0-a76d-c5043ebe3b91",
+                      "name": "VC Investment Associate",
+                      "description": "Sources deals, evaluates startups, and supports investment decisions.",
+                      "children": [],
+                      "skills": [
+                        "Pitch analysis",
+                        "Networking",
+                        "Financial modeling",
+                        "Market research"
+                      ],
+                      "salaryRange": "20L - 55L / yr",
+                      "roadmap": "Build startup network -> Analyze pitch decks -> Assist partners -> Move into senior VC roles"
+                    }
+                  ],
+                  "skills": [
+                    "Startup evaluation",
+                    "Networking",
+                    "Market research",
+                    "Financial analysis"
+                  ],
+                  "salaryRange": "18L - 50L / yr",
+                  "roadmap": "Understand startup ecosystem -> Work with founders -> Evaluate deals -> Move into VC partner roles"
+                }
+              ],
+              "skills": [
+                "Financial modeling",
+                "Valuation",
+                "Due diligence",
+                "Industry analysis"
+              ],
+              "salaryRange": "20L - 60L / yr",
+              "roadmap": "Gain IB experience -> Transition to PE -> Analyze deals -> Manage portfolio companies"
+            }
+          ]
+        },
+        {
+          "id": "fbf285e2-e26e-4d4d-b321-78a38878df94",
+          "name": "Consulting & Strategy Finance",
+          "description": "Combines finance expertise with business strategy to solve complex organizational problems.",
+          "children": [
+            {
+              "id": "f1d2022a-863f-4c61-b908-f3baed58d99e",
+              "name": "Financial Consultant",
+              "description": "Advises companies on financial strategy, restructuring, and performance improvement.",
+              "children": [
+                {
+                  "id": "c070fa99-d6a0-40f0-be5c-28ab49d54484",
+                  "name": "Corporate Strategy Consultant",
+                  "description": "Works on high-level business decisions like expansion, acquisitions, and market entry.",
+                  "children": [
+                    {
+                      "id": "c5500080-3c66-4c48-b0e6-6a2d1a2efff4",
+                      "name": "Strategy & Transformation Lead",
+                      "description": "Leads large transformation projects involving financial restructuring and business change.",
+                      "children": [],
+                      "skills": [
+                        "Leadership",
+                        "Change management",
+                        "Financial analysis",
+                        "Stakeholder management"
+                      ],
+                      "salaryRange": "30L - 80L / yr",
+                      "roadmap": "Gain consulting experience -> Lead projects -> Manage teams -> Move into CXO-level roles"
+                    }
+                  ],
+                  "skills": [
+                    "Strategic thinking",
+                    "Market analysis",
+                    "Financial modeling",
+                    "Presentation skills"
+                  ],
+                  "salaryRange": "20L - 50L / yr",
+                  "roadmap": "Gain consulting experience -> Work on strategy cases -> Build industry expertise -> Move into leadership"
+                },
+                {
+                  "id": "091eed51-fa79-4751-b280-f6290c5dd4ba",
+                  "name": "Restructuring & Turnaround",
+                  "description": "Focuses on improving distressed companies through financial restructuring.",
+                  "children": [
+                    {
+                      "id": "65280314-b349-4eed-8d12-f305d914dedd",
+                      "name": "Insolvency Professional",
+                      "description": "Handles bankruptcy processes and corporate insolvency cases under legal frameworks.",
+                      "children": [],
+                      "skills": [
+                        "Legal knowledge",
+                        "Financial restructuring",
+                        "Negotiation",
+                        "Compliance"
+                      ],
+                      "salaryRange": "25L - 70L / yr",
+                      "roadmap": "Gain certification (IBBI) -> Work on insolvency cases -> Build expertise -> Lead restructuring mandates"
+                    }
+                  ],
+                  "skills": [
+                    "Debt restructuring",
+                    "Financial analysis",
+                    "Negotiation",
+                    "Crisis management"
+                  ],
+                  "salaryRange": "18L - 45L / yr",
+                  "roadmap": "Learn restructuring frameworks -> Work on distressed cases -> Build expertise -> Move into senior advisory"
+                }
+              ],
+              "skills": [
+                "Problem-solving",
+                "Financial modeling",
+                "Communication",
+                "Strategy thinking"
+              ],
+              "salaryRange": "15L - 35L / yr",
+              "roadmap": "Join consulting firm -> Build analytical skills -> Work on client projects -> Move into senior consulting roles"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "school_b_tech_mechanical_india",
+    "level": "school",
+    "degree": "B.Tech",
+    "stream": "Mechanical",
+    "country": "India",
+    "createdAt": "2026-04-03T13:21:43.312Z",
+    "updatedAt": "2026-04-03T13:21:43.312Z",
+    "root": {
+      "id": "bff637be-e9af-400d-9531-94159786d836",
+      "name": "Mechanical",
+      "description": "Career paths for Mechanical in India",
+      "children": [
+        {
+          "id": "cb37df53-7e84-45d0-8573-d7669baf304c",
+          "name": "Core Mechanical Engineering",
+          "description": "Traditional mechanical engineering roles involving design, analysis, manufacturing, and maintenance of machines and mechanical systems across industries.",
+          "children": [
+            {
+              "id": "777c92d6-0dad-4820-a8e7-bd3ba935fa2a",
+              "name": "Design Engineer",
+              "description": "Responsible for designing mechanical components, machines, and systems using engineering principles and CAD tools.",
+              "children": [
+                {
+                  "id": "637e960d-6ab1-4d04-8ad6-52f8c60af3c3",
+                  "name": "Product Design Engineer",
+                  "description": "Designs consumer or industrial products focusing on functionality, aesthetics, and manufacturability.",
+                  "children": [
+                    {
+                      "id": "f2a59f7c-7f52-4a3b-ab52-28bdb83c9fbb",
+                      "name": "Industrial Designer",
+                      "description": "Focuses on user-centric design, ergonomics, and product aesthetics in addition to engineering functionality.",
+                      "children": [],
+                      "skills": [
+                        "Sketching",
+                        "CAD",
+                        "Ergonomics",
+                        "Creativity",
+                        "UI/UX basics"
+                      ],
+                      "salaryRange": "6L - 15L / yr",
+                      "roadmap": "Develop creativity -> Learn design tools -> Build portfolio -> Work in design studios"
+                    }
+                  ],
+                  "skills": [
+                    "CAD",
+                    "Prototyping",
+                    "Design thinking",
+                    "Material selection"
+                  ],
+                  "salaryRange": "5L - 12L / yr",
+                  "roadmap": "Learn product design principles -> Build prototypes -> Work on real-world projects -> Join product companies"
+                },
+                {
+                  "id": "34264b1d-5c7a-44f1-b3b7-fd964d8613e4",
+                  "name": "Automotive Design",
+                  "description": "Specializes in designing automotive components like engines, chassis, and vehicle systems.",
+                  "children": [
+                    {
+                      "id": "5a68b52a-2db5-4e8c-9bef-accdda32babc",
+                      "name": "Vehicle Design Engineer",
+                      "description": "Designs and optimizes vehicle components for performance, safety, and efficiency.",
+                      "children": [],
+                      "skills": [
+                        "CAD",
+                        "Simulation",
+                        "Vehicle dynamics",
+                        "Testing"
+                      ],
+                      "salaryRange": "6L - 16L / yr",
+                      "roadmap": "Build automotive knowledge -> Work on simulation tools -> Gain industry exposure -> Move into OEM roles"
+                    }
+                  ],
+                  "skills": [
+                    "CAD",
+                    "Automotive systems",
+                    "Dynamics",
+                    "Simulation tools"
+                  ],
+                  "salaryRange": "5L - 14L / yr",
+                  "roadmap": "Learn vehicle dynamics -> Work on automotive projects -> Intern in auto companies -> Specialize in vehicle design"
+                }
+              ],
+              "skills": [
+                "CAD (SolidWorks",
+                "CATIA)",
+                "Engineering drawing",
+                "Mechanics",
+                "Material science",
+                "Problem-solving"
+              ],
+              "salaryRange": "4L - 10L / yr",
+              "roadmap": "Build physics & math fundamentals in school -> Learn CAD basics in college -> Work on design projects -> Intern in core companies -> Apply for design roles"
+            }
+          ]
+        },
+        {
+          "id": "840c5b62-cff5-4c45-a5e5-f5678f8fd114",
+          "name": "Manufacturing & Production",
+          "description": "Focuses on production processes, plant operations, and optimization of manufacturing systems in industries.",
+          "children": [
+            {
+              "id": "41dc4d52-985c-4275-870b-67684a13da1c",
+              "name": "Production Engineer",
+              "description": "Oversees manufacturing processes, ensuring efficiency, quality, and cost-effectiveness in production lines.",
+              "children": [
+                {
+                  "id": "defcb418-27c1-4f10-94eb-5211ba31911b",
+                  "name": "Process Engineer",
+                  "description": "Designs and optimizes manufacturing processes for efficiency and productivity.",
+                  "children": [
+                    {
+                      "id": "9de84216-bc6e-48bd-9de0-de2455cc537d",
+                      "name": "Lean Manufacturing Specialist",
+                      "description": "Focuses on eliminating waste and improving efficiency using lean methodologies.",
+                      "children": [],
+                      "skills": [
+                        "Lean tools",
+                        "Kaizen",
+                        "Value stream mapping",
+                        "Continuous improvement"
+                      ],
+                      "salaryRange": "6L - 14L / yr",
+                      "roadmap": "Learn lean principles -> Work on plant improvements -> Get certifications -> Lead optimization projects"
+                    }
+                  ],
+                  "skills": [
+                    "Process optimization",
+                    "Six Sigma",
+                    "Data analysis",
+                    "Industrial engineering"
+                  ],
+                  "salaryRange": "5L - 11L / yr",
+                  "roadmap": "Learn process improvement tools -> Work on production data -> Implement optimizations -> Grow into process leadership"
+                },
+                {
+                  "id": "f832f692-e2ce-4d6e-936b-4c1f567ba914",
+                  "name": "Quality Engineer",
+                  "description": "Ensures products meet quality standards and regulatory requirements.",
+                  "children": [
+                    {
+                      "id": "5d0df16f-b7a0-401c-94de-33c7da8e15d5",
+                      "name": "Six Sigma Black Belt",
+                      "description": "Leads high-impact process improvement and quality initiatives.",
+                      "children": [],
+                      "skills": [
+                        "Six Sigma",
+                        "Statistical analysis",
+                        "Leadership",
+                        "Process optimization"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Gain quality experience -> Get Six Sigma certification -> Lead projects -> Move into senior roles"
+                    }
+                  ],
+                  "skills": [
+                    "Quality control",
+                    "Six Sigma",
+                    "Inspection tools",
+                    "Root cause analysis"
+                  ],
+                  "salaryRange": "4L - 10L / yr",
+                  "roadmap": "Learn quality tools -> Work in QA departments -> Conduct audits -> Move into quality leadership"
+                }
+              ],
+              "skills": [
+                "Manufacturing processes",
+                "Lean principles",
+                "Quality control",
+                "Operations management"
+              ],
+              "salaryRange": "4L - 9L / yr",
+              "roadmap": "Learn manufacturing basics -> Gain shop floor exposure -> Work in factories -> Move into supervisory roles"
+            }
+          ]
+        },
+        {
+          "id": "822614ac-e231-4286-827a-ff11f0d01bfd",
+          "name": "Core Mechanical Systems",
+          "description": "Deals with thermodynamics, fluid mechanics, and energy systems used in industries like power plants, HVAC, and oil & gas.",
+          "children": [
+            {
+              "id": "38b2f489-4577-4fcf-b591-9b9373af60b4",
+              "name": "Thermal Engineer",
+              "description": "Works on heat transfer, thermodynamics, and energy systems such as engines and power plants.",
+              "children": [
+                {
+                  "id": "1f6d8f68-0006-4669-94bb-333e7b6a3528",
+                  "name": "HVAC Engineer",
+                  "description": "Designs heating, ventilation, and air conditioning systems for buildings and industries.",
+                  "children": [
+                    {
+                      "id": "6295acc8-b271-44f4-a253-2315ae022d08",
+                      "name": "Building Services Engineer",
+                      "description": "Designs and manages mechanical systems in buildings including HVAC, plumbing, and fire systems.",
+                      "children": [],
+                      "skills": [
+                        "System design",
+                        "CAD",
+                        "Project management",
+                        "Regulations"
+                      ],
+                      "salaryRange": "6L - 14L / yr",
+                      "roadmap": "Learn building systems -> Work on projects -> Gain site experience -> Move into consultancy roles"
+                    }
+                  ],
+                  "skills": [
+                    "HVAC design",
+                    "Load calculations",
+                    "Energy efficiency",
+                    "AutoCAD"
+                  ],
+                  "salaryRange": "5L - 11L / yr",
+                  "roadmap": "Learn HVAC systems -> Work on building projects -> Gain certifications -> Move into senior roles"
+                },
+                {
+                  "id": "dba356cd-c286-4b6d-b02f-9324def690a4",
+                  "name": "Power Plant Engineer",
+                  "description": "Works in thermal, nuclear, or renewable power plants managing energy production systems.",
+                  "children": [
+                    {
+                      "id": "d0aa39f1-23b4-4fc4-8e7e-dc6d0f0df008",
+                      "name": "Energy Analyst",
+                      "description": "Analyzes energy consumption and efficiency, focusing on optimization and sustainability.",
+                      "children": [],
+                      "skills": [
+                        "Energy modeling",
+                        "Data analysis",
+                        "Sustainability",
+                        "Reporting"
+                      ],
+                      "salaryRange": "7L - 18L / yr",
+                      "roadmap": "Learn energy systems -> Analyze data -> Work on sustainability projects -> Move into consulting"
+                    }
+                  ],
+                  "skills": [
+                    "Thermodynamics",
+                    "Turbine systems",
+                    "Maintenance",
+                    "Operations"
+                  ],
+                  "salaryRange": "6L - 15L / yr",
+                  "roadmap": "Learn power systems -> Join energy sector -> Gain plant experience -> Move into senior operations"
+                }
+              ],
+              "skills": [
+                "Thermodynamics",
+                "Heat transfer",
+                "Fluid mechanics",
+                "Simulation (ANSYS)"
+              ],
+              "salaryRange": "5L - 12L / yr",
+              "roadmap": "Master core subjects -> Work on simulation tools -> Intern in energy sector -> Join core companies"
+            }
+          ]
+        },
+        {
+          "id": "6d5d5e38-10f8-4d0f-93c2-65b21d3e4a18",
+          "name": "Robotics & Automation",
+          "description": "Combines mechanical engineering with electronics and software to build automated systems and intelligent machines.",
+          "children": [
+            {
+              "id": "e1da77ad-39a9-4719-a2af-bf2464e58dc4",
+              "name": "Robotics Engineer",
+              "description": "Designs and develops robots and automated systems for industries like manufacturing and healthcare.",
+              "children": [
+                {
+                  "id": "a6caf620-a404-43c9-a128-1ea3aea64aa2",
+                  "name": "Industrial Automation",
+                  "description": "Focuses on automating industrial processes using PLCs and control systems.",
+                  "children": [
+                    {
+                      "id": "933e65a9-3c63-40d6-840f-2282b7dabca1",
+                      "name": "Automation Engineer",
+                      "description": "Designs and maintains automated production systems for efficiency and reliability.",
+                      "children": [],
+                      "skills": [
+                        "PLC",
+                        "SCADA",
+                        "Troubleshooting",
+                        "Process control"
+                      ],
+                      "salaryRange": "6L - 16L / yr",
+                      "roadmap": "Gain automation skills -> Work on industrial systems -> Optimize processes -> Lead automation projects"
+                    }
+                  ],
+                  "skills": [
+                    "PLC programming",
+                    "SCADA",
+                    "Control systems",
+                    "Electrical basics"
+                  ],
+                  "salaryRange": "5L - 15L / yr",
+                  "roadmap": "Learn PLC/SCADA -> Work in factories -> Implement automation -> Move into senior roles"
+                },
+                {
+                  "id": "05e1c7d7-d0fa-4068-8821-3e17d965627c",
+                  "name": "Mechatronics",
+                  "description": "Integrates mechanical, electrical, and software systems for advanced product development.",
+                  "children": [
+                    {
+                      "id": "72f431f3-1c8b-41bf-8df6-375939160fa4",
+                      "name": "Robotics Systems Developer",
+                      "description": "Builds intelligent robotic systems integrating hardware and software.",
+                      "children": [],
+                      "skills": [
+                        "ROS",
+                        "AI basics",
+                        "Sensors",
+                        "Control systems"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Learn robotics frameworks -> Build complex systems -> Work in R&D -> Move into advanced robotics"
+                    }
+                  ],
+                  "skills": [
+                    "Embedded systems",
+                    "Sensors",
+                    "CAD",
+                    "Programming"
+                  ],
+                  "salaryRange": "6L - 17L / yr",
+                  "roadmap": "Learn interdisciplinary skills -> Build projects -> Work on smart systems -> Join R&D roles"
+                }
+              ],
+              "skills": [
+                "Robotics",
+                "Programming (Python/C++)",
+                "Sensors",
+                "Control systems"
+              ],
+              "salaryRange": "6L - 18L / yr",
+              "roadmap": "Learn basics of robotics -> Build projects -> Work with Arduino/ROS -> Intern in robotics firms"
+            }
+          ]
+        },
+        {
+          "id": "4fb44f20-c4c1-4312-aee6-f6c5d20e59df",
+          "name": "Emerging & Interdisciplinary Fields",
+          "description": "Modern career paths combining mechanical engineering with AI, sustainability, and advanced technologies.",
+          "children": [
+            {
+              "id": "93fefb58-4b95-4071-b6aa-1baa7db52268",
+              "name": "EV (Electric Vehicle) Engineer",
+              "description": "Works on electric vehicle systems including battery, motor, and powertrain design.",
+              "children": [
+                {
+                  "id": "23615473-8581-49e8-b6ca-ca9c81cf5813",
+                  "name": "Battery Systems Engineer",
+                  "description": "Focuses on battery design, performance, and thermal management in EVs.",
+                  "children": [
+                    {
+                      "id": "d80db776-75b7-447c-b1cc-dcf0fd0d3e19",
+                      "name": "Energy Storage Specialist",
+                      "description": "Works on advanced energy storage technologies beyond EVs like grid storage.",
+                      "children": [],
+                      "skills": [
+                        "Energy systems",
+                        "Materials science",
+                        "Simulation",
+                        "Research"
+                      ],
+                      "salaryRange": "10L - 25L / yr",
+                      "roadmap": "Learn energy storage tech -> Work on research projects -> Join advanced tech firms"
+                    }
+                  ],
+                  "skills": [
+                    "Battery chemistry",
+                    "Thermal systems",
+                    "Simulation",
+                    "Testing"
+                  ],
+                  "salaryRange": "8L - 22L / yr",
+                  "roadmap": "Learn battery tech -> Work on EV systems -> Gain R&D exposure -> Move into advanced roles"
+                },
+                {
+                  "id": "95838f03-57bc-4c0b-b013-f91c0a6bd3c5",
+                  "name": "AI in Mechanical Systems",
+                  "description": "Applies machine learning to predictive maintenance, optimization, and smart manufacturing.",
+                  "children": [
+                    {
+                      "id": "f44bc7b1-00d8-4451-a476-33458325b1fa",
+                      "name": "Predictive Maintenance Engineer",
+                      "description": "Uses data and AI to predict failures in machines and reduce downtime.",
+                      "children": [],
+                      "skills": [
+                        "Data analytics",
+                        "ML models",
+                        "IoT sensors",
+                        "Reliability engineering"
+                      ],
+                      "salaryRange": "10L - 28L / yr",
+                      "roadmap": "Learn ML + IoT -> Work on industrial data -> Build predictive systems -> Move into Industry 4.0 roles"
+                    }
+                  ],
+                  "skills": [
+                    "Python",
+                    "ML basics",
+                    "Data analysis",
+                    "IoT"
+                  ],
+                  "salaryRange": "8L - 25L / yr",
+                  "roadmap": "Learn coding + ML -> Work on predictive models -> Integrate with mechanical systems -> Join smart manufacturing firms"
+                }
+              ],
+              "skills": [
+                "EV systems",
+                "Battery technology",
+                "Power electronics",
+                "Simulation"
+              ],
+              "salaryRange": "7L - 20L / yr",
+              "roadmap": "Learn EV fundamentals -> Work on projects -> Intern in EV startups -> Join automotive firms"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ug_b_arch_urban_planning_india",
+    "level": "undergraduate",
+    "degree": "B.Arch",
+    "stream": "Urban Planning",
+    "country": "India",
+    "createdAt": "2026-04-03T13:51:44.251Z",
+    "updatedAt": "2026-04-03T13:51:44.252Z",
+    "root": {
+      "id": "41c5813d-3263-4bee-bf5b-6cdf87745a01",
+      "name": "Urban Planning",
+      "description": "Career paths for Urban Planning in India",
+      "children": [
+        {
+          "id": "a9eaaddd-fc97-4e47-9f59-3d56c3fb780a",
+          "name": "Core Urban Planning",
+          "description": "Focuses on designing and managing urban spaces, infrastructure, and land use to create sustainable, functional, and livable cities.",
+          "children": [
+            {
+              "id": "075675a5-fd44-45fb-85ae-f4face48c03a",
+              "name": "Urban Planner",
+              "description": "Works on city layouts, zoning regulations, land use planning, and development strategies for urban and semi-urban areas.",
+              "children": [
+                {
+                  "id": "12c01896-9de0-44f6-8cba-cc58c1fe204f",
+                  "name": "Land Use Planner",
+                  "description": "Specializes in zoning, land allocation, and optimizing land resources for residential, commercial, and industrial use.",
+                  "children": [
+                    {
+                      "id": "c72fb70d-d4a9-4183-af8b-f0a2bd27fd2f",
+                      "name": "Zoning Specialist",
+                      "description": "Ensures compliance with zoning laws and assists in drafting zoning regulations for urban development.",
+                      "children": [],
+                      "skills": [
+                        "Legal frameworks",
+                        "GIS",
+                        "Urban policies",
+                        "Documentation"
+                      ],
+                      "salaryRange": "6L - 14L / yr",
+                      "roadmap": "Study urban laws -> Work with planning authorities -> Draft zoning plans -> Move into policy advisory"
+                    }
+                  ],
+                  "skills": [
+                    "Zoning laws",
+                    "GIS",
+                    "Spatial analysis",
+                    "Regulatory frameworks"
+                  ],
+                  "salaryRange": "5L - 12L / yr",
+                  "roadmap": "Learn zoning regulations -> Work on land allocation projects -> Gain exposure to master plans -> Join consulting firms"
+                },
+                {
+                  "id": "55a8f8af-e25b-47b0-8d17-ac2956f8c794",
+                  "name": "Master Planning",
+                  "description": "Focuses on long-term city development plans including infrastructure, transportation, and sustainability.",
+                  "children": [
+                    {
+                      "id": "2e29bb1a-4b3c-4801-b613-ae6a5790c745",
+                      "name": "City Development Planner",
+                      "description": "Designs comprehensive development strategies for cities, balancing growth, infrastructure, and sustainability.",
+                      "children": [],
+                      "skills": [
+                        "Urban strategy",
+                        "Data analysis",
+                        "GIS",
+                        "Policy design"
+                      ],
+                      "salaryRange": "7L - 18L / yr",
+                      "roadmap": "Gain planning experience -> Work on master plans -> Collaborate with governments -> Move into senior planning roles"
+                    }
+                  ],
+                  "skills": [
+                    "Strategic planning",
+                    "GIS",
+                    "Infrastructure planning",
+                    "Stakeholder coordination"
+                  ],
+                  "salaryRange": "6L - 15L / yr",
+                  "roadmap": "Work on city-level projects -> Learn integrated planning -> Build portfolio -> Join large planning consultancies"
+                }
+              ],
+              "skills": [
+                "Urban design",
+                "GIS",
+                "AutoCAD",
+                "Policy understanding",
+                "Data analysis"
+              ],
+              "salaryRange": "4L - 10L / yr",
+              "roadmap": "Build planning fundamentals -> Learn GIS & mapping tools -> Work on studio projects -> Intern with planning firms -> Apply for planner roles"
+            }
+          ]
+        },
+        {
+          "id": "78343b9f-e98f-49ea-a61b-2ed62dfb520c",
+          "name": "Transportation & Infrastructure Planning",
+          "description": "Focuses on planning efficient transportation systems and infrastructure networks for cities.",
+          "children": [
+            {
+              "id": "1f1020c1-623a-4ed9-89ed-87b6e5c077c5",
+              "name": "Transportation Planner",
+              "description": "Designs transport systems including roads, public transit, and traffic management solutions.",
+              "children": [
+                {
+                  "id": "5ca3636e-9a64-4bb3-991b-10d7707acbe4",
+                  "name": "Traffic Engineer",
+                  "description": "Works on traffic flow optimization, signal systems, and road safety improvements.",
+                  "children": [
+                    {
+                      "id": "411fbd0e-2936-40e2-97e4-77810e7f7537",
+                      "name": "Intelligent Transport Systems (ITS) Specialist",
+                      "description": "Uses technology to improve traffic management through sensors, AI, and smart systems.",
+                      "children": [],
+                      "skills": [
+                        "IoT",
+                        "Data analytics",
+                        "Traffic systems",
+                        "Programming basics"
+                      ],
+                      "salaryRange": "8L - 18L / yr",
+                      "roadmap": "Learn ITS technologies -> Work on smart city projects -> Integrate tech with planning -> Move into smart mobility"
+                    }
+                  ],
+                  "skills": [
+                    "Traffic simulation",
+                    "Data analysis",
+                    "Road design",
+                    "Safety standards"
+                  ],
+                  "salaryRange": "6L - 14L / yr",
+                  "roadmap": "Learn traffic modeling -> Work on real projects -> Analyze traffic data -> Move into advanced roles"
+                },
+                {
+                  "id": "02b7f242-c06e-49cc-9fcf-05737b27f552",
+                  "name": "Public Transit Planning",
+                  "description": "Designs metro, bus, and rail systems for efficient urban mobility.",
+                  "children": [
+                    {
+                      "id": "298bb570-6e77-4fbf-991b-ec0e831a8e45",
+                      "name": "Metro Rail Planner",
+                      "description": "Works on planning and expansion of metro rail networks in cities.",
+                      "children": [],
+                      "skills": [
+                        "Infrastructure planning",
+                        "GIS",
+                        "Project management",
+                        "Policy"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Work on rail projects -> Understand large-scale infra -> Collaborate with agencies -> Move into leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Transit modeling",
+                    "GIS",
+                    "Policy planning",
+                    "Demand forecasting"
+                  ],
+                  "salaryRange": "6L - 15L / yr",
+                  "roadmap": "Study transit systems -> Work on metro/bus projects -> Analyze ridership -> Move into senior transit roles"
+                }
+              ],
+              "skills": [
+                "Traffic analysis",
+                "GIS",
+                "Transportation modeling",
+                "Data analysis"
+              ],
+              "salaryRange": "5L - 12L / yr",
+              "roadmap": "Learn transportation systems -> Work on traffic studies -> Use simulation tools -> Join infrastructure firms"
+            }
+          ]
+        },
+        {
+          "id": "149c65c1-4fbe-4609-9fce-c46b26918094",
+          "name": "Environmental & Sustainable Planning",
+          "description": "Focuses on integrating sustainability, environmental protection, and climate resilience into urban development.",
+          "children": [
+            {
+              "id": "ffd03cc1-9b7a-42df-9a00-ade3103161e8",
+              "name": "Environmental Planner",
+              "description": "Works on minimizing environmental impact of urban projects and ensuring sustainable development.",
+              "children": [
+                {
+                  "id": "773adf7b-2485-433a-839b-db4ad3db4a95",
+                  "name": "Climate Resilience Planning",
+                  "description": "Focuses on designing cities that can withstand climate change impacts like floods and heatwaves.",
+                  "children": [
+                    {
+                      "id": "5ff396e0-df13-4397-bc0c-2819980f310f",
+                      "name": "Disaster Management Planner",
+                      "description": "Plans urban systems to handle disasters like floods, earthquakes, and cyclones.",
+                      "children": [],
+                      "skills": [
+                        "Risk assessment",
+                        "Emergency planning",
+                        "GIS",
+                        "Policy"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Learn disaster frameworks -> Work with agencies -> Plan mitigation systems -> Move into leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Climate modeling",
+                    "GIS",
+                    "Risk assessment",
+                    "Sustainability"
+                  ],
+                  "salaryRange": "7L - 18L / yr",
+                  "roadmap": "Study climate science -> Work on resilience projects -> Collaborate with NGOs/government -> Move into global roles"
+                },
+                {
+                  "id": "5822e2c6-0649-4345-a69d-8fbed2a235f8",
+                  "name": "Sustainable Urban Design",
+                  "description": "Integrates green spaces, renewable energy, and eco-friendly practices into city planning.",
+                  "children": [
+                    {
+                      "id": "b9def5ec-578c-4fe9-864a-659493506483",
+                      "name": "Green Infrastructure Specialist",
+                      "description": "Designs eco-friendly infrastructure like parks, water systems, and green corridors.",
+                      "children": [],
+                      "skills": [
+                        "Landscape design",
+                        "GIS",
+                        "Ecology",
+                        "Planning"
+                      ],
+                      "salaryRange": "7L - 18L / yr",
+                      "roadmap": "Learn ecological design -> Work on urban projects -> Build expertise -> Move into consultancy"
+                    }
+                  ],
+                  "skills": [
+                    "Green design",
+                    "Energy systems",
+                    "GIS",
+                    "Urban ecology"
+                  ],
+                  "salaryRange": "6L - 16L / yr",
+                  "roadmap": "Learn sustainability principles -> Work on green projects -> Build portfolio -> Join global firms"
+                }
+              ],
+              "skills": [
+                "Environmental impact assessment",
+                "GIS",
+                "Sustainability",
+                "Policy analysis"
+              ],
+              "salaryRange": "5L - 12L / yr",
+              "roadmap": "Learn environmental laws -> Work on impact assessments -> Join sustainability projects -> Grow into senior roles"
+            }
+          ]
+        },
+        {
+          "id": "8f4b6c98-b165-4abc-9162-eeede3a93e45",
+          "name": "Real Estate & Urban Development",
+          "description": "Involves planning and managing real estate projects, urban expansion, and infrastructure development.",
+          "children": [
+            {
+              "id": "82e6e77e-c773-44a8-9f01-5eec919fe415",
+              "name": "Real Estate Planner",
+              "description": "Works on land development projects, feasibility studies, and real estate investment planning.",
+              "children": [
+                {
+                  "id": "8d7bea68-03c4-44c0-b957-0ae39ee730f2",
+                  "name": "Urban Development Consultant",
+                  "description": "Advises on large-scale urban projects including townships and smart cities.",
+                  "children": [
+                    {
+                      "id": "31d28997-ba61-48ea-a8ea-0679b3df9082",
+                      "name": "Smart City Consultant",
+                      "description": "Works on technology-driven urban projects integrating IoT, sustainability, and infrastructure.",
+                      "children": [],
+                      "skills": [
+                        "Smart systems",
+                        "Data analysis",
+                        "GIS",
+                        "Policy"
+                      ],
+                      "salaryRange": "10L - 25L / yr",
+                      "roadmap": "Learn smart city tech -> Work on government projects -> Build expertise -> Move into global roles"
+                    }
+                  ],
+                  "skills": [
+                    "Project management",
+                    "Policy",
+                    "Financial analysis",
+                    "Stakeholder management"
+                  ],
+                  "salaryRange": "8L - 20L / yr",
+                  "roadmap": "Gain consulting experience -> Work on urban projects -> Build network -> Move into senior advisory"
+                },
+                {
+                  "id": "fa01e96e-7588-4307-80c6-392a2b164e01",
+                  "name": "Project Development",
+                  "description": "Focuses on execution of urban projects including planning, budgeting, and coordination.",
+                  "children": [
+                    {
+                      "id": "91b1f9b5-d4ea-4c04-91fe-43904aa357ce",
+                      "name": "Infrastructure Project Manager",
+                      "description": "Manages large infrastructure projects like roads, housing, and utilities.",
+                      "children": [],
+                      "skills": [
+                        "Project management",
+                        "Leadership",
+                        "Budgeting",
+                        "Planning"
+                      ],
+                      "salaryRange": "10L - 30L / yr",
+                      "roadmap": "Gain project experience -> Lead teams -> Manage budgets -> Move into senior roles"
+                    }
+                  ],
+                  "skills": [
+                    "Project management",
+                    "Budgeting",
+                    "Coordination",
+                    "Planning"
+                  ],
+                  "salaryRange": "7L - 18L / yr",
+                  "roadmap": "Work with developers -> Handle projects -> Learn execution -> Move into leadership"
+                }
+              ],
+              "skills": [
+                "Market analysis",
+                "Financial modeling",
+                "Urban planning",
+                "Negotiation"
+              ],
+              "salaryRange": "6L - 15L / yr",
+              "roadmap": "Learn real estate basics -> Work on feasibility studies -> Join developers -> Move into project roles"
+            }
+          ]
+        },
+        {
+          "id": "9cdec34e-2690-4e3c-a1cf-d6213bbc9ce5",
+          "name": "Policy, Research & Governance",
+          "description": "Focuses on urban policy-making, research, and governance to guide city development at institutional levels.",
+          "children": [
+            {
+              "id": "c4cc5e67-8df8-4a37-89e0-8e134f08941b",
+              "name": "Urban Policy Analyst",
+              "description": "Works on policy formulation, urban regulations, and governance frameworks.",
+              "children": [
+                {
+                  "id": "76fcd8bc-82cc-439d-90b6-67c078ec4252",
+                  "name": "Government Urban Planner",
+                  "description": "Works with government bodies on city planning, infrastructure, and development policies.",
+                  "children": [
+                    {
+                      "id": "499c599b-bef7-42df-8145-9dfd9676b388",
+                      "name": "Town Planning Officer",
+                      "description": "Oversees planning and development activities within municipalities or regions.",
+                      "children": [],
+                      "skills": [
+                        "Regulations",
+                        "Planning",
+                        "Administration",
+                        "GIS"
+                      ],
+                      "salaryRange": "8L - 20L / yr",
+                      "roadmap": "Join govt services -> Manage planning activities -> Gain administrative experience -> Move into higher posts"
+                    }
+                  ],
+                  "skills": [
+                    "Public policy",
+                    "Planning",
+                    "GIS",
+                    "Administration"
+                  ],
+                  "salaryRange": "6L - 15L / yr",
+                  "roadmap": "Prepare for govt exams -> Work in planning departments -> Gain experience -> Move into senior roles"
+                },
+                {
+                  "id": "53e2a9ad-a4bb-4342-92e2-30e0cfec46d7",
+                  "name": "Urban Researcher",
+                  "description": "Conducts research on urban issues like housing, mobility, and sustainability.",
+                  "children": [
+                    {
+                      "id": "965bf350-db14-4895-a70b-00d1a3f0bc4d",
+                      "name": "Academic / Professor",
+                      "description": "Teaches urban planning and conducts research in universities.",
+                      "children": [],
+                      "skills": [
+                        "Teaching",
+                        "Research",
+                        "Writing",
+                        "Subject expertise"
+                      ],
+                      "salaryRange": "8L - 25L / yr",
+                      "roadmap": "Pursue masters/PhD -> Publish research -> Teach -> Move into senior academic roles"
+                    }
+                  ],
+                  "skills": [
+                    "Research methods",
+                    "Data analysis",
+                    "GIS",
+                    "Report writing"
+                  ],
+                  "salaryRange": "5L - 12L / yr",
+                  "roadmap": "Work in research orgs -> Publish papers -> Build expertise -> Move into academia or policy"
+                }
+              ],
+              "skills": [
+                "Policy analysis",
+                "Research",
+                "Data analysis",
+                "Writing"
+              ],
+              "salaryRange": "5L - 14L / yr",
+              "roadmap": "Learn policy frameworks -> Work with think tanks -> Conduct research -> Move into advisory roles"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
