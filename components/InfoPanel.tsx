@@ -1,8 +1,12 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, DollarSign } from 'lucide-react';
 import { CareerNode } from '@/lib/types';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+
+const SHEET_BREAKPOINT = '(max-width: 639px)';
 
 interface InfoPanelProps {
   node: CareerNode | null;
@@ -16,39 +20,111 @@ interface InfoPanelProps {
 
 export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanelProps) {
   const isEmbedded = variant === 'embedded';
+  const isSheet = useMediaQuery(SHEET_BREAKPOINT);
+
+  useEffect(() => {
+    if (!node || !isSheet || isEmbedded) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [node, isSheet, isEmbedded]);
+
+  useEffect(() => {
+    if (!node) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [node, onClose]);
+
+  const sheet = isSheet;
+  const zBackdrop = isEmbedded ? 25 : 190;
+  const zPanel = isEmbedded ? 30 : 200;
 
   return (
     <AnimatePresence>
       {node && (
         <>
-          {/* Panel */}
+          {sheet && (
+            <motion.div
+              key="backdrop"
+              role="presentation"
+              aria-hidden
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={onClose}
+              style={{
+                position: isEmbedded ? 'absolute' : 'fixed',
+                left: 0,
+                right: 0,
+                bottom: 0,
+                top: isEmbedded ? 0 : 56,
+                background: 'rgba(26, 26, 24, 0.38)',
+                zIndex: zBackdrop,
+              }}
+            />
+          )}
           <motion.aside
             key="panel"
-            initial={{ x: 400, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 400, opacity: 0 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="will-change-transform"
+            initial={
+              sheet
+                ? { y: '100%', opacity: 1 }
+                : { x: 380, opacity: 0 }
+            }
+            animate={sheet ? { y: 0, opacity: 1 } : { x: 0, opacity: 1 }}
+            exit={sheet ? { y: '100%', opacity: 1 } : { x: 380, opacity: 0 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 340 }}
+            className="will-change-transform ct-info-panel"
             style={{
               position: isEmbedded ? 'absolute' : 'fixed',
-              top: isEmbedded ? 0 : '56px',
-              right: 0,
-              bottom: 0,
-              width: isEmbedded ? 'min(380px, 100%)' : '380px',
-              maxWidth: isEmbedded ? '100%' : undefined,
+              top: sheet ? 'auto' : isEmbedded ? 0 : 56,
+              right: sheet ? 0 : 0,
+              bottom: sheet ? 0 : 0,
+              left: sheet ? 0 : 'auto',
+              width: sheet ? '100%' : isEmbedded ? 'min(380px, 100%)' : 'min(380px, 100vw)',
+              maxWidth: sheet ? '100%' : undefined,
+              maxHeight: sheet ? 'min(88dvh, 640px)' : undefined,
+              margin: 0,
               background: 'white',
-              borderLeft: '1px solid var(--color-border)',
-              boxShadow: isEmbedded ? '-4px 0 24px rgba(0,0,0,0.06)' : 'var(--shadow-panel)',
-              zIndex: isEmbedded ? 30 : 200,
+              borderLeft: sheet ? 'none' : '1px solid var(--color-border)',
+              borderTop: sheet ? '1px solid var(--color-border)' : undefined,
+              borderRadius: sheet ? '16px 16px 0 0' : undefined,
+              boxShadow: sheet
+                ? '0 -8px 40px rgba(0,0,0,0.12)'
+                : isEmbedded
+                  ? '-4px 0 24px rgba(0,0,0,0.06)'
+                  : 'var(--shadow-panel)',
+              zIndex: zPanel,
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
+              paddingBottom: sheet ? 'env(safe-area-inset-bottom, 0px)' : undefined,
             }}
           >
+            {sheet && (
+              <div
+                aria-hidden
+                style={{
+                  alignSelf: 'center',
+                  width: 40,
+                  height: 4,
+                  borderRadius: 2,
+                  background: 'var(--color-border)',
+                  marginTop: 10,
+                  marginBottom: 4,
+                  flexShrink: 0,
+                }}
+              />
+            )}
             {/* Header */}
             <div
               style={{
-                padding: '24px 24px 20px',
+                padding: sheet ? '16px 18px 14px' : '24px 24px 20px',
                 borderBottom: '1px solid var(--color-border)',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -60,7 +136,7 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
               <h2
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '26px',
+                  fontSize: sheet ? 'clamp(1.25rem, 4.5vw, 1.5rem)' : '26px',
                   lineHeight: 1.15,
                   color: 'var(--color-ink)',
                   letterSpacing: '-0.02em',
@@ -72,9 +148,9 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 onClick={onClose}
                 className="btn-ghost"
                 aria-label="Close panel"
-                style={{ padding: '4px', flexShrink: 0, marginTop: '2px' }}
+                style={{ padding: '8px', flexShrink: 0, marginTop: sheet ? 0 : '2px' }}
               >
-                <X size={16} />
+                <X size={18} />
               </button>
             </div>
 
@@ -83,17 +159,17 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
               style={{
                 flex: 1,
                 overflowY: 'auto',
-                padding: '24px',
+                WebkitOverflowScrolling: 'touch',
+                padding: sheet ? '18px' : '24px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '24px',
+                gap: sheet ? 18 : 24,
               }}
             >
-              {/* Description */}
               <p
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '14px',
+                  fontSize: sheet ? '15px' : '14px',
                   lineHeight: 1.7,
                   color: 'var(--color-ink)',
                 }}
@@ -101,7 +177,6 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 {node.description}
               </p>
 
-              {/* Salary */}
               {node.salaryRange && (
                 <div>
                   <SectionLabel>Salary Range</SectionLabel>
@@ -132,7 +207,6 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 </div>
               )}
 
-              {/* Skills */}
               {node.skills && node.skills.length > 0 && (
                 <div>
                   <SectionLabel>Key Skills</SectionLabel>
@@ -153,14 +227,13 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 </div>
               )}
 
-              {/* Roadmap */}
               {node.roadmap && (
                 <div>
                   <SectionLabel>How to Get There</SectionLabel>
                   <p
                     style={{
                       fontFamily: 'var(--font-sans)',
-                      fontSize: '13.5px',
+                      fontSize: sheet ? '14px' : '13.5px',
                       lineHeight: 1.75,
                       color: 'var(--color-ink)',
                       marginTop: '10px',
@@ -176,7 +249,6 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 </div>
               )}
 
-              {/* Terminal indicator */}
               {node.children.length === 0 && (
                 <div
                   style={{

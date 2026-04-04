@@ -42,13 +42,21 @@ export default function AdminPage() {
     });
 
   return (
-    <main style={{ maxWidth: '900px', margin: '0 auto', padding: '80px 24px 48px' }}>
+    <main
+      style={{
+        maxWidth: '900px',
+        margin: '0 auto',
+        padding: 'clamp(64px, 12vw, 80px) clamp(16px, 4vw, 24px) 48px',
+      }}
+    >
       {/* Header row */}
       <div
         style={{
           display: 'flex',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
+          gap: '16px',
           marginBottom: '40px',
         }}
       >
@@ -85,7 +93,11 @@ export default function AdminPage() {
             </code>
           </p>
         </div>
-        <Link href="/admin/new" className="btn-primary" style={{ textDecoration: 'none' }}>
+        <Link
+          href="/admin/new"
+          className="btn-primary"
+          style={{ textDecoration: 'none', flexShrink: 0 }}
+        >
           <Plus size={14} /> New Tree
         </Link>
       </div>
@@ -119,7 +131,14 @@ export default function AdminPage() {
         <>
           {/* Top Stats Row */}
           {trees.length > 0 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '32px' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                gap: '16px',
+                marginBottom: '32px',
+              }}
+            >
           <div className="ct-card" style={{ padding: '20px', cursor: 'default' }}>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-ink-muted)', textTransform: 'uppercase' }}>Total Trees</div>
             <div style={{ fontSize: '32px', fontFamily: 'var(--font-serif)', marginTop: '8px' }}>{trees.length}</div>

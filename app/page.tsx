@@ -64,7 +64,8 @@ export default function HomePage() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '48px 24px',
+        padding: 'clamp(24px, 6vw, 48px) clamp(16px, 4vw, 24px)',
+        paddingBottom: 'max(clamp(24px, 6vw, 48px), env(safe-area-inset-bottom, 0px))',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -246,8 +247,8 @@ export default function HomePage() {
         className="btn-secondary"
         style={{
           position: 'fixed',
-          bottom: '24px',
-          left: '24px',
+          bottom: 'max(16px, env(safe-area-inset-bottom, 0px))',
+          left: 'max(16px, env(safe-area-inset-left, 0px))',
           padding: '8px 16px',
           fontSize: '12px',
           textDecoration: 'none',
@@ -255,6 +256,7 @@ export default function HomePage() {
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
+          maxWidth: 'calc(100vw - 32px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))',
         }}
       >
         <Settings size={14} />

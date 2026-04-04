@@ -34,6 +34,12 @@ interface TreeViewerProps {
   orientation?: 'horizontal' | 'vertical';
   nodeScores?: Record<string, number>;
   selectedNodeId?: string | null;
+  /**
+   * Mobile/tablet: first tap expands a collapsed branch; panel opens only when the branch is already expanded.
+   * Second tap on an expanded parent collapses and clears selection.
+   */
+  clickMode?: 'default' | 'expandThenPanel';
+  onClearSelection?: () => void;
 }
 
 function buildNodeMap(node: CareerNode, map = new Map<string, CareerNode>()): Map<string, CareerNode> {
@@ -125,6 +131,7 @@ function ZoomBridge({
 function TreeFlowInner({
   root,
   orientation,
+  compactLayout,
   collapsedIds,
   onNodeClick,
   onZoomIn,
@@ -133,9 +140,12 @@ function TreeFlowInner({
   nodeScores,
   selectedNodeId,
   toggleNode,
+  expandThenPanel,
+  onClearSelection,
 }: {
   root: CareerNode;
   orientation: 'horizontal' | 'vertical';
+  compactLayout: boolean;
   collapsedIds: Set<string>;
   onNodeClick: (node: CareerNode) => void;
   onZoomIn?: (fn: () => void) => void;
@@ -144,10 +154,12 @@ function TreeFlowInner({
   nodeScores?: Record<string, number>;
   selectedNodeId?: string | null;
   toggleNode: (nodeId: string) => void;
+  expandThenPanel: boolean;
+  onClearSelection?: () => void;
 }) {
   const { nodes: layoutNodes, edges: layoutEdges } = useMemo(
-    () => toReactFlowElements(root, orientation),
-    [root, orientation]
+    () => toReactFlowElements(root, orientation, compactLayout),
+    [root, orientation, compactLayout]
   );
 
   const visibleIds = useMemo(
@@ -197,16 +209,40 @@ function TreeFlowInner({
   const handleNodeClick = useCallback(
     (_event: ReactMouseEvent, node: Node<CareerNodeData>) => {
       const d = node.data;
+      if (expandThenPanel && d.depth > 0) {
+        const isCollapsed = collapsedIds.has(d.node.id);
+        if (d.hasChildren && isCollapsed) {
+          toggleNode(d.node.id);
+          return;
+        }
+        if (d.hasChildren && !isCollapsed) {
+          if (selectedNodeId === d.node.id) {
+            toggleNode(d.node.id);
+            onClearSelection?.();
+            return;
+          }
+          d.onNodeClick(d.node);
+          return;
+        }
+        d.onNodeClick(d.node);
+        return;
+      }
       d.onNodeClick(d.node);
       if (d.hasChildren) d.toggleNode(d.node.id);
     },
-    []
+    [
+      collapsedIds,
+      expandThenPanel,
+      onClearSelection,
+      selectedNodeId,
+      toggleNode,
+    ]
   );
 
   return (
     <>
       <ReactFlow
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', touchAction: 'none' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -215,13 +251,21 @@ function TreeFlowInner({
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         fitView
-        fitViewOptions={{ padding: 0.2, duration: 480, interpolate: 'smooth' }}
-        minZoom={0.2}
-        maxZoom={1.5}
+        fitViewOptions={{
+          padding: compactLayout ? 0.12 : 0.2,
+          duration: 480,
+          interpolate: 'smooth',
+        }}
+        minZoom={0.15}
+        maxZoom={1.75}
         proOptions={{ hideAttribution: true }}
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
+        panOnDrag
+        zoomOnScroll
+        zoomOnPinch
+        panOnScroll={false}
       >
         <Background color="#E8E4DC" gap={24} size={1} variant={BackgroundVariant.Dots} />
         <FitViewOnChange orientation={orientation} rootId={root.id} />
@@ -247,6 +291,8 @@ export default function TreeViewer({
   orientation = 'horizontal',
   nodeScores,
   selectedNodeId,
+  clickMode = 'default',
+  onClearSelection,
 }: TreeViewerProps) {
   const [collapsedIds, setCollapsedIds] = useState<Set<string>>(() =>
     buildInitialCollapsed(root)
@@ -257,6 +303,11 @@ export default function TreeViewer({
   useEffect(() => {
     setCollapsedIds(buildInitialCollapsed(root));
   }, [root.id]);
+
+  const compactLayout =
+    containerWidth > 0 && containerWidth < 640;
+
+  const expandThenPanel = clickMode === 'expandThenPanel';
 
   const toggleNode = useCallback(
     (nodeId: string) => {
@@ -280,13 +331,18 @@ export default function TreeViewer({
   return (
     <div
       className="tree-canvas"
-      style={{ width: containerWidth, height: containerHeight }}
+      style={{
+        width: containerWidth > 0 ? containerWidth : '100%',
+        height: containerHeight > 0 ? containerHeight : '100%',
+        maxWidth: '100%',
+      }}
     >
       <ReactFlowProvider>
         <div style={{ width: '100%', height: '100%' }}>
           <TreeFlowInner
             root={root}
             orientation={orientation}
+            compactLayout={compactLayout}
             collapsedIds={collapsedIds}
             onNodeClick={onNodeClick}
             onZoomIn={onZoomIn}
@@ -295,6 +351,8 @@ export default function TreeViewer({
             nodeScores={nodeScores}
             selectedNodeId={selectedNodeId}
             toggleNode={toggleNode}
+            expandThenPanel={expandThenPanel}
+            onClearSelection={onClearSelection}
           />
         </div>
       </ReactFlowProvider>

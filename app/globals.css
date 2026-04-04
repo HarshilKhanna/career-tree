@@ -308,3 +308,4 @@ h1, h2, h3 {
 /* ─── Will-change hints ──────────────────────────────────────────── */
 .will-change-transform { will-change: transform; }
 .will-change-opacity   { will-change: opacity; }
+

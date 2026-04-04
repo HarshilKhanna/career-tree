@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import InfoPanel from '@/components/InfoPanel';
 import OrientationToggle from '@/components/OrientationToggle';
 import { sortTreeByAnalytics } from '@/lib/analyticsUtils';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 // SSR=false: React Flow / dagre layout run in the browser
 const TreeViewer = dynamic(() => import('@/components/TreeViewer'), {
@@ -28,72 +29,44 @@ const TreeViewer = dynamic(() => import('@/components/TreeViewer'), {
   ),
 });
 
-interface FlatListProps {
-  node: CareerNode;
-  depth?: number;
-}
-
-function FlatList({ node, depth = 0 }: FlatListProps) {
-  return (
-    <li>
-      <span
-        style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '14px',
-          color: depth === 0 ? 'var(--color-ink)' : 'var(--color-ink-muted)',
-          fontWeight: depth === 0 ? 600 : 400,
-        }}
-      >
-        {node.name}
-      </span>
-      {node.children.length > 0 && (
-        <ul style={{ paddingLeft: '20px', borderLeft: '1px solid var(--color-border)', marginLeft: '8px', marginTop: '4px' }}>
-          {node.children.map((child) => (
-            <FlatList key={child.id} node={child} depth={depth + 1} />
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
 export default function TreePage({ params }: { params: Promise<{ id: string }> }) {
   const [tree, setTree] = useState<CareerTree | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<CareerNode | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [dimensions, setDimensions] = useState({ w: 1200, h: 800 });
+  const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
   const [treeId, setTreeId] = useState<string>('');
   const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
   const zoomInRef = useRef<(() => void) | null>(null);
   const zoomOutRef = useRef<(() => void) | null>(null);
   const zoomResetRef = useRef<(() => void) | null>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
 
-  // Resolve params
+  const minimalHeader = useMediaQuery('(max-width: 768px)');
+  const expandThenPanel = useMediaQuery('(max-width: 1023px)');
+  const orientationLabelsInHeader = useMediaQuery('(min-width: 520px)');
+  /** Zoom (+/−/home) only on desktop — hidden on mobile and tablet. */
+  const showHeaderZoom = useMediaQuery('(min-width: 1024px)');
+
   useEffect(() => {
     params.then(({ id }) => setTreeId(id));
   }, [params]);
 
-  // Detect mobile
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+    const el = canvasRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0]?.contentRect;
+      if (!cr) return;
+      setDimensions({
+        w: Math.max(160, Math.floor(cr.width)),
+        h: Math.max(160, Math.floor(cr.height)),
+      });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [tree]);
 
-  // Measure container
-  useEffect(() => {
-    const update = () => {
-      setDimensions({ w: window.innerWidth, h: window.innerHeight - 56 });
-    };
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  // Load orientation
   useEffect(() => {
     const saved = localStorage.getItem('careertree_orientation');
     if (saved === 'horizontal' || saved === 'vertical') {
@@ -106,35 +79,34 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
     localStorage.setItem('careertree_orientation', o);
   }, []);
 
-  // Load tree + analytics once per navigation (treeId). Sorted order is fixed for this visit —
-  // clicks/expands do not refetch or reshuffle the layout mid-session (next visit picks up new analytics).
   useEffect(() => {
     if (!treeId) return;
-    
+
     Promise.all([
-      fetch(`/api/trees/${treeId}`).then(r => {
+      fetch(`/api/trees/${treeId}`).then((r) => {
         if (!r.ok) throw new Error('Not found');
         return r.json();
       }),
-      fetch(`/api/analytics/${treeId}`).then(r => {
-        if (!r.ok) return undefined;
-        return r.json();
-      }).catch(() => undefined)
+      fetch(`/api/analytics/${treeId}`)
+        .then((r) => {
+          if (!r.ok) return undefined;
+          return r.json();
+        })
+        .catch(() => undefined),
     ])
       .then(([treeData, analyticsData]) => {
         const sortedTree = {
           ...treeData,
-          root: sortTreeByAnalytics(treeData.root, analyticsData)
+          root: sortTreeByAnalytics(treeData.root, analyticsData),
         };
-        
+
         setTree(sortedTree);
         setLoading(false);
-        
-        // Track view
+
         fetch(`/api/analytics/${treeId}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'view' })
+          body: JSON.stringify({ type: 'view' }),
         }).catch(() => null);
       })
       .catch(() => {
@@ -143,28 +115,44 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
       });
   }, [treeId]);
 
-  const handleNodeClick = useCallback((node: CareerNode) => {
-    setSelectedNode(node);
-    if (!treeId) return;
-    fetch(`/api/analytics/${treeId}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'click', nodeId: node.id })
-    }).catch(() => null);
-  }, [treeId]);
+  const handleNodeClick = useCallback(
+    (node: CareerNode) => {
+      setSelectedNode(node);
+      if (!treeId) return;
+      fetch(`/api/analytics/${treeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'click', nodeId: node.id }),
+      }).catch(() => null);
+    },
+    [treeId]
+  );
 
-  const handleNodeExpand = useCallback((node: CareerNode) => {
-    if (!treeId) return;
-    fetch(`/api/analytics/${treeId}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'expand', nodeId: node.id })
-    }).catch(() => null);
-  }, [treeId]);
+  const handleNodeExpand = useCallback(
+    (node: CareerNode) => {
+      if (!treeId) return;
+      fetch(`/api/analytics/${treeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'expand', nodeId: node.id }),
+      }).catch(() => null);
+    },
+    [treeId]
+  );
 
-  const registerZoomIn = useCallback((fn: () => void) => { zoomInRef.current = fn; }, []);
-  const registerZoomOut = useCallback((fn: () => void) => { zoomOutRef.current = fn; }, []);
-  const registerZoomReset = useCallback((fn: () => void) => { zoomResetRef.current = fn; }, []);
+  const registerZoomIn = useCallback((fn: () => void) => {
+    zoomInRef.current = fn;
+  }, []);
+  const registerZoomOut = useCallback((fn: () => void) => {
+    zoomOutRef.current = fn;
+  }, []);
+  const registerZoomReset = useCallback((fn: () => void) => {
+    zoomResetRef.current = fn;
+  }, []);
+
+  const clearSelection = useCallback(() => {
+    setSelectedNode(null);
+  }, []);
 
   if (loading) {
     return (
@@ -194,9 +182,17 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
           height: '100dvh',
           flexDirection: 'column',
           gap: '16px',
+          padding: '24px',
         }}
       >
-        <p style={{ fontFamily: 'var(--font-sans)', color: 'var(--color-ink-muted)' }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            color: 'var(--color-ink-muted)',
+            textAlign: 'center',
+            maxWidth: '360px',
+          }}
+        >
           {error || 'Tree not found.'}
         </p>
       </div>
@@ -208,15 +204,33 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
   return (
     <>
       <Header
+        mode={minimalHeader ? 'minimal' : 'full'}
         breadcrumb={breadcrumb}
         showBack
-        showZoom={!isMobile}
+        showZoom={showHeaderZoom}
+        showAdminLink
+        compactToolbar={minimalHeader}
         onZoomIn={() => zoomInRef.current?.()}
         onZoomOut={() => zoomOutRef.current?.()}
         onZoomReset={() => zoomResetRef.current?.()}
-        centerContent={!isMobile && (
-          <OrientationToggle orientation={orientation} onChange={handleOrientationChange} />
-        )}
+        centerContent={
+          minimalHeader ? undefined : (
+            <OrientationToggle
+              orientation={orientation}
+              onChange={handleOrientationChange}
+              showLabels={orientationLabelsInHeader}
+            />
+          )
+        }
+        trailingToolbarStart={
+          minimalHeader ? (
+            <OrientationToggle
+              orientation={orientation}
+              onChange={handleOrientationChange}
+              showLabels={false}
+            />
+          ) : undefined
+        }
       />
 
       <main
@@ -225,53 +239,38 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
           height: '100dvh',
           overflow: 'hidden',
           position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          boxSizing: 'border-box',
         }}
       >
-        {isMobile ? (
-          /* Mobile fallback */
-          <div style={{ padding: '32px 24px', overflowY: 'auto', height: '100%' }}>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '6px 12px',
-                background: '#FFFBEB',
-                border: '1px solid #FDE68A',
-                borderRadius: '6px',
-                marginBottom: '24px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '12px',
-                color: '#92400E',
-              }}
-            >
-              Best viewed on desktop — showing simplified list view
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {tree.root.children.map((child) => (
-                <FlatList key={child.id} node={child} />
-              ))}
-            </ul>
-          </div>
-        ) : (
-          /* Full tree viewer */
-          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <TreeViewer
-              root={tree.root}
-              orientation={orientation}
-              onNodeClick={handleNodeClick}
-              onNodeExpand={handleNodeExpand}
-              onZoomIn={registerZoomIn}
-              onZoomOut={registerZoomOut}
-              onZoomReset={registerZoomReset}
-              containerWidth={dimensions.w}
-              containerHeight={dimensions.h}
-              selectedNodeId={selectedNode?.id ?? null}
-            />
-          </div>
-        )}
+        <div
+          ref={canvasRef}
+          style={{
+            flex: 1,
+            minHeight: 0,
+            minWidth: 0,
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          <TreeViewer
+            root={tree.root}
+            orientation={orientation}
+            onNodeClick={handleNodeClick}
+            onNodeExpand={handleNodeExpand}
+            onZoomIn={registerZoomIn}
+            onZoomOut={registerZoomOut}
+            onZoomReset={registerZoomReset}
+            containerWidth={dimensions.w}
+            containerHeight={dimensions.h}
+            selectedNodeId={selectedNode?.id ?? null}
+            clickMode={expandThenPanel ? 'expandThenPanel' : 'default'}
+            onClearSelection={clearSelection}
+          />
+        </div>
 
-        <InfoPanel node={selectedNode} onClose={() => setSelectedNode(null)} />
+        <InfoPanel node={selectedNode} onClose={clearSelection} />
       </main>
     </>
   );

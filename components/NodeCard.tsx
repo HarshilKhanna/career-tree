@@ -41,6 +41,7 @@ function CareerNodeCardInner({ data }: NodeProps<CareerNodeNode>) {
     toggleNode,
     selectedNodeId,
     nodeScores,
+    compact,
   } = data;
 
   const [hovered, setHovered] = useState(false);
@@ -105,10 +106,10 @@ function CareerNodeCardInner({ data }: NodeProps<CareerNodeNode>) {
       borderWidth,
       borderStyle: 'solid',
       borderColor,
-      borderRadius: 14,
-      padding: '12px 16px',
-      minWidth: 180,
-      maxWidth: 220,
+      borderRadius: compact ? 12 : 14,
+      padding: compact ? '10px 12px' : '12px 16px',
+      minWidth: compact ? 160 : 180,
+      maxWidth: compact ? 200 : 220,
       width: 'fit-content',
       boxShadow,
       transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -119,11 +120,11 @@ function CareerNodeCardInner({ data }: NodeProps<CareerNodeNode>) {
     if (isRoot) {
       style.color = '#F7F5F0';
       style.fontFamily = 'var(--font-serif)';
-      style.fontSize = 15;
+      style.fontSize = compact ? 14 : 15;
     }
 
     return style;
-  }, [hovered, isRoot, isSelected, isTerminal, node.id, nodeScores]);
+  }, [compact, hovered, isRoot, isSelected, isTerminal, node.id, nodeScores]);
 
   return (
     <>
@@ -168,7 +169,7 @@ function CareerNodeCardInner({ data }: NodeProps<CareerNodeNode>) {
                 flex: 1,
                 minWidth: 0,
                 fontFamily: 'var(--font-sans)',
-                fontSize: 13,
+                fontSize: compact ? 12 : 13,
                 fontWeight: 500,
                 color: '#1A1A18',
                 lineHeight: 1.4,
@@ -192,7 +193,7 @@ function CareerNodeCardInner({ data }: NodeProps<CareerNodeNode>) {
             <div
               style={{
                 fontFamily: isRoot ? 'var(--font-serif)' : 'var(--font-sans)',
-                fontSize: isRoot ? 15 : 13,
+                fontSize: isRoot ? (compact ? 14 : 15) : compact ? 12 : 13,
                 fontWeight: isRoot ? 400 : 500,
                 color: isRoot ? '#F7F5F0' : '#1A1A18',
                 lineHeight: 1.4,

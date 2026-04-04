@@ -1,31 +1,68 @@
 {
-  "ug_b_tech_computer_science_india": {
-    "treeViews": 3,
+  "masters_mba_corporate_finance_india": {
+    "treeViews": 1,
     "nodes": {
-      "a9ece1b4-b9db-496f-870f-90e69dd8c474": {
-        "clicks": 6,
-        "expands": 6
-      },
-      "feac04f3-a18d-4a11-8ceb-0c6551b9e120": {
-        "clicks": 2,
+      "091eed51-fa79-4751-b280-f6290c5dd4ba": {
+        "clicks": 0,
         "expands": 1
       },
-      "bcd71f46-0b1e-4573-8a39-385075d5f2f5": {
+      "840928b5-983e-436a-8d68-3e9cbdea3b07": {
+        "clicks": 0,
+        "expands": 2
+      },
+      "b4250011-d97a-4145-9967-4a819ad4b56a": {
+        "clicks": 0,
+        "expands": 2
+      },
+      "9c7df277-06a6-4853-9843-c12978f9477e": {
+        "clicks": 1,
+        "expands": 1
+      },
+      "78d5edb2-1421-4b7b-a3e7-557d9c543001": {
+        "clicks": 1,
+        "expands": 0
+      },
+      "ac33791c-9bc4-4ddf-aa06-f91a5fc28c7a": {
+        "clicks": 1,
+        "expands": 0
+      },
+      "833a074c-42e3-4ba8-9e41-df5b73a8574d": {
         "clicks": 1,
         "expands": 0
       }
     }
   },
-  "masters_mba_corporate_finance_india": {
-    "treeViews": 2,
-    "nodes": {}
-  },
-  "ug_b_sc_computer_science_usa": {
+  "ug_b_tech_artificial_intelligence_data_science_india": {
     "treeViews": 1,
     "nodes": {}
   },
   "ug_b_arch_interior_design_india": {
     "treeViews": 1,
+    "nodes": {
+      "eb869d86-a12e-459e-b914-75a73ed4432d": {
+        "clicks": 1,
+        "expands": 0
+      },
+      "ef5b1799-aaed-4f88-a94c-bdbc1a46048b": {
+        "clicks": 0,
+        "expands": 2
+      },
+      "f019c49e-bfa9-4778-b0c3-f8fd0e157102": {
+        "clicks": 0,
+        "expands": 2
+      },
+      "2d6f1c48-87c4-470d-a52b-7f14ef06c402": {
+        "clicks": 1,
+        "expands": 2
+      },
+      "982bf5e1-8478-4362-a238-40ec84444dd4": {
+        "clicks": 1,
+        "expands": 1
+      }
+    }
+  },
+  "ug_b_arch_urban_planning_india": {
+    "treeViews": 4,
     "nodes": {}
   }
 }

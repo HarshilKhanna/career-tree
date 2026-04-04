@@ -26,7 +26,7 @@ function CustomSelect({
   const label = formatDisplay ?? ((s: string) => s);
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
+    <div style={{ position: 'relative', width: '100%', maxWidth: 'min(300px, 100%)' }}>
       <div 
         className="ct-input" 
         style={{ display: 'flex', justifyContent: 'space-between', cursor: 'pointer', alignItems: 'center', userSelect: 'none' }}

@@ -12,6 +12,7 @@ import Link from 'next/link';
 import OrientationToggle from '@/components/OrientationToggle';
 import InfoPanel from '@/components/InfoPanel';
 import { COUNTRIES, degreesForLevel, streamsForDegree, formatLevelLabel } from '@/lib/treeConfig';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const TreeViewer = dynamic(() => import('@/components/TreeViewer'), { ssr: false });
 
@@ -174,7 +175,10 @@ export default function AdminUploader({
   const [previewSize, setPreviewSize] = useState({ w: 600, h: 500 });
   const splitContainerRef = useRef<HTMLDivElement>(null);
   const previewPaneRef = useRef<HTMLDivElement>(null);
+  const mobilePreviewCanvasRef = useRef<HTMLDivElement>(null);
   const draggingSplit = useRef(false);
+  const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
+  const expandThenPanel = useMediaQuery('(max-width: 1023px)');
 
   const [level, setLevel] = useState('');
   const [country, setCountry] = useState('');
@@ -267,7 +271,15 @@ export default function AdminUploader({
   }, [previewTree?.root.id]);
 
   useEffect(() => {
-    const el = previewPaneRef.current;
+    if (isDesktopSplit) setMobilePreviewOpen(false);
+  }, [isDesktopSplit]);
+
+  useEffect(() => {
+    if (!previewTree) return;
+    const el =
+      !isDesktopSplit && mobilePreviewOpen
+        ? mobilePreviewCanvasRef.current
+        : previewPaneRef.current;
     if (!el) return;
     const ro = new ResizeObserver((entries) => {
       const cr = entries[0]?.contentRect;
@@ -279,7 +291,7 @@ export default function AdminUploader({
     });
     ro.observe(el);
     return () => ro.disconnect();
-  }, [previewTree]);
+  }, [previewTree, isDesktopSplit, mobilePreviewOpen]);
 
   const persistSplitPct = useCallback((pct: number) => {
     const clamped = Math.min(SPLIT_MAX, Math.max(SPLIT_MIN, Math.round(pct)));
@@ -423,9 +435,12 @@ CATEGORY: Core Domain
     if (!result.success) {
       setErrors(result.errors);
       setPreviewTree(null);
+      setMobilePreviewOpen(false);
     } else {
       setErrors([]);
-      setPreviewTree(result.tree || null);
+      const next = result.tree || null;
+      setPreviewTree(next);
+      if (next && !isDesktopSplit) setMobilePreviewOpen(true);
     }
   };
 
@@ -525,6 +540,81 @@ CATEGORY: Core Domain
         </div>
       )}
 
+      {!isDesktopSplit && mobilePreviewOpen && previewTree ? (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 240,
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'var(--color-paper)',
+            paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+          }}
+        >
+          <div
+            style={{
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '10px clamp(12px, 3vw, 16px)',
+              borderBottom: '1px solid var(--color-border)',
+              background: 'white',
+            }}
+          >
+            <button
+              type="button"
+              className="btn-secondary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+              onClick={() => {
+                setMobilePreviewOpen(false);
+                setSelectedNode(null);
+              }}
+            >
+              <ArrowLeft size={14} /> Editor
+            </button>
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 600,
+                color: 'var(--color-ink)',
+              }}
+            >
+              Tree preview
+            </span>
+            <div style={{ marginLeft: 'auto' }}>
+              <OrientationToggle
+                orientation={orientation}
+                onChange={setOrientation}
+                showLabels={false}
+              />
+            </div>
+          </div>
+          <div
+            ref={mobilePreviewCanvasRef}
+            style={{ flex: 1, minHeight: 0, position: 'relative', overflow: 'hidden' }}
+          >
+            <TreeViewer
+              root={previewTree.root}
+              orientation={orientation}
+              onNodeClick={(node) => setSelectedNode(node)}
+              containerWidth={previewSize.w}
+              containerHeight={previewSize.h}
+              selectedNodeId={selectedNode?.id ?? null}
+              clickMode={expandThenPanel ? 'expandThenPanel' : 'default'}
+              onClearSelection={() => setSelectedNode(null)}
+            />
+            <InfoPanel
+              variant="embedded"
+              node={selectedNode}
+              onClose={() => setSelectedNode(null)}
+            />
+          </div>
+        </div>
+      ) : null}
+
       <div
         ref={splitContainerRef}
         style={{
@@ -551,16 +641,33 @@ CATEGORY: Core Domain
                   borderRight: '1px solid var(--color-border)',
                 }
               : {
-                  height: `${splitPct}%`,
-                  minHeight: 120,
-                  maxHeight: '86%',
-                  flexShrink: 0,
-                  borderBottom: '1px solid var(--color-border)',
+                  flex: 1,
+                  minHeight: 0,
+                  width: '100%',
                 }),
           }}
         >
-        <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--color-paper)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div
+          style={{
+            padding: 'clamp(12px, 2vw, 16px) clamp(14px, 3vw, 24px)',
+            borderBottom: '1px solid var(--color-border)',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '10px',
+            background: 'var(--color-paper)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'clamp(8px, 2vw, 16px)',
+              flexWrap: 'wrap',
+              minWidth: 0,
+            }}
+          >
             <Link href="/admin" style={{ color: 'var(--color-ink-muted)', display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontSize: '13px' }}>
               <ArrowLeft size={14} /> Back
             </Link>
@@ -568,7 +675,7 @@ CATEGORY: Core Domain
               {isEdit ? 'Edit Tree Source' : 'New Tree Source'}
             </h2>
           </div>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button
               onClick={handlePreview}
               className="btn-secondary"
@@ -581,7 +688,18 @@ CATEGORY: Core Domain
               }
             >
               <Play size={14} /> Preview
+              {!isDesktopSplit ? ' (full screen)' : ''}
             </button>
+            {!isDesktopSplit && previewTree ? (
+              <button
+                type="button"
+                onClick={() => setMobilePreviewOpen(true)}
+                className="btn-secondary"
+                style={{ padding: '6px 14px' }}
+              >
+                View tree
+              </button>
+            ) : null}
             <button
               onClick={handleSave}
               className="btn-primary"
@@ -752,128 +870,110 @@ CATEGORY: Core Domain
         )}
         </div>
 
-        <div
-          role="separator"
-          aria-orientation={isDesktopSplit ? 'vertical' : 'horizontal'}
-          aria-label="Resize source and preview panels"
-          aria-valuenow={Math.round(splitPct)}
-          tabIndex={0}
-          onMouseDown={handleSplitPointerDown}
-          onTouchStart={handleSplitPointerDown}
-          onKeyDown={(e) => {
-            const step = 4;
-            if (isDesktopSplit) {
-              if (e.key === 'ArrowLeft') persistSplitPct(splitPct - step);
-              if (e.key === 'ArrowRight') persistSplitPct(splitPct + step);
-            } else {
-              if (e.key === 'ArrowUp') persistSplitPct(splitPct - step);
-              if (e.key === 'ArrowDown') persistSplitPct(splitPct + step);
-            }
-          }}
-          style={{
-            flexShrink: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'transparent',
-            touchAction: 'none',
-            zIndex: 6,
-            ...(isDesktopSplit
-              ? {
-                  width: 12,
-                  marginLeft: -6,
-                  marginRight: -6,
-                  cursor: 'col-resize',
-                }
-              : {
-                  height: 12,
-                  width: '100%',
-                  marginTop: -6,
-                  marginBottom: -6,
-                  cursor: 'row-resize',
-                }),
-          }}
-        >
-          <div
-            style={
-              isDesktopSplit
-                ? {
-                    width: 3,
-                    height: 'min(140px, 32vh)',
-                    background: 'var(--color-border)',
-                    borderRadius: 2,
-                  }
-                : {
-                    height: 3,
-                    width: 'min(140px, 32vw)',
-                    background: 'var(--color-border)',
-                    borderRadius: 2,
-                  }
-            }
-          />
-        </div>
-
-        <div
-          ref={previewPaneRef}
-          style={{
-            flex: 1,
-            minWidth: 0,
-            minHeight: isDesktopSplit ? 0 : 180,
-            position: 'relative',
-            background: 'var(--color-paper)',
-            overflow: 'hidden',
-          }}
-        >
-          {previewTree && (
+        {isDesktopSplit ? (
+          <>
             <div
-              style={{
-                position: 'absolute',
-                top: 12,
-                right: 12,
-                zIndex: 15,
-                pointerEvents: 'auto',
+              role="separator"
+              aria-orientation="vertical"
+              aria-label="Resize source and preview panels"
+              aria-valuenow={Math.round(splitPct)}
+              tabIndex={0}
+              onMouseDown={handleSplitPointerDown}
+              onTouchStart={handleSplitPointerDown}
+              onKeyDown={(e) => {
+                const step = 4;
+                if (e.key === 'ArrowLeft') persistSplitPct(splitPct - step);
+                if (e.key === 'ArrowRight') persistSplitPct(splitPct + step);
               }}
-            >
-              <OrientationToggle orientation={orientation} onChange={setOrientation} />
-            </div>
-          )}
-          {previewTree ? (
-            <TreeViewer
-              root={previewTree.root}
-              orientation={orientation}
-              onNodeClick={(node) => setSelectedNode(node)}
-              containerWidth={previewSize.w}
-              containerHeight={previewSize.h}
-              selectedNodeId={selectedNode?.id ?? null}
-            />
-          ) : (
-            <div
               style={{
+                flexShrink: 0,
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100%',
-                padding: '24px',
-                gap: '8px',
-                color: 'var(--color-ink-muted)',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '13px',
-                textAlign: 'center',
+                background: 'transparent',
+                touchAction: 'none',
+                zIndex: 6,
+                width: 12,
+                marginLeft: -6,
+                marginRight: -6,
+                cursor: 'col-resize',
               }}
             >
-              <span>Hit Preview to render the tree.</span>
-              <span style={{ fontSize: '12px', maxWidth: 280 }}>
-                After preview, click any node to open the same detail panel as the live viewer.
-              </span>
+              <div
+                style={{
+                  width: 3,
+                  height: 'min(140px, 32vh)',
+                  background: 'var(--color-border)',
+                  borderRadius: 2,
+                }}
+              />
             </div>
-          )}
-          <InfoPanel
-            variant="embedded"
-            node={selectedNode}
-            onClose={() => setSelectedNode(null)}
-          />
-        </div>
+
+            <div
+              ref={previewPaneRef}
+              style={{
+                flex: 1,
+                minWidth: 0,
+                minHeight: 0,
+                position: 'relative',
+                background: 'var(--color-paper)',
+                overflow: 'hidden',
+              }}
+            >
+              {previewTree && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 12,
+                    right: 12,
+                    zIndex: 15,
+                    pointerEvents: 'auto',
+                  }}
+                >
+                  <OrientationToggle orientation={orientation} onChange={setOrientation} />
+                </div>
+              )}
+              {previewTree ? (
+                <TreeViewer
+                  root={previewTree.root}
+                  orientation={orientation}
+                  onNodeClick={(node) => setSelectedNode(node)}
+                  containerWidth={previewSize.w}
+                  containerHeight={previewSize.h}
+                  selectedNodeId={selectedNode?.id ?? null}
+                  clickMode={expandThenPanel ? 'expandThenPanel' : 'default'}
+                  onClearSelection={() => setSelectedNode(null)}
+                />
+              ) : (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100%',
+                    padding: '24px',
+                    gap: '8px',
+                    color: 'var(--color-ink-muted)',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '13px',
+                    textAlign: 'center',
+                  }}
+                >
+                  <span>Hit Preview to render the tree.</span>
+                  <span style={{ fontSize: '12px', maxWidth: 280 }}>
+                    After preview, click any node to open the same detail panel as the live viewer.
+                  </span>
+                </div>
+              )}
+              <InfoPanel
+                variant="embedded"
+                node={selectedNode}
+                onClose={() => setSelectedNode(null)}
+              />
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

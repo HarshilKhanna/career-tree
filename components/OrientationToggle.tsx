@@ -5,9 +5,15 @@ import { ArrowLeftRight, ArrowUpDown } from 'lucide-react';
 interface OrientationToggleProps {
   orientation: 'horizontal' | 'vertical';
   onChange: (o: 'horizontal' | 'vertical') => void;
+  /** When false, show icon-only controls (narrow header). */
+  showLabels?: boolean;
 }
 
-export default function OrientationToggle({ orientation, onChange }: OrientationToggleProps) {
+export default function OrientationToggle({
+  orientation,
+  onChange,
+  showLabels = true,
+}: OrientationToggleProps) {
   return (
     <div
       style={{
@@ -20,12 +26,16 @@ export default function OrientationToggle({ orientation, onChange }: Orientation
       }}
     >
       <button
+        type="button"
         onClick={() => onChange('horizontal')}
+        title="Horizontal layout"
+        aria-label="Horizontal layout"
+        aria-pressed={orientation === 'horizontal'}
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '6px',
-          padding: '4px 10px',
+          gap: showLabels ? '6px' : 0,
+          padding: showLabels ? '4px 10px' : '6px 10px',
           borderRadius: '100px',
           border: 'none',
           background: orientation === 'horizontal' ? 'white' : 'transparent',
@@ -39,15 +49,19 @@ export default function OrientationToggle({ orientation, onChange }: Orientation
         }}
       >
         <ArrowLeftRight size={12} />
-        Horizontal
+        {showLabels ? 'Horizontal' : null}
       </button>
       <button
+        type="button"
         onClick={() => onChange('vertical')}
+        title="Vertical layout"
+        aria-label="Vertical layout"
+        aria-pressed={orientation === 'vertical'}
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '6px',
-          padding: '4px 10px',
+          gap: showLabels ? '6px' : 0,
+          padding: showLabels ? '4px 10px' : '6px 10px',
           borderRadius: '100px',
           border: 'none',
           background: orientation === 'vertical' ? 'white' : 'transparent',
@@ -61,7 +75,7 @@ export default function OrientationToggle({ orientation, onChange }: Orientation
         }}
       >
         <ArrowUpDown size={12} />
-        Vertical
+        {showLabels ? 'Vertical' : null}
       </button>
     </div>
   );
