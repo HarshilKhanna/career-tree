@@ -3592,5 +3592,418 @@
         }
       ]
     }
+  },
+  {
+    "id": "school_gcse_igcse_fintech_uk",
+    "level": "school",
+    "degree": "GCSE / IGCSE",
+    "stream": "FinTech",
+    "country": "UK",
+    "createdAt": "2026-04-04T09:34:02.514Z",
+    "updatedAt": "2026-04-04T09:34:02.514Z",
+    "root": {
+      "id": "85f349f5-e31d-42c8-8583-fd362ad902af",
+      "name": "FinTech",
+      "description": "Career paths for FinTech in UK",
+      "children": [
+        {
+          "id": "888e04a2-d836-4db8-b8fc-a45bc5084a9c",
+          "name": "Core FinTech Development",
+          "description": "Focuses on building financial technology applications such as payment systems, banking apps, and digital financial platforms using software and finance fundamentals.",
+          "children": [
+            {
+              "id": "40fd91f8-1bce-4890-948b-23bf06f48064",
+              "name": "FinTech Developer",
+              "description": "Develops applications for digital payments, banking platforms, and financial services using programming and financial domain knowledge.",
+              "children": [
+                {
+                  "id": "6d67a9c0-c72e-4655-9197-950fa6182b6f",
+                  "name": "Payment Systems Developer",
+                  "description": "Works on building secure and scalable payment gateways and transaction systems.",
+                  "children": [
+                    {
+                      "id": "8372901b-22fa-49bf-a63e-fcdb6d364fda",
+                      "name": "Payment Gateway Engineer",
+                      "description": "Designs and maintains infrastructure for processing online payments securely and efficiently.",
+                      "children": [],
+                      "skills": [
+                        "Distributed systems",
+                        "Encryption basics",
+                        "APIs",
+                        "Scalability"
+                      ],
+                      "salaryRange": "£40,000 - £90,000 / yr",
+                      "roadmap": "Learn system design -> Work on real payment systems -> Gain experience in scaling -> Move into senior roles"
+                    }
+                  ],
+                  "skills": [
+                    "APIs",
+                    "Security basics",
+                    "Backend development",
+                    "Databases"
+                  ],
+                  "salaryRange": "£35,000 - £80,000 / yr",
+                  "roadmap": "Learn backend development -> Understand payment flows -> Build API-based apps -> Work in fintech startups"
+                },
+                {
+                  "id": "252742f1-bca8-4b07-bcbf-4affaa9e4d66",
+                  "name": "Banking Software Developer",
+                  "description": "Builds digital banking platforms including mobile banking apps and backend systems.",
+                  "children": [
+                    {
+                      "id": "3662143d-4e17-40ca-900c-9d83455dfb26",
+                      "name": "Core Banking Engineer",
+                      "description": "Works on backend systems that power banking operations like transactions, accounts, and loans.",
+                      "children": [],
+                      "skills": [
+                        "Java",
+                        "Databases",
+                        "System design",
+                        "Financial systems"
+                      ],
+                      "salaryRange": "£45,000 - £95,000 / yr",
+                      "roadmap": "Learn backend systems -> Understand banking infra -> Work in financial institutions -> Move into architecture roles"
+                    }
+                  ],
+                  "skills": [
+                    "Full-stack development",
+                    "Security",
+                    "Databases",
+                    "Cloud basics"
+                  ],
+                  "salaryRange": "£35,000 - £85,000 / yr",
+                  "roadmap": "Learn full-stack dev -> Build banking projects -> Intern in banks/fintech -> Grow into senior roles"
+                }
+              ],
+              "skills": [
+                "Python",
+                "JavaScript",
+                "APIs",
+                "Basic finance concepts",
+                "Problem-solving"
+              ],
+              "salaryRange": "£30,000 - £70,000 / yr",
+              "roadmap": "Learn programming basics in school -> Build simple finance apps -> Study Computer Science/FinTech -> Intern in fintech firms -> Become developer"
+            }
+          ]
+        },
+        {
+          "id": "496917b2-99d0-4d4a-9885-d1d9e9e562c2",
+          "name": "Data & Financial Analytics",
+          "description": "Focuses on analyzing financial data, building models, and deriving insights for financial decision-making.",
+          "children": [
+            {
+              "id": "efb52b90-c0ad-498d-badf-66238ce15988",
+              "name": "FinTech Data Analyst",
+              "description": "Analyzes financial data to identify trends, risks, and opportunities in digital finance systems.",
+              "children": [
+                {
+                  "id": "e9057b0b-de3f-4078-8e00-f77157df262c",
+                  "name": "Risk Analyst",
+                  "description": "Evaluates financial risks such as fraud, credit defaults, and market fluctuations.",
+                  "children": [
+                    {
+                      "id": "ddb4d028-014d-4ba0-9141-8a0328af9b04",
+                      "name": "Fraud Detection Analyst",
+                      "description": "Detects fraudulent transactions using data patterns and machine learning techniques.",
+                      "children": [],
+                      "skills": [
+                        "Data analysis",
+                        "Machine learning basics",
+                        "Pattern recognition",
+                        "Python"
+                      ],
+                      "salaryRange": "£40,000 - £80,000 / yr",
+                      "roadmap": "Learn ML basics -> Work on fraud datasets -> Build detection models -> Join fintech security teams"
+                    }
+                  ],
+                  "skills": [
+                    "Risk modeling",
+                    "Data analysis",
+                    "Statistics",
+                    "Financial knowledge"
+                  ],
+                  "salaryRange": "£35,000 - £75,000 / yr",
+                  "roadmap": "Learn risk concepts -> Work on financial datasets -> Build models -> Join banks/fintech firms"
+                },
+                {
+                  "id": "94d9fad1-2305-4623-a151-a35d27ce25a6",
+                  "name": "Investment Data Analyst",
+                  "description": "Analyzes market data to support investment strategies and portfolio decisions.",
+                  "children": [
+                    {
+                      "id": "bedb89c4-4832-44a5-a379-0a5a55d5ef49",
+                      "name": "Quantitative Analyst (Junior)",
+                      "description": "Builds mathematical models for trading and investment strategies.",
+                      "children": [],
+                      "skills": [
+                        "Mathematics",
+                        "Python",
+                        "Statistics",
+                        "Financial modeling"
+                      ],
+                      "salaryRange": "£45,000 - £100,000 / yr",
+                      "roadmap": "Strengthen math skills -> Learn programming -> Build models -> Transition into quant roles"
+                    }
+                  ],
+                  "skills": [
+                    "Financial markets",
+                    "Data analysis",
+                    "Python",
+                    "Excel"
+                  ],
+                  "salaryRange": "£32,000 - £70,000 / yr",
+                  "roadmap": "Learn finance basics -> Follow markets -> Build analysis projects -> Join investment firms"
+                }
+              ],
+              "skills": [
+                "Excel",
+                "SQL",
+                "Data visualization",
+                "Statistics",
+                "Python basics"
+              ],
+              "salaryRange": "£28,000 - £60,000 / yr",
+              "roadmap": "Learn data basics in school -> Practice Excel & SQL -> Study data science/finance -> Build projects -> Join fintech firms"
+            }
+          ]
+        },
+        {
+          "id": "d6092bee-f664-4880-b53f-de792684863a",
+          "name": "Blockchain & Digital Assets",
+          "description": "Focuses on decentralized finance, cryptocurrencies, and blockchain-based financial systems.",
+          "children": [
+            {
+              "id": "d20db012-681a-4246-8710-77ef68ba0fc0",
+              "name": "Blockchain Developer",
+              "description": "Builds decentralized applications (dApps) and smart contracts for financial systems.",
+              "children": [
+                {
+                  "id": "8d82147e-6bc1-4127-8540-f9d31309cefb",
+                  "name": "Smart Contract Developer",
+                  "description": "Develops secure smart contracts for decentralized finance applications.",
+                  "children": [
+                    {
+                      "id": "cd46dfd4-4d4e-46f6-9bf2-f974e2ad504e",
+                      "name": "DeFi Protocol Engineer",
+                      "description": "Designs and builds decentralized finance protocols like lending and trading platforms.",
+                      "children": [],
+                      "skills": [
+                        "Tokenomics",
+                        "Smart contracts",
+                        "Security",
+                        "System design"
+                      ],
+                      "salaryRange": "£60,000 - £120,000 / yr",
+                      "roadmap": "Study DeFi systems -> Build protocols -> Contribute to open-source -> Join Web3 firms"
+                    }
+                  ],
+                  "skills": [
+                    "Solidity",
+                    "Security",
+                    "Ethereum",
+                    "Testing frameworks"
+                  ],
+                  "salaryRange": "£50,000 - £110,000 / yr",
+                  "roadmap": "Learn Solidity -> Build DeFi apps -> Audit contracts -> Work in blockchain startups"
+                },
+                {
+                  "id": "25adf65e-62ea-445b-b04c-cb1213c497b2",
+                  "name": "Crypto Analyst",
+                  "description": "Analyzes cryptocurrency markets, trends, and investment opportunities.",
+                  "children": [
+                    {
+                      "id": "36b4e8a7-b7a9-4a17-843c-3a91dd120a7f",
+                      "name": "Digital Asset Strategist",
+                      "description": "Develops investment and trading strategies for digital assets and crypto portfolios.",
+                      "children": [],
+                      "skills": [
+                        "Portfolio management",
+                        "Risk analysis",
+                        "Market research"
+                      ],
+                      "salaryRange": "£50,000 - £110,000 / yr",
+                      "roadmap": "Build crypto knowledge -> Manage portfolios -> Develop strategies -> Move into advisory roles"
+                    }
+                  ],
+                  "skills": [
+                    "Market analysis",
+                    "Tokenomics",
+                    "Research",
+                    "Financial analysis"
+                  ],
+                  "salaryRange": "£35,000 - £85,000 / yr",
+                  "roadmap": "Learn crypto markets -> Track trends -> Build research reports -> Join crypto firms"
+                }
+              ],
+              "skills": [
+                "Solidity",
+                "Blockchain basics",
+                "Cryptography",
+                "JavaScript"
+              ],
+              "salaryRange": "£40,000 - £100,000 / yr",
+              "roadmap": "Learn blockchain basics -> Build smart contracts -> Work on Web3 projects -> Join crypto firms"
+            }
+          ]
+        },
+        {
+          "id": "e384fca0-f5c8-481c-9b36-b2ea972a9d07",
+          "name": "FinTech Product & Business",
+          "description": "Combines finance, technology, and business strategy to build and scale financial products.",
+          "children": [
+            {
+              "id": "b444933d-0fb5-448c-a19b-cff0d35227b1",
+              "name": "FinTech Product Manager",
+              "description": "Oversees development and strategy of fintech products such as apps, platforms, and services.",
+              "children": [
+                {
+                  "id": "284a8759-4af9-48e2-a092-748943eaf600",
+                  "name": "Digital Banking Product",
+                  "description": "Manages digital banking products like mobile apps and online banking systems.",
+                  "children": [
+                    {
+                      "id": "84f54af3-34fb-4670-ba15-8457332bfd9b",
+                      "name": "NeoBank Product Lead",
+                      "description": "Leads product development for digital-only banks and financial platforms.",
+                      "children": [],
+                      "skills": [
+                        "Leadership",
+                        "Product strategy",
+                        "Financial knowledge"
+                      ],
+                      "salaryRange": "£70,000 - £130,000 / yr",
+                      "roadmap": "Gain PM experience -> Lead teams -> Scale products -> Move into leadership roles"
+                    }
+                  ],
+                  "skills": [
+                    "UX",
+                    "APIs",
+                    "Financial systems",
+                    "Stakeholder management"
+                  ],
+                  "salaryRange": "£50,000 - £100,000 / yr",
+                  "roadmap": "Learn banking systems -> Work on product lifecycle -> Manage teams -> Grow into leadership"
+                },
+                {
+                  "id": "6164b37c-0a29-4f1a-b217-3adab846f789",
+                  "name": "FinTech Startup Founder",
+                  "description": "Builds and scales fintech startups focusing on innovation in financial services.",
+                  "children": [
+                    {
+                      "id": "a23b8006-d99a-48b7-9362-2dd613705c20",
+                      "name": "Startup CEO (FinTech)",
+                      "description": "Leads fintech startup operations, strategy, and growth.",
+                      "children": [],
+                      "skills": [
+                        "Leadership",
+                        "Fundraising",
+                        "Strategy",
+                        "Decision-making"
+                      ],
+                      "salaryRange": "Variable (0 - £500,000+ / yr)",
+                      "roadmap": "Build startup -> Raise capital -> Scale business -> Expand globally"
+                    }
+                  ],
+                  "skills": [
+                    "Entrepreneurship",
+                    "Finance",
+                    "Product building",
+                    "Networking"
+                  ],
+                  "salaryRange": "Variable (0 - £200,000+ / yr)",
+                  "roadmap": "Learn fintech basics -> Build MVP -> Raise funding -> Scale startup"
+                }
+              ],
+              "skills": [
+                "Product management",
+                "Communication",
+                "UX understanding",
+                "Business strategy"
+              ],
+              "salaryRange": "£40,000 - £90,000 / yr",
+              "roadmap": "Learn product basics -> Work on small projects -> Study business/tech -> Join fintech firms"
+            }
+          ]
+        },
+        {
+          "id": "e630d310-8f22-4f29-b547-8647e56f9033",
+          "name": "Cybersecurity & Compliance in FinTech",
+          "description": "Focuses on securing financial systems and ensuring compliance with financial regulations.",
+          "children": [
+            {
+              "id": "cd1be536-0a5e-401e-9b36-4a8cc85ded24",
+              "name": "FinTech Security Analyst",
+              "description": "Protects financial systems from cyber threats and ensures secure transactions.",
+              "children": [
+                {
+                  "id": "f446785d-296d-4eb1-8a45-af01ccb27689",
+                  "name": "Compliance Analyst",
+                  "description": "Ensures financial systems comply with regulations and legal standards.",
+                  "children": [
+                    {
+                      "id": "882648c1-18c2-4709-8517-4d6d98648827",
+                      "name": "AML (Anti-Money Laundering) Specialist",
+                      "description": "Monitors transactions and ensures compliance with anti-money laundering regulations.",
+                      "children": [],
+                      "skills": [
+                        "AML frameworks",
+                        "Data analysis",
+                        "Risk assessment"
+                      ],
+                      "salaryRange": "£40,000 - £85,000 / yr",
+                      "roadmap": "Learn AML regulations -> Analyze transaction data -> Work in banks -> Advance into leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Regulatory knowledge",
+                    "Documentation",
+                    "Risk assessment"
+                  ],
+                  "salaryRange": "£30,000 - £70,000 / yr",
+                  "roadmap": "Learn financial laws -> Work in compliance teams -> Gain certifications -> Move into senior roles"
+                },
+                {
+                  "id": "c0a6d862-ca5b-4320-a680-51fa5ba9ea95",
+                  "name": "Cybersecurity Engineer",
+                  "description": "Designs secure systems and protects fintech platforms from cyber attacks.",
+                  "children": [
+                    {
+                      "id": "a17fe6a5-fb8c-4e85-bd62-3373df9f976c",
+                      "name": "FinTech Security Architect",
+                      "description": "Designs overall security architecture for financial platforms and systems.",
+                      "children": [],
+                      "skills": [
+                        "System design",
+                        "Security frameworks",
+                        "Risk management"
+                      ],
+                      "salaryRange": "£70,000 - £130,000 / yr",
+                      "roadmap": "Gain security experience -> Design large systems -> Lead security strategy -> Move into leadership"
+                    }
+                  ],
+                  "skills": [
+                    "Network security",
+                    "Encryption",
+                    "Programming",
+                    "Threat detection"
+                  ],
+                  "salaryRange": "£50,000 - £100,000 / yr",
+                  "roadmap": "Learn security tools -> Build secure systems -> Gain certifications -> Move into senior engineering roles"
+                }
+              ],
+              "skills": [
+                "Cybersecurity basics",
+                "Networking",
+                "Risk analysis",
+                "Encryption"
+              ],
+              "salaryRange": "£35,000 - £75,000 / yr",
+              "roadmap": "Learn cybersecurity basics -> Practice ethical hacking -> Study security tools -> Join fintech firms"
+            }
+          ]
+        }
+      ]
+    }
   }
 ]

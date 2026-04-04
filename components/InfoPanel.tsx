@@ -7,9 +7,16 @@ import { CareerNode } from '@/lib/types';
 interface InfoPanelProps {
   node: CareerNode | null;
   onClose: () => void;
+  /**
+   * `page` — fixed under the public tree header (56px offset).
+   * `embedded` — absolute inside the admin preview column (full height of preview).
+   */
+  variant?: 'page' | 'embedded';
 }
 
-export default function InfoPanel({ node, onClose }: InfoPanelProps) {
+export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanelProps) {
+  const isEmbedded = variant === 'embedded';
+
   return (
     <AnimatePresence>
       {node && (
@@ -23,15 +30,16 @@ export default function InfoPanel({ node, onClose }: InfoPanelProps) {
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
             className="will-change-transform"
             style={{
-              position: 'fixed',
-              top: '56px',
+              position: isEmbedded ? 'absolute' : 'fixed',
+              top: isEmbedded ? 0 : '56px',
               right: 0,
               bottom: 0,
-              width: '380px',
+              width: isEmbedded ? 'min(380px, 100%)' : '380px',
+              maxWidth: isEmbedded ? '100%' : undefined,
               background: 'white',
               borderLeft: '1px solid var(--color-border)',
-              boxShadow: 'var(--shadow-panel)',
-              zIndex: 200,
+              boxShadow: isEmbedded ? '-4px 0 24px rgba(0,0,0,0.06)' : 'var(--shadow-panel)',
+              zIndex: isEmbedded ? 30 : 200,
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',

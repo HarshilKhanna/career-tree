@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { COUNTRIES, DEGREES, STREAMS, formatLevelLabel } from '@/lib/treeConfig';
+import { COUNTRIES, formatLevelLabel } from '@/lib/treeConfig';
 import { Book, GraduationCap, Building2, ChevronDown, Check } from 'lucide-react';
 import { useState } from 'react';
 
@@ -89,8 +89,6 @@ export default function SteppedSelector({
     visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' as const } },
     exit: { opacity: 0, y: -10, transition: { duration: 0.15 } }
   };
-
-  const needsStream = degree ? STREAMS[degree] !== null : false;
 
   const computeVisibility = (standard: string[], dynamic: string[], selected: string | null | undefined, limit: number = 5) => {
     let visible = [...standard];

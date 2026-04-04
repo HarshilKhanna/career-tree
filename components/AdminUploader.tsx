@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { CareerTree } from '@/lib/types';
+import { CareerTree, CareerNode } from '@/lib/types';
 import type { TreeMetadata } from '@/lib/types';
 import { parseTreeFile, ParseError } from '@/lib/parseTreeFile';
 import { buildTreeId } from '@/lib/treeUtils';
@@ -10,9 +10,14 @@ import { Play, Save, AlertCircle, ArrowLeft, Bot } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import OrientationToggle from '@/components/OrientationToggle';
-import { COUNTRIES, degreesForLevel, STREAMS, formatLevelLabel } from '@/lib/treeConfig';
+import InfoPanel from '@/components/InfoPanel';
+import { COUNTRIES, degreesForLevel, streamsForDegree, formatLevelLabel } from '@/lib/treeConfig';
 
 const TreeViewer = dynamic(() => import('@/components/TreeViewer'), { ssr: false });
+
+const SPLIT_STORAGE_KEY = 'careertree_admin_split_pct';
+const SPLIT_MIN = 22;
+const SPLIT_MAX = 78;
 
 const OTHER = '__other__';
 
@@ -163,6 +168,14 @@ export default function AdminUploader({
   const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
   const [notice, setNotice] = useState<{ text: string; tone: 'info' | 'error' } | null>(null);
 
+  const [selectedNode, setSelectedNode] = useState<CareerNode | null>(null);
+  const [splitPct, setSplitPct] = useState(50);
+  const [isDesktopSplit, setIsDesktopSplit] = useState(true);
+  const [previewSize, setPreviewSize] = useState({ w: 600, h: 500 });
+  const splitContainerRef = useRef<HTMLDivElement>(null);
+  const previewPaneRef = useRef<HTMLDivElement>(null);
+  const draggingSplit = useRef(false);
+
   const [level, setLevel] = useState('');
   const [country, setCountry] = useState('');
   const [degree, setDegree] = useState('');
@@ -177,6 +190,19 @@ export default function AdminUploader({
   const finalCountry = country === OTHER ? customCountry.trim() : country.trim();
   const finalDegree = degree === OTHER ? customDegree.trim() : degree.trim();
   const finalStream = stream === OTHER ? customStream.trim() : stream.trim();
+
+  /** New trees: block source editing until metadata is set (edit mode always allowed). */
+  const metaComplete = useMemo(
+    () =>
+      isEdit ||
+      Boolean(
+        finalLevel &&
+          finalCountry &&
+          finalDegree &&
+          finalStream
+      ),
+    [isEdit, finalLevel, finalCountry, finalDegree, finalStream]
+  );
 
   const degreeOptions = useMemo(() => {
     if (!level) return [];
@@ -201,11 +227,7 @@ export default function AdminUploader({
     });
   }, [degreeOptions, level, customLevel]);
 
-  const streamOptions = useMemo(() => {
-    if (!finalDegree) return [];
-    const list = STREAMS[finalDegree];
-    return Array.isArray(list) ? list : [];
-  }, [finalDegree]);
+  const streamOptions = useMemo(() => streamsForDegree(finalDegree), [finalDegree]);
 
   useEffect(() => {
     if (!finalDegree) {
@@ -220,6 +242,92 @@ export default function AdminUploader({
       return '';
     });
   }, [finalDegree, streamOptions]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(SPLIT_STORAGE_KEY);
+      if (raw == null) return;
+      const n = Number(raw);
+      if (Number.isFinite(n) && n >= SPLIT_MIN && n <= SPLIT_MAX) setSplitPct(n);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const apply = () => setIsDesktopSplit(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+
+  useEffect(() => {
+    setSelectedNode(null);
+  }, [previewTree?.root.id]);
+
+  useEffect(() => {
+    const el = previewPaneRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0]?.contentRect;
+      if (!cr) return;
+      setPreviewSize({
+        w: Math.max(240, Math.floor(cr.width)),
+        h: Math.max(200, Math.floor(cr.height)),
+      });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [previewTree]);
+
+  const persistSplitPct = useCallback((pct: number) => {
+    const clamped = Math.min(SPLIT_MAX, Math.max(SPLIT_MIN, Math.round(pct)));
+    setSplitPct(clamped);
+    try {
+      localStorage.setItem(SPLIT_STORAGE_KEY, String(clamped));
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    const move = (clientX: number, clientY: number) => {
+      if (!draggingSplit.current || !splitContainerRef.current) return;
+      const rect = splitContainerRef.current.getBoundingClientRect();
+      if (isDesktopSplit) {
+        const x = clientX - rect.left;
+        persistSplitPct((x / rect.width) * 100);
+      } else {
+        const y = clientY - rect.top;
+        persistSplitPct((y / rect.height) * 100);
+      }
+    };
+    const onMouseMove = (e: MouseEvent) => move(e.clientX, e.clientY);
+    const onTouchMove = (e: TouchEvent) => {
+      if (!draggingSplit.current) return;
+      e.preventDefault();
+      if (e.touches[0]) move(e.touches[0].clientX, e.touches[0].clientY);
+    };
+    const end = () => {
+      draggingSplit.current = false;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', end);
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', end);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', end);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', end);
+    };
+  }, [isDesktopSplit, persistSplitPct]);
+
+  const handleSplitPointerDown = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    draggingSplit.current = true;
+  }, []);
 
   useEffect(() => {
     if (isEdit) return;
@@ -303,6 +411,13 @@ CATEGORY: Core Domain
   };
 
   const handlePreview = () => {
+    if (!metaComplete) {
+      showNotice(
+        'Select level, country, degree, and stream before previewing the tree.',
+        'error'
+      );
+      return;
+    }
     clearFeedback();
     const result = parseTreeFile(text);
     if (!result.success) {
@@ -315,6 +430,13 @@ CATEGORY: Core Domain
   };
 
   const handleSave = async () => {
+    if (!metaComplete) {
+      showNotice(
+        'Select level, country, degree, and stream before saving.',
+        'error'
+      );
+      return;
+    }
     if (!previewTree) {
       showNotice('Preview the tree first — click Preview and fix any parse errors.', 'info');
       return;
@@ -368,17 +490,26 @@ CATEGORY: Core Domain
   const streamSelectDisabled = !finalDegree;
 
   return (
-    <div style={{ display: 'flex', height: '100dvh', width: '100vw', overflow: 'hidden' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100dvh',
+        width: '100%',
+        maxWidth: '100vw',
+        overflow: 'hidden',
+      }}
+    >
       {notice && (
         <div
           role="status"
           style={{
             position: 'fixed',
-            top: '56px',
+            top: '12px',
             left: '50%',
             transform: 'translateX(-50%)',
-            zIndex: 200,
-            maxWidth: '420px',
+            zIndex: 250,
+            maxWidth: 'min(420px, calc(100vw - 24px))',
             padding: '10px 16px',
             borderRadius: '8px',
             fontFamily: 'var(--font-sans)',
@@ -394,7 +525,40 @@ CATEGORY: Core Domain
         </div>
       )}
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', borderRight: '1px solid var(--color-border)', background: 'white' }}>
+      <div
+        ref={splitContainerRef}
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: isDesktopSplit ? 'row' : 'column',
+          minHeight: 0,
+          minWidth: 0,
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            background: 'white',
+            minHeight: 0,
+            ...(isDesktopSplit
+              ? {
+                  width: `${splitPct}%`,
+                  minWidth: 220,
+                  maxWidth: '86%',
+                  borderRight: '1px solid var(--color-border)',
+                }
+              : {
+                  height: `${splitPct}%`,
+                  minHeight: 120,
+                  maxHeight: '86%',
+                  flexShrink: 0,
+                  borderBottom: '1px solid var(--color-border)',
+                }),
+          }}
+        >
         <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--color-paper)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <Link href="/admin" style={{ color: 'var(--color-ink-muted)', display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontSize: '13px' }}>
@@ -405,10 +569,30 @@ CATEGORY: Core Domain
             </h2>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
-            <button onClick={handlePreview} className="btn-secondary" style={{ padding: '6px 14px' }}>
+            <button
+              onClick={handlePreview}
+              className="btn-secondary"
+              style={{ padding: '6px 14px' }}
+              disabled={!metaComplete}
+              title={
+                !metaComplete
+                  ? 'Fill level, country, degree, and stream first'
+                  : undefined
+              }
+            >
               <Play size={14} /> Preview
             </button>
-            <button onClick={handleSave} className="btn-primary" style={{ padding: '6px 14px' }} disabled={saving}>
+            <button
+              onClick={handleSave}
+              className="btn-primary"
+              style={{ padding: '6px 14px' }}
+              disabled={saving || !metaComplete}
+              title={
+                !metaComplete
+                  ? 'Fill level, country, degree, and stream first'
+                  : undefined
+              }
+            >
               <Save size={14} /> {saving ? 'Saving...' : 'Save'}
             </button>
           </div>
@@ -498,15 +682,46 @@ CATEGORY: Core Domain
           </div>
         )}
 
+        {!isEdit && !metaComplete && (
+          <div
+            style={{
+              padding: '12px 24px',
+              background: '#FFFBEB',
+              borderBottom: '1px solid #FDE68A',
+              fontFamily: 'var(--font-sans)',
+              fontSize: '12px',
+              lineHeight: 1.5,
+              color: '#92400E',
+            }}
+          >
+            <strong>Metadata required.</strong> Choose level, country, degree, and stream above before
+            editing the tree. If your stream is not listed, pick <strong>Other…</strong> and type it.
+          </div>
+        )}
+
         <textarea
           value={text}
           onChange={(e) => {
+            if (!metaComplete) return;
             clearFeedback();
             setText(e.target.value);
           }}
-          placeholder="TREE: B.Tech — Computer Science | India | undergraduate&#10;CATEGORY: Software Development&#10;  DESC: ...&#10;"
+          onPaste={(e) => {
+            if (!metaComplete) e.preventDefault();
+          }}
+          onDrop={(e) => {
+            if (!metaComplete) e.preventDefault();
+          }}
+          readOnly={!metaComplete}
+          aria-readonly={!metaComplete}
+          placeholder={
+            metaComplete
+              ? 'TREE: B.Tech — Computer Science | India | undergraduate&#10;CATEGORY: Software Development&#10;  DESC: ...&#10;'
+              : 'Complete level, country, degree, and stream above to edit the tree source…'
+          }
           style={{
             flex: 1,
+            minHeight: 0,
             width: '100%',
             padding: '24px',
             fontFamily: 'var(--font-mono)',
@@ -515,8 +730,9 @@ CATEGORY: Core Domain
             border: 'none',
             resize: 'none',
             outline: 'none',
-            background: 'white',
-            color: 'var(--color-ink)',
+            background: metaComplete ? 'white' : 'var(--color-paper)',
+            color: metaComplete ? 'var(--color-ink)' : 'var(--color-ink-muted)',
+            cursor: metaComplete ? 'text' : 'not-allowed',
             whiteSpace: 'pre',
           }}
           spellCheck={false}
@@ -534,27 +750,130 @@ CATEGORY: Core Domain
             ))}
           </div>
         )}
-      </div>
+        </div>
 
-      <div style={{ flex: 1, position: 'relative', background: 'var(--color-paper)' }}>
-        {previewTree && (
-          <div style={{ position: 'absolute', top: '16px', right: '24px', zIndex: 10 }}>
-            <OrientationToggle orientation={orientation} onChange={setOrientation} />
-          </div>
-        )}
-        {previewTree ? (
-          <TreeViewer
-            root={previewTree.root}
-            orientation={orientation}
-            onNodeClick={() => {}}
-            containerWidth={typeof window !== 'undefined' ? window.innerWidth / 2 : 800}
-            containerHeight={typeof window !== 'undefined' ? window.innerHeight : 600}
+        <div
+          role="separator"
+          aria-orientation={isDesktopSplit ? 'vertical' : 'horizontal'}
+          aria-label="Resize source and preview panels"
+          aria-valuenow={Math.round(splitPct)}
+          tabIndex={0}
+          onMouseDown={handleSplitPointerDown}
+          onTouchStart={handleSplitPointerDown}
+          onKeyDown={(e) => {
+            const step = 4;
+            if (isDesktopSplit) {
+              if (e.key === 'ArrowLeft') persistSplitPct(splitPct - step);
+              if (e.key === 'ArrowRight') persistSplitPct(splitPct + step);
+            } else {
+              if (e.key === 'ArrowUp') persistSplitPct(splitPct - step);
+              if (e.key === 'ArrowDown') persistSplitPct(splitPct + step);
+            }
+          }}
+          style={{
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'transparent',
+            touchAction: 'none',
+            zIndex: 6,
+            ...(isDesktopSplit
+              ? {
+                  width: 12,
+                  marginLeft: -6,
+                  marginRight: -6,
+                  cursor: 'col-resize',
+                }
+              : {
+                  height: 12,
+                  width: '100%',
+                  marginTop: -6,
+                  marginBottom: -6,
+                  cursor: 'row-resize',
+                }),
+          }}
+        >
+          <div
+            style={
+              isDesktopSplit
+                ? {
+                    width: 3,
+                    height: 'min(140px, 32vh)',
+                    background: 'var(--color-border)',
+                    borderRadius: 2,
+                  }
+                : {
+                    height: 3,
+                    width: 'min(140px, 32vw)',
+                    background: 'var(--color-border)',
+                    borderRadius: 2,
+                  }
+            }
           />
-        ) : (
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-ink-muted)', fontFamily: 'var(--font-sans)' }}>
-            Hit Preview to see the tree.
-          </div>
-        )}
+        </div>
+
+        <div
+          ref={previewPaneRef}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            minHeight: isDesktopSplit ? 0 : 180,
+            position: 'relative',
+            background: 'var(--color-paper)',
+            overflow: 'hidden',
+          }}
+        >
+          {previewTree && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 12,
+                right: 12,
+                zIndex: 15,
+                pointerEvents: 'auto',
+              }}
+            >
+              <OrientationToggle orientation={orientation} onChange={setOrientation} />
+            </div>
+          )}
+          {previewTree ? (
+            <TreeViewer
+              root={previewTree.root}
+              orientation={orientation}
+              onNodeClick={(node) => setSelectedNode(node)}
+              containerWidth={previewSize.w}
+              containerHeight={previewSize.h}
+              selectedNodeId={selectedNode?.id ?? null}
+            />
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                padding: '24px',
+                gap: '8px',
+                color: 'var(--color-ink-muted)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '13px',
+                textAlign: 'center',
+              }}
+            >
+              <span>Hit Preview to render the tree.</span>
+              <span style={{ fontSize: '12px', maxWidth: 280 }}>
+                After preview, click any node to open the same detail panel as the live viewer.
+              </span>
+            </div>
+          )}
+          <InfoPanel
+            variant="embedded"
+            node={selectedNode}
+            onClose={() => setSelectedNode(null)}
+          />
+        </div>
       </div>
     </div>
   );
