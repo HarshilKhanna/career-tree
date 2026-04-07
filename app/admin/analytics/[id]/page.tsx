@@ -154,7 +154,7 @@ export default function AdminAnalyticsPage({
               lineHeight: 1.25,
             }}
           >
-            Analytics: {tree.degree} · {tree.country}
+            Analytics: {tree.degree}
           </h2>
         </div>
 

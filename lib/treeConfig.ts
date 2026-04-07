@@ -386,3 +386,109 @@ export function streamsForDegree(degree: string): string[] {
   if (Array.isArray(list) && list.length > 0) return list;
   return [...GENERIC_STREAM_SUGGESTIONS];
 }
+
+/** Landing + admin profile picker (in-school streams; distinct from degree {@link STREAMS}). */
+export const INSCHOOL_STREAMS = ['PCM', 'PCMB', 'PCB', 'Commerce', 'Humanities'];
+
+export const PROFILE_TYPES = [
+  { id: 'inschool' as const, label: 'In-School' },
+  { id: 'bachelors' as const, label: "Bachelor's Student / Fresh Graduate" },
+  { id: 'bachelors_exp' as const, label: "Bachelor's + Under 2 Yrs Experience" },
+  { id: 'masters' as const, label: "Master's Student / Fresh Graduate" },
+  { id: 'masters_exp' as const, label: "Master's + Under 2 Yrs Experience" },
+  { id: 'exp2plus' as const, label: 'More Than 2 Years Experience' },
+];
+
+export const UG_DEGREES = [
+  'B.Tech / B.E.',
+  'BBA',
+  'B.Com',
+  'B.Sc',
+  'BA',
+  'BCA',
+  'B.Arch',
+  'MBBS',
+  'B.Pharm',
+  'LLB',
+];
+
+export const MASTERS_DEGREES = [
+  'M.Tech / M.E.',
+  'MBA',
+  'M.Sc',
+  'MA',
+  'MCA',
+  'M.Com',
+  'LLM',
+  'MD',
+  'M.Arch',
+];
+
+export const WORK_DOMAINS = [
+  'Software',
+  'Finance',
+  'Consulting',
+  'Marketing',
+  'Operations',
+  'Design',
+  'Healthcare',
+  'Education',
+  'Research',
+  'Manufacturing',
+];
+
+export const SENIOR_ROLES = [
+  'Software Engineering',
+  'Data & AI',
+  'Product Management',
+  'Finance & Banking',
+  'Consulting',
+  'Marketing',
+  'Operations',
+  'Design',
+  'Research',
+  'Entrepreneurship',
+];
+
+export const SPECIALISATIONS: Record<string, string[] | null> = {
+  'B.Tech / B.E.': [
+    'Computer Science',
+    'Mechanical',
+    'Civil',
+    'Electrical',
+    'Electronics & Communication',
+    'Chemical',
+    'Aerospace',
+    'Biotechnology',
+  ],
+  BBA: null,
+  'B.Com': ['General', 'Honours', 'Accounting & Finance'],
+  'B.Sc': ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'Computer Science', 'Statistics'],
+  BA: ['Economics', 'Psychology', 'Sociology', 'English', 'History', 'Political Science'],
+  BCA: null,
+  'B.Arch': null,
+  MBBS: null,
+  'B.Pharm': null,
+  LLB: null,
+  'M.Tech / M.E.': [
+    'Computer Science / AI',
+    'Mechanical',
+    'Civil',
+    'VLSI',
+    'Data Science',
+  ],
+  MBA: ['Finance', 'Marketing', 'HR', 'Operations', 'Consulting', 'Entrepreneurship'],
+  'M.Sc': ['Physics', 'Chemistry', 'Mathematics', 'Data Science', 'Biotechnology'],
+  MA: ['Economics', 'Psychology', 'Sociology', 'English', 'History'],
+  MCA: null,
+  'M.Com': null,
+  LLM: null,
+  MD: null,
+  'M.Arch': null,
+};
+
+export function profileSpecialisations(degree: string): string[] | null {
+  const list = SPECIALISATIONS[degree.trim()];
+  if (list === undefined) return null;
+  return list;
+}

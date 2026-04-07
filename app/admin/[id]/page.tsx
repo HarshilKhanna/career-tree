@@ -71,5 +71,18 @@ export default function AdminTreeEditorPage({
     );
   }
 
-  return <AdminUploader initialText={treeToText(tree)} isEdit originalTreeId={treeId} />;
+  return (
+    <AdminUploader
+      initialText={treeToText(tree)}
+      isEdit
+      originalTreeId={treeId}
+      editBaseline={{
+        id: tree.id,
+        createdAt: tree.createdAt,
+        country: tree.country,
+        ugDegree: tree.ugDegree,
+        ugStream: tree.ugStream,
+      }}
+    />
+  );
 }

@@ -249,6 +249,8 @@ export default function InfoPanel({ node, onClose, variant = 'page' }: InfoPanel
                 </div>
               )}
 
+              <PathDetailSections node={node} sheet={sheet} />
+
               {node.children.length === 0 && (
                 <div
                   style={{
@@ -302,5 +304,94 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
+  );
+}
+
+const PATH_DETAIL_SECTIONS: Array<{
+  key: keyof import('@/lib/types').CareerNode;
+  label: string;
+}> = [
+  { key: 'what_it_is', label: 'What It Is' },
+  { key: 'entry_route', label: 'Entry Route' },
+  { key: 'timeline', label: 'Timeline' },
+  { key: 'salary_range', label: 'Salary Range' },
+  { key: 'work_lifestyle', label: 'Work & Lifestyle' },
+  { key: 'growth_and_progression', label: 'Growth' },
+  { key: 'demand_and_outlook', label: 'Demand' },
+  { key: 'who_its_not_for', label: "Not For" },
+  { key: 'honest_caveat', label: 'Caveat' },
+];
+
+function PathDetailSections({ node, sheet }: { node: import('@/lib/types').CareerNode; sheet: boolean }) {
+  const rows = PATH_DETAIL_SECTIONS.filter(({ key }) => {
+    const val = node[key as keyof import('@/lib/types').CareerNode];
+    return Array.isArray(val) && (val as string[]).length > 0;
+  });
+  if (rows.length === 0) return null;
+
+  return (
+    <div>
+      <SectionLabel>Path Details</SectionLabel>
+      <div
+        style={{
+          marginTop: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: '6px',
+          overflow: 'hidden',
+          background: 'var(--color-paper)',
+        }}
+      >
+        {rows.map(({ key, label }, idx) => {
+          const items = node[key as keyof import('@/lib/types').CareerNode] as string[];
+          return (
+            <div
+              key={key}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'min(34%, 120px) 1fr',
+                borderBottom: idx < rows.length - 1 ? '1px solid var(--color-border)' : undefined,
+              }}
+            >
+              <div
+                style={{
+                  padding: '7px 10px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '10px',
+                  fontWeight: 500,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-ink-muted)',
+                  lineHeight: 1.4,
+                  borderRight: '1px solid var(--color-border)',
+                }}
+              >
+                {label}
+              </div>
+              <div
+                style={{
+                  padding: '7px 10px',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: sheet ? '13.5px' : '13px',
+                  lineHeight: 1.55,
+                  color: 'var(--color-ink)',
+                }}
+              >
+                {items.length === 1 ? (
+                  items[0]
+                ) : (
+                  <ul style={{ margin: 0, padding: '0 0 0 14px' }}>
+                    {items.map((item, i) => (
+                      <li key={i} style={{ marginBottom: i < items.length - 1 ? '2px' : 0 }}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

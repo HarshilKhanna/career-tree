@@ -199,7 +199,7 @@ export default function TreePage({ params }: { params: Promise<{ id: string }> }
     );
   }
 
-  const breadcrumb = `${tree.degree}${tree.stream ? ` · ${tree.stream}` : ''} · ${tree.country}`;
+  const breadcrumb = `${tree.degree}${tree.stream ? ` · ${tree.stream}` : ''}`;
 
   return (
     <>

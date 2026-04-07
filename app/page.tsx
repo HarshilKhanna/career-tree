@@ -1,15 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Settings } from 'lucide-react';
-import SteppedSelector from '@/components/SteppedSelector';
-import { EducationLevel } from '@/lib/treeConfig';
-import { buildTreeId } from '@/lib/treeUtils';
-import { TreeMetadata } from '@/lib/types';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { Settings } from 'lucide-react';
+import ProfileLandingFlow from '@/components/ProfileLandingFlow';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -21,41 +15,6 @@ const fadeUp = {
 };
 
 export default function HomePage() {
-  const router = useRouter();
-  const [country, setCountry] = useState('');
-  const [level, setLevel] = useState<EducationLevel | ''>('');
-  const [degree, setDegree] = useState('');
-  const [stream, setStream] = useState<string | null | undefined>(undefined);
-  
-  const [status, setStatus] = useState<'idle' | 'loading' | 'not-found'>('idle');
-  const [treeData, setTreeData] = useState<TreeMetadata[]>([]);
-
-  useEffect(() => {
-    fetch('/api/trees')
-      .then(r => r.json())
-      .then((data: TreeMetadata[]) => setTreeData(data))
-      .catch(console.error);
-  }, []);
-
-  const isComplete = Boolean(country && level && degree && (stream !== undefined));
-
-  const handleExplore = async () => {
-    if (!isComplete) return;
-    setStatus('loading');
-    
-    // buildTreeId to get id, then fetch tree
-    const targetId = buildTreeId(level as string, degree, stream as string | null, country as string);
-    
-    try {
-      const res = await fetch(`/api/trees/${targetId}`);
-      if (!res.ok) throw new Error('Failed to fetch');
-      // If we find it, proceed
-      router.push(`/tree/${targetId}`);
-    } catch {
-      setStatus('not-found');
-    }
-  };
-
   return (
     <main
       style={{
@@ -70,7 +29,6 @@ export default function HomePage() {
         overflow: 'hidden',
       }}
     >
-      {/* Subtle background texture */}
       <div
         aria-hidden
         style={{
@@ -82,20 +40,18 @@ export default function HomePage() {
         }}
       />
 
-      {/* Content */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '32px',
-          maxWidth: '600px',
+          gap: 32,
+          maxWidth: 600,
           width: '100%',
           textAlign: 'center',
           position: 'relative',
         }}
       >
-        {/* Eyebrow */}
         <motion.div
           custom={0}
           variants={fadeUp}
@@ -130,7 +86,6 @@ export default function HomePage() {
           </span>
         </motion.div>
 
-        {/* Heading */}
         <motion.h1
           custom={1}
           variants={fadeUp}
@@ -143,6 +98,7 @@ export default function HomePage() {
             lineHeight: 1.1,
             color: 'var(--color-ink)',
             letterSpacing: '-0.03em',
+            margin: 0,
           }}
         >
           Where does your degree{' '}
@@ -151,7 +107,6 @@ export default function HomePage() {
           </em>
         </motion.h1>
 
-        {/* Subheading */}
         <motion.p
           custom={2}
           variants={fadeUp}
@@ -164,84 +119,25 @@ export default function HomePage() {
             lineHeight: 1.65,
             color: 'var(--color-ink-muted)',
             maxWidth: '440px',
+            margin: 0,
           }}
         >
-          Explore every career path available to you — from first job to career
-          peak — in an interactive, collapsible tree.
+          Explore every career path available to you — from first job to career peak — in an
+          interactive, collapsible tree.
         </motion.p>
 
-        {/* Selectors */}
         <motion.div
           custom={3}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           className="will-change-transform"
-          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          style={{ width: '100%', maxWidth: 560 }}
         >
-          <SteppedSelector
-            country={country}
-            level={level as any}
-            degree={degree}
-            stream={stream}
-            treeData={treeData}
-            onCountryChange={(v) => { setCountry(v); setStatus('idle'); }}
-            onLevelChange={(v) => { setLevel(v); setStatus('idle'); }}
-            onDegreeChange={(v) => { setDegree(v); setStatus('idle'); }}
-            onStreamChange={(v) => { setStream(v); setStatus('idle'); }}
-          />
+          <ProfileLandingFlow />
         </motion.div>
-
-        {/* CTA */}
-        <AnimatePresence>
-          {isComplete && (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ delay: 0.1 }}
-              style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}
-            >
-              <button
-                className="btn-primary"
-                onClick={handleExplore}
-                disabled={status === 'loading'}
-                id="explore-btn"
-                style={{
-                  fontSize: '16px',
-                  padding: '14px 36px',
-                  cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                }}
-              >
-                {status === 'loading' ? 'Searching…' : 'Explore Paths'}
-                {status !== 'loading' && <ArrowRight size={16} />}
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Not-found message */}
-        {status === 'not-found' && (
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '13px',
-              color: '#B45309',
-              background: '#FFFBEB',
-              border: '1px solid #FDE68A',
-              borderRadius: '6px',
-              padding: '10px 16px',
-            }}
-          >
-            This path isn&apos;t mapped yet. Check back soon.
-          </motion.p>
-        )}
       </div>
 
-      {/* Admin link */}
       <Link
         href="/admin"
         className="btn-secondary"

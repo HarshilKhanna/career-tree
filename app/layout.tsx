@@ -12,8 +12,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'CareerTree — Explore Every Career Path',
   description:
-    'An interactive career path decision tree for students and graduates. Input your degree and country to explore every career path available to you.',
-  keywords: ['career paths', 'B.Tech', 'engineering careers', 'career tree', 'India careers'],
+    'An interactive career path decision tree for students and graduates. Input your profile and degree to explore every career path available to you.',
+  keywords: ['career paths', 'B.Tech', 'engineering careers', 'career tree'],
   openGraph: {
     title: 'CareerTree',
     description: 'Explore every career path available to you, interactively.',

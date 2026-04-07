@@ -1,128 +1,92 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useCallback,
+  useRef,
+  type CSSProperties,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { CareerTree, CareerNode } from '@/lib/types';
 import type { TreeMetadata } from '@/lib/types';
 import { parseTreeFile, ParseError } from '@/lib/parseTreeFile';
-import { buildTreeId } from '@/lib/treeUtils';
+import {
+  applyProfileMetadata,
+  buildTreeId,
+  profileToCareerTreeFields,
+  treeSelectionsFromForm,
+  type Exp2PlusEducation,
+  type TreeSelections,
+} from '@/lib/treeUtils';
 import { Play, Save, AlertCircle, ArrowLeft, Bot } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import OrientationToggle from '@/components/OrientationToggle';
 import InfoPanel from '@/components/InfoPanel';
-import { COUNTRIES, degreesForLevel, streamsForDegree, formatLevelLabel } from '@/lib/treeConfig';
+import {
+  formatLevelLabel,
+  INSCHOOL_STREAMS,
+  MASTERS_DEGREES,
+  PROFILE_TYPES,
+  profileSpecialisations,
+  SENIOR_ROLES,
+  UG_DEGREES,
+  WORK_DOMAINS,
+} from '@/lib/treeConfig';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const TreeViewer = dynamic(() => import('@/components/TreeViewer'), { ssr: false });
 
 const SPLIT_STORAGE_KEY = 'careertree_admin_split_pct';
+const CUSTOM_OPTIONS_STORAGE_KEY = 'careertree_admin_custom_options_v1';
 const SPLIT_MIN = 22;
 const SPLIT_MAX = 78;
 
-const OTHER = '__other__';
+const DUPLICATE_PROFILE_MSG =
+  'A tree already exists for this ID. Change the selections or edit the existing tree.';
 
-const LEVEL_OPTIONS = ['school', 'undergraduate', 'masters'] as const;
-
-const DUPLICATE_TREE_MSG =
-  'A tree already exists for this level, country, degree, and stream. Change one of the attributes or edit the existing tree.';
-
-/** Same rules as save: composite id or matching level/degree/stream/country. */
-function duplicateExists(
-  meta: TreeMetadata[],
-  level: string,
-  degree: string,
-  stream: string | null,
-  country: string
-): boolean {
-  const streamNorm = stream?.trim() ? stream.trim() : null;
-  const computedId = buildTreeId(level, degree, streamNorm, country);
-  return meta.some(
-    (m) =>
-      m.id === computedId ||
-      (m.level === level &&
-        m.degree === degree &&
-        m.country === country &&
-        (m.stream ?? null) === streamNorm)
-  );
+function duplicateProfileId(meta: TreeMetadata[], id: string): boolean {
+  return meta.some((m) => m.id === id);
 }
 
-function SelectOrOtherField({
+function adminLabelStyle(): CSSProperties {
+  return {
+    fontSize: '11px',
+    fontWeight: 600,
+    color: 'var(--color-ink-muted)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    display: 'block',
+    marginBottom: '6px',
+  };
+}
+
+function AdminSelect({
   label,
-  options,
   value,
-  onSelect,
-  otherText,
-  onOtherText,
-  resetListValue,
+  onChange,
   placeholder,
-  disabledSelect,
-  formatOption,
+  items,
+  disabled,
+  allowCustom,
+  onCreateOption,
 }: {
   label: string;
-  options: string[];
   value: string;
-  onSelect: (v: string) => void;
-  otherText: string;
-  onOtherText: (v: string) => void;
-  /** Value to apply when leaving “Other…” via “Choose from list” */
-  resetListValue: string;
+  onChange: (v: string) => void;
   placeholder: string;
-  disabledSelect?: boolean;
-  /** Optional label transform for list options (values unchanged). */
-  formatOption?: (option: string) => string;
+  items: { value: string; label: string }[];
+  disabled?: boolean;
+  allowCustom?: boolean;
+  onCreateOption?: (nextValue: string) => void;
 }) {
-  const isOther = value === OTHER;
-  if (isOther) {
-    return (
-      <div style={{ flex: 1, minWidth: '120px' }}>
-        <label
-          style={{
-            fontSize: '11px',
-            fontWeight: 600,
-            color: 'var(--color-ink-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            display: 'block',
-            marginBottom: '6px',
-          }}
-        >
-          {label}
-        </label>
-        <input
-          type="text"
-          className="ct-input"
-          value={otherText}
-          onChange={(e) => onOtherText(e.target.value)}
-          placeholder={`Type ${label.toLowerCase()}…`}
-          style={{ padding: '6px 10px', fontSize: '13px', borderRadius: '6px', width: '100%' }}
-        />
-        <button
-          type="button"
-          className="btn-ghost"
-          style={{ fontSize: '11px', marginTop: 6, padding: '2px 0' }}
-          onClick={() => onSelect(resetListValue)}
-        >
-          Choose from list
-        </button>
-      </div>
-    );
-  }
+  const NEW_VALUE = '__new__';
   return (
-    <div style={{ flex: 1, minWidth: '120px' }}>
-      <label
-        style={{
-          fontSize: '11px',
-          fontWeight: 600,
-          color: 'var(--color-ink-muted)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          display: 'block',
-          marginBottom: '6px',
-        }}
-      >
-        {label}
-      </label>
+    <div style={{ flex: 1, minWidth: '140px' }}>
+      <label style={adminLabelStyle()}>{label}</label>
       <select
         className="ct-input"
         style={{
@@ -133,33 +97,64 @@ function SelectOrOtherField({
           color: value === '' ? 'var(--color-ink-muted)' : 'inherit',
         }}
         value={value}
-        disabled={disabledSelect}
-        onChange={(e) => onSelect(e.target.value)}
+        disabled={disabled}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (allowCustom && next === NEW_VALUE && onCreateOption) {
+            const typed = window.prompt(`Add new option for ${label}`);
+            if (typed && typed.trim()) {
+              onCreateOption(typed.trim());
+            }
+            return;
+          }
+          onChange(next);
+        }}
       >
         <option value="" disabled>
           {placeholder}
         </option>
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {formatOption ? formatOption(o) : o}
+        {items.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
           </option>
         ))}
-        <option value={OTHER}>Other…</option>
+        {allowCustom ? <option value={NEW_VALUE}>+ New…</option> : null}
       </select>
     </div>
   );
 }
 
+interface CustomAdminOptions {
+  inschoolStreams: string[];
+  ugDegrees: string[];
+  mastersDegrees: string[];
+  workDomains: string[];
+  seniorRoles: string[];
+  specialisations: Record<string, string[]>;
+}
+
+const EMPTY_CUSTOM_OPTIONS: CustomAdminOptions = {
+  inschoolStreams: [],
+  ugDegrees: [],
+  mastersDegrees: [],
+  workDomains: [],
+  seniorRoles: [],
+  specialisations: {},
+};
+
 interface AdminUploaderProps {
   initialText?: string;
   isEdit?: boolean;
   originalTreeId?: string;
+  /** When editing, preserve stable metadata the .txt header does not encode (profile id, UG fields, timestamps). */
+  editBaseline?: Pick<CareerTree, 'id' | 'createdAt' | 'country' | 'ugDegree' | 'ugStream'> | null;
 }
 
 export default function AdminUploader({
   initialText = '',
   isEdit = false,
   originalTreeId,
+  editBaseline = null,
 }: AdminUploaderProps) {
   const router = useRouter();
   const [text, setText] = useState(initialText);
@@ -168,6 +163,7 @@ export default function AdminUploader({
   const [saving, setSaving] = useState(false);
   const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
   const [notice, setNotice] = useState<{ text: string; tone: 'info' | 'error' } | null>(null);
+  const [isDuplicateProfile, setIsDuplicateProfile] = useState(false);
 
   const [selectedNode, setSelectedNode] = useState<CareerNode | null>(null);
   const [splitPct, setSplitPct] = useState(50);
@@ -180,72 +176,200 @@ export default function AdminUploader({
   const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
   const expandThenPanel = useMediaQuery('(max-width: 1023px)');
 
-  const [level, setLevel] = useState('');
-  const [country, setCountry] = useState('');
-  const [degree, setDegree] = useState('');
-  const [stream, setStream] = useState('');
+  const [pProfile, setPProfile] = useState<TreeSelections['profile'] | ''>('');
+  const [pStream, setPStream] = useState('');
+  const [pUgDegree, setPUgDegree] = useState('');
+  const [pUgSpec, setPUgSpec] = useState('');
+  const [pMastersDegree, setPMastersDegree] = useState('');
+  const [pMastersSpec, setPMastersSpec] = useState('');
+  const [pDomain, setPDomain] = useState('');
+  const [pRole, setPRole] = useState('');
+  const [pExp2plusEdu, setPExp2plusEdu] = useState<Exp2PlusEducation | ''>('');
+  const [customOptions, setCustomOptions] =
+    useState<CustomAdminOptions>(EMPTY_CUSTOM_OPTIONS);
 
-  const [customLevel, setCustomLevel] = useState('');
-  const [customCountry, setCustomCountry] = useState('');
-  const [customDegree, setCustomDegree] = useState('');
-  const [customStream, setCustomStream] = useState('');
+  const addUnique = (arr: string[], value: string) =>
+    arr.some((v) => v.toLowerCase() === value.toLowerCase()) ? arr : [...arr, value];
 
-  const finalLevel = level === OTHER ? customLevel.trim() : level.trim();
-  const finalCountry = country === OTHER ? customCountry.trim() : country.trim();
-  const finalDegree = degree === OTHER ? customDegree.trim() : degree.trim();
-  const finalStream = stream === OTHER ? customStream.trim() : stream.trim();
+  const persistCustomOptions = (next: CustomAdminOptions) => {
+    setCustomOptions(next);
+    try {
+      localStorage.setItem(CUSTOM_OPTIONS_STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      /* ignore */
+    }
+  };
 
-  /** New trees: block source editing until metadata is set (edit mode always allowed). */
-  const metaComplete = useMemo(
-    () =>
-      isEdit ||
-      Boolean(
-        finalLevel &&
-          finalCountry &&
-          finalDegree &&
-          finalStream
-      ),
-    [isEdit, finalLevel, finalCountry, finalDegree, finalStream]
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(CUSTOM_OPTIONS_STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as CustomAdminOptions;
+      persistCustomOptions({
+        inschoolStreams: parsed.inschoolStreams || [],
+        ugDegrees: parsed.ugDegrees || [],
+        mastersDegrees: parsed.mastersDegrees || [],
+        workDomains: parsed.workDomains || [],
+        seniorRoles: parsed.seniorRoles || [],
+        specialisations: parsed.specialisations || {},
+      });
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const inschoolOptions = useMemo(
+    () => [...INSCHOOL_STREAMS, ...customOptions.inschoolStreams],
+    [customOptions.inschoolStreams]
+  );
+  const ugDegreeOptions = useMemo(
+    () => [...UG_DEGREES, ...customOptions.ugDegrees],
+    [customOptions.ugDegrees]
+  );
+  const mastersDegreeOptions = useMemo(
+    () => [...MASTERS_DEGREES, ...customOptions.mastersDegrees],
+    [customOptions.mastersDegrees]
+  );
+  const workDomainOptions = useMemo(
+    () => [...WORK_DOMAINS, ...customOptions.workDomains],
+    [customOptions.workDomains]
+  );
+  const seniorRoleOptions = useMemo(
+    () => [...SENIOR_ROLES, ...customOptions.seniorRoles],
+    [customOptions.seniorRoles]
   );
 
-  const degreeOptions = useMemo(() => {
-    if (!level) return [];
-    if (level === OTHER && !customLevel.trim()) return [];
-    const key = level === OTHER ? customLevel.trim() : level;
-    return degreesForLevel(key || 'undergraduate');
-  }, [level, customLevel]);
+  const profileForm = useMemo(() => {
+    const profileTrim = pProfile.trim();
+    const profileNorm =
+      profileTrim === '' ? null : (profileTrim as TreeSelections['profile']);
+    const eduTrim = pExp2plusEdu.trim();
+    const exp2EduNorm: Exp2PlusEducation | null =
+      profileNorm === 'exp2plus' &&
+      (eduTrim === 'bachelors_only' || eduTrim === 'masters')
+        ? eduTrim
+        : null;
+    return {
+      profile: profileNorm,
+      stream: pStream.trim() || null,
+      ugDegree: pUgDegree.trim() || null,
+      ugSpec: pUgSpec.trim() || null,
+      mastersDegree: pMastersDegree.trim() || null,
+      mastersSpec: pMastersSpec.trim() || null,
+      domain: pDomain.trim() || null,
+      role: pRole.trim() || null,
+      exp2plusEducation: exp2EduNorm,
+    };
+  }, [
+    pProfile,
+    pStream,
+    pUgDegree,
+    pUgSpec,
+    pMastersDegree,
+    pMastersSpec,
+    pDomain,
+    pRole,
+    pExp2plusEdu,
+  ]);
+
+  const profileSelections = useMemo(
+    () => treeSelectionsFromForm(profileForm),
+    [profileForm]
+  );
+
+  const computedTreeId = profileSelections ? buildTreeId(profileSelections) : '';
+
+  const ugSpecList = useMemo(() => {
+    if (!pUgDegree) return null;
+    const base = profileSpecialisations(pUgDegree) || [];
+    const extra = customOptions.specialisations[pUgDegree] || [];
+    const merged = [...base, ...extra];
+    return merged.length ? merged : null;
+  }, [pUgDegree, customOptions.specialisations]);
+
+  const mastersSpecList = useMemo(() => {
+    if (!pMastersDegree) return null;
+    const base = profileSpecialisations(pMastersDegree) || [];
+    const extra = customOptions.specialisations[pMastersDegree] || [];
+    const merged = [...base, ...extra];
+    return merged.length ? merged : null;
+  }, [pMastersDegree, customOptions.specialisations]);
+
+  /** New trees: block source editing until profile path is complete (edit mode always allowed). */
+  const metaComplete = useMemo(
+    () => isEdit || profileSelections !== null,
+    [isEdit, profileSelections]
+  );
+  const duplicateLocked = !isEdit && isDuplicateProfile;
 
   useEffect(() => {
-    if (!level || (level === OTHER && !customLevel.trim())) {
-      setDegree('');
+    if (!pUgDegree) {
+      setPUgSpec('');
       return;
     }
-    if (degreeOptions.length === 0) {
-      setDegree('');
+    const opts = profileSpecialisations(pUgDegree);
+    if (!opts || opts.length === 0) {
+      setPUgSpec('');
       return;
     }
-    setDegree((prev) => {
-      if (prev === OTHER) return prev;
-      if (prev && degreeOptions.includes(prev)) return prev;
-      return '';
-    });
-  }, [degreeOptions, level, customLevel]);
-
-  const streamOptions = useMemo(() => streamsForDegree(finalDegree), [finalDegree]);
+    setPUgSpec((prev) => (prev && opts.includes(prev) ? prev : ''));
+  }, [pUgDegree]);
 
   useEffect(() => {
-    if (!finalDegree) {
-      setStream('');
-      setCustomStream('');
+    if (!pMastersDegree) {
+      setPMastersSpec('');
       return;
     }
-    const options = streamOptions;
-    setStream((prev) => {
-      if (prev === OTHER) return prev;
-      if (prev && options.includes(prev)) return prev;
-      return '';
-    });
-  }, [finalDegree, streamOptions]);
+    const opts = profileSpecialisations(pMastersDegree);
+    if (!opts || opts.length === 0) {
+      setPMastersSpec('');
+      return;
+    }
+    setPMastersSpec((prev) => (prev && opts.includes(prev) ? prev : ''));
+  }, [pMastersDegree]);
+
+  useLayoutEffect(() => {
+    setPStream('');
+    setPUgDegree('');
+    setPUgSpec('');
+    setPMastersDegree('');
+    setPMastersSpec('');
+    setPDomain('');
+    setPRole('');
+    setPExp2plusEdu('');
+  }, [pProfile]);
+
+  useEffect(() => {
+    if (pExp2plusEdu.trim() === 'bachelors_only') {
+      setPMastersDegree('');
+      setPMastersSpec('');
+    }
+  }, [pExp2plusEdu]);
+
+  const ugPathReadyAdmin = useMemo(
+    () =>
+      Boolean(
+        pUgDegree?.trim() && (!ugSpecList?.length || Boolean(pUgSpec?.trim()))
+      ),
+    [pUgDegree, pUgSpec, ugSpecList]
+  );
+
+  const mastersPathReadyAdmin = useMemo(
+    () =>
+      Boolean(
+        pMastersDegree?.trim() &&
+          (!mastersSpecList?.length || Boolean(pMastersSpec?.trim()))
+      ),
+    [pMastersDegree, pMastersSpec, mastersSpecList]
+  );
+
+  /** Drop exp2+ follow-ups when undergrad path is incomplete (avoids stale UI vs validation). */
+  useEffect(() => {
+    if (pProfile !== 'exp2plus') return;
+    if (ugPathReadyAdmin) return;
+    setPExp2plusEdu('');
+    setPRole('');
+  }, [pProfile, ugPathReadyAdmin]);
 
   useEffect(() => {
     try {
@@ -343,8 +467,9 @@ export default function AdminUploader({
 
   useEffect(() => {
     if (isEdit) return;
-    if (!finalLevel || !finalCountry || !finalDegree || !finalStream) {
-      setNotice((n) => (n?.text === DUPLICATE_TREE_MSG ? null : n));
+    if (!computedTreeId) {
+      setIsDuplicateProfile(false);
+      setNotice((n) => (n?.text === DUPLICATE_PROFILE_MSG ? null : n));
       return;
     }
 
@@ -354,10 +479,12 @@ export default function AdminUploader({
         const res = await fetch('/api/trees', { signal: ac.signal });
         if (!res.ok) return;
         const meta = (await res.json()) as TreeMetadata[];
-        if (duplicateExists(meta, finalLevel, finalDegree, finalStream, finalCountry)) {
-          setNotice({ text: DUPLICATE_TREE_MSG, tone: 'error' });
+        if (duplicateProfileId(meta, computedTreeId)) {
+          setIsDuplicateProfile(true);
+          setNotice({ text: DUPLICATE_PROFILE_MSG, tone: 'error' });
         } else {
-          setNotice((prev) => (prev?.text === DUPLICATE_TREE_MSG ? null : prev));
+          setIsDuplicateProfile(false);
+          setNotice((prev) => (prev?.text === DUPLICATE_PROFILE_MSG ? null : prev));
         }
       } catch {
         /* aborted or network */
@@ -368,7 +495,7 @@ export default function AdminUploader({
       clearTimeout(t);
       ac.abort();
     };
-  }, [finalLevel, finalCountry, finalDegree, finalStream, isEdit]);
+  }, [computedTreeId, isEdit]);
 
   const clearFeedback = useCallback(() => {
     setNotice(null);
@@ -380,54 +507,237 @@ export default function AdminUploader({
   };
 
   const handleGeneratePrompt = () => {
-    if (!finalLevel || !finalCountry || !finalDegree || !finalStream) {
-      showNotice('Fill level, country, degree, and stream before generating.', 'error');
+    if (duplicateLocked) {
+      showNotice(DUPLICATE_PROFILE_MSG, 'error');
       return;
     }
+    if (!profileSelections) {
+      showNotice('Complete the profile selections before generating.', 'error');
+      return;
+    }
+    const f = profileToCareerTreeFields(profileSelections);
+    const header = `TREE: ${f.degree} — ${f.stream ?? 'None'} | ${formatLevelLabel(f.level)}`;
+    const isInschool = profileSelections.profile === 'inschool';
+    const profileTypeLabel =
+      PROFILE_TYPES.find((p) => p.id === profileSelections.profile)?.label ??
+      'Unknown profile';
 
-    const template = `=== LLM PROMPT (Copy/paste the text below into ChatGPT/Claude to generate a new tree) ===
+    const inschoolBlock = isInschool
+      ? `
+In-School focus (${f.stream ?? 'stream'}):
+- Audience: students in school choosing next steps (exams, degrees, early careers).
+- Keep salary and progression examples realistic and practical.
+`
+      : `
+Audience:
+- Match ${formatLevelLabel(f.level)}; tree id for reference: ${f.id}.
+- Profile type: ${profileTypeLabel}.
+`;
 
-Please act as an expert career counselor. Generate a comprehensive, deep, and highly detailed career path tree for a ${finalDegree} in ${finalStream} for students in ${finalCountry} at the ${formatLevelLabel(finalLevel)} level.
+    const profileContextBlock = (() => {
+      if (!profileSelections) return '';
+      if (profileSelections.profile === 'masters_exp') {
+        return `
+Profile nuance (must reflect in content):
+- Profile type: ${profileTypeLabel}.
+- UG degree: ${profileSelections.ugDegree}${profileSelections.ugSpec ? ` — ${profileSelections.ugSpec}` : ''}.
+- Master's degree: ${profileSelections.mastersDegree}${profileSelections.mastersSpec ? ` — ${profileSelections.mastersSpec}` : ''}.
+- Work domain (from dropdown): ${profileSelections.domain ?? 'selected domain'}.
+- This is NOT a generic masters student tree.
+- Audience has a master's degree plus under 2 years of work experience.
+- Prioritize transition-ready roles where early industry exposure is valued.
+- Include practical portfolio, delivery, stakeholder, and business-context readiness.
+- Tailor content specifically to this degree + specialization + domain combination.
+`;
+      }
+      if (profileSelections.profile === 'bachelors_exp') {
+        return `
+Profile nuance (must reflect in content):
+- Profile type: ${profileTypeLabel}.
+- UG degree: ${profileSelections.ugDegree}${profileSelections.ugSpec ? ` — ${profileSelections.ugSpec}` : ''}.
+- Work domain (from dropdown): ${profileSelections.domain ?? 'selected domain'}.
+- Audience has a bachelor's degree plus under 2 years of work experience.
+- Favor role paths that reward execution maturity over purely academic depth.
+- Tailor content specifically to this degree + specialization + domain combination.
+`;
+      }
+      if (profileSelections.profile === 'exp2plus') {
+        const hasMasters = Boolean(profileSelections.mastersDegree?.trim());
+        const eduLines: string[] = [];
+        eduLines.push(`- UG degree: ${profileSelections.ugDegree}${profileSelections.ugSpec ? ` — ${profileSelections.ugSpec}` : ''}`);
+        if (hasMasters) {
+          eduLines.push(`- Master's degree: ${profileSelections.mastersDegree}${profileSelections.mastersSpec ? ` — ${profileSelections.mastersSpec}` : ''}`);
+        } else {
+          eduLines.push(`- Highest education: Bachelor's only (no master's degree).`);
+        }
+        return `
+Profile nuance (must reflect in content):
+- Profile type (from dropdown): ${profileTypeLabel}.
+${eduLines.join('\n')}
+- Target senior role / domain (from dropdown): ${profileSelections.role ?? 'not specified'}.
+- Audience has 2+ years experience and is targeting growth/leadership trajectory.
+- Emphasize ownership, decision-making, cross-functional scope, and progression paths.
+- Tailor content specifically to someone with this education background pursuing this senior role.
+`;
+      }
+      return '';
+    })();
 
-You MUST output your response strictly in the following custom plain-text format, with no markdown code blocks wrapping it. 
-Strictly use exactly 2 spaces for each level of indentation.
-Use the exact keywords: TREE:, CATEGORY:, PATH:, SPEC:, SUB:, DESC:, SKILLS:, SALARY:, ROADMAP:
+    const template = `=== LLM PROMPT — CareerTree .txt source (copy into ChatGPT / Claude) ===
 
-Format Rules:
-1. The first line must be the TREE header in exactly this format: TREE: ${finalDegree} - ${finalStream} | ${finalCountry} | ${formatLevelLabel(finalLevel)}
-2. The hierarchy is: CATEGORY -> PATH -> SPEC -> SUB.
-3. **CRITICAL**: EVERY SINGLE NODE (CATEGORY, PATH, SPEC, SUB) MUST have a detailed DESC (Description) under it.
-4. **CRITICAL**: EVERY SINGLE PATH, SPEC, and SUB MUST also have SKILLS, SALARY, and ROADMAP attributes filled with highly realistic, role-specific data. Do not skip these attributes for any child nodes!
-5. Metadata (DESC, SKILLS, SALARY, ROADMAP) must be indented 2 spaces further than their parent node.
-6. Add an empty line between different categories/paths for readability.
+Act as an expert career counselor.
 
-Example structure:
-TREE: ${finalDegree} - ${finalStream} | ${finalCountry} | ${formatLevelLabel(finalLevel)}
+## Output contract
+- Return **ONLY** parser-valid tree text.
+- Your response must start with \`TREE:\` as the first character.
+- Do **NOT** include any preface, explanation, notes, headings, markdown, code fences, or trailing commentary.
+- Do **NOT** wrap the answer in backticks.
+- Do **NOT** output any line containing a colon (\`:\`) unless it uses one of the exact keywords listed below. The parser treats every \`KEYWORD: value\` line as a keyword — any invented label (e.g. \`THE FUNDAMENTAL FORK:\`, \`NOTE:\`, \`SECTION:\`) will cause a parse error and reject the whole tree.
+- If you cannot comply, output exactly: \`ERROR: unable to generate valid tree\`
 
-CATEGORY: Core Domain
-  DESC: Writing, testing, and maintaining core systems and applications.
+${inschoolBlock.trim()}
 
-  PATH: Domain Specialist
-    DESC: Building highly interactive experiences and robust logic.
-    SKILLS: Core Skill 1, Core Skill 2, Essential Tooling
-    SALARY: 10L - 25L / yr
-    ROADMAP: Learn basics deeply -> Master a framework -> Build a complex portfolio -> Apply for jobs
+${profileContextBlock.trim()}
 
-    SPEC: Sub-Specialist
-      DESC: Focusing on advanced niche applications directly within the field.
-      SKILLS: Niche Skill 1, Niche Skill 2, Advanced Math
-      SALARY: 15L - 35L / yr
-      ROADMAP: Learn advanced concepts -> Master niche tools -> Build interactive playgrounds
+## Hard limits (important)
+- **Total nodes: 50–60** (count every **CATEGORY, PATH, SPEC, and SUB**; the root line is not a node). Aim mid-band unless the topic needs the high end.
+- Build a **substantial** tree: use enough categories, paths, branches, and **SUB** splits so coverage feels deep, while keeping the total in **50–60**.
+- **Before finalizing, self-count nodes. If outside 50–60, expand/compress and recount until compliant.**
+- **Do not return a draft. Return only the final version that already satisfies 50–60 nodes.**
+- **Do not** mention "terminal", "leaf", or "end of tree" in any user-facing text.
+
+## Hierarchy (indent with exactly 2 spaces per level)
+Use the full chain **CATEGORY → PATH → SPEC → SUB** whenever it helps. **SUB** is encouraged for finer role splits (e.g. multiple concrete jobs under one SPEC). Do **not** flatten artificially.
+
+## Every non-terminal node (ABSOLUTE rule — zero exceptions)
+For **every node that has children** (\`CATEGORY\`, \`PATH\`, or a branching \`SPEC\`), you **must** output all of the following, in this exact order — skipping even one will cause a parse error:
+1. \`DESC: …\` — one short line.
+2. \`WHAT_IT_IS:\` followed by at least one \`- …\` bullet.
+3. \`WHO_ITS_NOT_FOR:\` followed by at least one \`- …\` bullet.
+4. \`WORK_LIFESTYLE:\` followed by at least one \`- …\` bullet.
+5. \`ENTRY_ROUTE:\` followed by at least one \`- …\` bullet.
+6. \`TIMELINE:\` followed by at least one \`- …\` bullet.
+7. \`SALARY_RANGE:\` followed by at least one \`- …\` bullet.
+8. \`GROWTH:\` followed by at least one \`- …\` bullet.
+9. \`DEMAND:\` followed by at least one \`- …\` bullet.
+10. \`HONEST_CAVEAT:\` followed by at least one \`- …\` bullet.
+- **Do not** put \`SKILLS:\`, \`SALARY:\`, or \`ROADMAP:\` on non-terminals (those are terminal-only).
+- **Check before moving to the next node**: every non-terminal must have all 10 items above.
+
+## SPEC nodes — two cases
+**A) SPEC branches further** (has \`SUB:\` children): treat exactly like any non-terminal — output \`DESC:\` plus **all ten items** from the non-terminal rule above (one \`- \` bullet each). **No** \`SKILLS\` / \`SALARY\` / \`ROADMAP\` on that SPEC.
+
+**B) SPEC is a leaf** (no SUB under it): terminal content — \`    DESC:\` (1–2 short sentences), \`    SKILLS:\` (**4–8** comma-separated), \`    SALARY:\` (one INR line), \`    ROADMAP:\` (one line; use \`→\` where natural).
+
+## SUB nodes = deepest terminals (no children)
+Each \`SUB:\` **must** include:
+- \`      DESC: …\` — 1–2 short sentences.
+- \`      SKILLS: …\` — **4–8** comma-separated skills.
+- \`      SALARY: …\` — one INR line.
+- \`      ROADMAP: …\` — one scannable line with \`→\` where natural.
+
+## First line (required)
+${header}
+
+## Keywords the parser accepts
+Structural: \`CATEGORY:\`, \`PATH:\`, \`SPEC:\`, \`SUB:\`
+Scalars: \`DESC:\`, \`SKILLS:\`, \`SALARY:\`, \`ROADMAP:\`
+Path arrays: \`WHAT_IT_IS:\`, \`WHO_ITS_NOT_FOR:\`, \`WORK_LIFESTYLE:\`, \`ENTRY_ROUTE:\`, \`TIMELINE:\`, \`SALARY_RANGE:\`, \`GROWTH:\`, \`DEMAND:\`, \`HONEST_CAVEAT:\` (prefer \`- \` bullets, but concise plain lines are acceptable).
+
+## Minimal example shape (illustration only — replace with real content)
+${header}
+
+CATEGORY: Example domain
+  DESC: One-line scope for this bucket.
+  WHAT_IT_IS:
+  - Short point under ten words.
+  WHO_ITS_NOT_FOR:
+  - Short point under ten words.
+  WORK_LIFESTYLE:
+  - Short point under ten words.
+  ENTRY_ROUTE:
+  - Short point under ten words.
+  TIMELINE:
+  - Short point under ten words.
+  SALARY_RANGE:
+  - Short point under ten words.
+  GROWTH:
+  - Short point under ten words.
+  DEMAND:
+  - Short point under ten words.
+  HONEST_CAVEAT:
+  - Short point under ten words.
+
+  PATH: Example route
+    DESC: One-line summary of this branch.
+    WHAT_IT_IS:
+    - Short point under ten words.
+    WHO_ITS_NOT_FOR:
+    - Short point under ten words.
+    WORK_LIFESTYLE:
+    - Short point under ten words.
+    ENTRY_ROUTE:
+    - Short point under ten words.
+    TIMELINE:
+    - Short point under ten words.
+    SALARY_RANGE:
+    - Short point under ten words.
+    GROWTH:
+    - Short point under ten words.
+    DEMAND:
+    - Short point under ten words.
+    HONEST_CAVEAT:
+    - Short point under ten words.
+
+    SPEC: Example grouping (branches to SUBs)
+      DESC: One line introducing this split.
+      WHAT_IT_IS:
+      - Short point under ten words.
+      WHO_ITS_NOT_FOR:
+      - Short point under ten words.
+      WORK_LIFESTYLE:
+      - Short point under ten words.
+      ENTRY_ROUTE:
+      - Short point under ten words.
+      TIMELINE:
+      - Short point under ten words.
+      SALARY_RANGE:
+      - Short point under ten words.
+      GROWTH:
+      - Short point under ten words.
+      DEMAND:
+      - Short point under ten words.
+      HONEST_CAVEAT:
+      - Short point under ten words.
+
+      SUB: Concrete role A
+        DESC: One or two sentences. Practical and realistic tone.
+        SKILLS: Skill A, Skill B, Skill C, Skill D, Skill E
+        SALARY: ₹10L–₹25L / yr
+        ROADMAP: Step one → Step two → Step three
+
+      SUB: Concrete role B
+        DESC: One or two sentences.
+        SKILLS: Skill F, Skill G, Skill H, Skill I
+        SALARY: ₹8L–₹18L / yr
+        ROADMAP: Stage one → Stage two → Stage three
+
+    SPEC: Standalone leaf role (no SUB)
+      DESC: One or two sentences when this SPEC has no children.
+      SKILLS: Skill A, Skill B, Skill C, Skill D
+      SALARY: ₹12L–₹28L / yr
+      ROADMAP: A → B → C
 `;
     setText(template);
   };
 
   const handlePreview = () => {
     if (!metaComplete) {
-      showNotice(
-        'Select level, country, degree, and stream before previewing the tree.',
-        'error'
-      );
+      showNotice('Complete the profile selections before previewing the tree.', 'error');
+      return;
+    }
+    if (!isEdit && !profileSelections) {
+      showNotice('Complete the profile selections before previewing the tree.', 'error');
       return;
     }
     clearFeedback();
@@ -438,7 +748,17 @@ CATEGORY: Core Domain
       setMobilePreviewOpen(false);
     } else {
       setErrors([]);
-      const next = result.tree || null;
+      const next = result.tree ? { ...result.tree } : null;
+      if (next && !isEdit && profileSelections) {
+        applyProfileMetadata(next, profileSelections);
+      }
+      if (next && isEdit && editBaseline) {
+        next.id = editBaseline.id;
+        next.createdAt = editBaseline.createdAt;
+        next.country = editBaseline.country;
+        next.ugDegree = editBaseline.ugDegree ?? null;
+        next.ugStream = editBaseline.ugStream ?? null;
+      }
       setPreviewTree(next);
       if (next && !isDesktopSplit) setMobilePreviewOpen(true);
     }
@@ -446,10 +766,7 @@ CATEGORY: Core Domain
 
   const handleSave = async () => {
     if (!metaComplete) {
-      showNotice(
-        'Select level, country, degree, and stream before saving.',
-        'error'
-      );
+      showNotice('Complete the profile selections before saving.', 'error');
       return;
     }
     if (!previewTree) {
@@ -459,7 +776,7 @@ CATEGORY: Core Domain
 
     if (isEdit && originalTreeId && previewTree.id !== originalTreeId) {
       showNotice(
-        'The TREE header must match this tree’s degree, stream, country, and level. Revert the first line or open New Tree for a different path.',
+        'Saved tree id must match this record. Revert edits to the parsed id or open New Tree for a different path.',
         'error'
       );
       return;
@@ -472,16 +789,8 @@ CATEGORY: Core Domain
       const meta = (await metaRes.json()) as TreeMetadata[];
 
       if (!isEdit) {
-        if (
-          duplicateExists(
-            meta,
-            previewTree.level,
-            previewTree.degree,
-            previewTree.stream,
-            previewTree.country
-          )
-        ) {
-          showNotice(DUPLICATE_TREE_MSG, 'error');
+        if (duplicateProfileId(meta, previewTree.id)) {
+          showNotice(DUPLICATE_PROFILE_MSG, 'error');
           setSaving(false);
           return;
         }
@@ -500,9 +809,6 @@ CATEGORY: Core Domain
       setSaving(false);
     }
   };
-
-  const degreeSelectDisabled = !level || (level === OTHER && !customLevel.trim()) || degreeOptions.length === 0;
-  const streamSelectDisabled = !finalDegree;
 
   return (
     <div
@@ -683,7 +989,7 @@ CATEGORY: Core Domain
               disabled={!metaComplete}
               title={
                 !metaComplete
-                  ? 'Fill level, country, degree, and stream first'
+                  ? 'Complete profile selections first'
                   : undefined
               }
             >
@@ -707,7 +1013,7 @@ CATEGORY: Core Domain
               disabled={saving || !metaComplete}
               title={
                 !metaComplete
-                  ? 'Fill level, country, degree, and stream first'
+                  ? 'Complete profile selections first'
                   : undefined
               }
             >
@@ -719,81 +1025,285 @@ CATEGORY: Core Domain
         {!isEdit && (
           <div style={{ padding: '16px 24px', background: 'var(--color-paper)', borderBottom: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
-              <SelectOrOtherField
-                label="Level"
-                options={[...LEVEL_OPTIONS]}
-                value={level}
-                onSelect={(v) => {
+              <AdminSelect
+                label="Profile type"
+                value={pProfile}
+                onChange={(v) => {
                   clearFeedback();
-                  setLevel(v);
+                  const t = v.trim();
+                  setPProfile((t || '') as TreeSelections['profile'] | '');
                 }}
-                otherText={customLevel}
-                onOtherText={(v) => {
-                  clearFeedback();
-                  setCustomLevel(v);
-                }}
-                resetListValue=""
-                placeholder="Select level…"
-                formatOption={formatLevelLabel}
+                placeholder="Select profile…"
+                items={PROFILE_TYPES.map((p) => ({ value: p.id, label: p.label }))}
               />
-              <SelectOrOtherField
-                label="Country"
-                options={COUNTRIES}
-                value={country}
-                onSelect={(v) => {
-                  clearFeedback();
-                  setCountry(v);
-                }}
-                otherText={customCountry}
-                onOtherText={(v) => {
-                  clearFeedback();
-                  setCustomCountry(v);
-                }}
-                resetListValue=""
-                placeholder="Select country…"
-              />
-              <SelectOrOtherField
-                label="Degree"
-                options={degreeOptions}
-                value={degree}
-                onSelect={(v) => {
-                  clearFeedback();
-                  setDegree(v);
-                }}
-                otherText={customDegree}
-                onOtherText={(v) => {
-                  clearFeedback();
-                  setCustomDegree(v);
-                }}
-                resetListValue=""
-                placeholder={degreeSelectDisabled ? 'Select level first…' : 'Select degree…'}
-                disabledSelect={degreeSelectDisabled}
-              />
-              <SelectOrOtherField
-                label="Stream / specialization"
-                options={streamOptions}
-                value={stream}
-                onSelect={(v) => {
-                  clearFeedback();
-                  setStream(v);
-                }}
-                otherText={customStream}
-                onOtherText={(v) => {
-                  clearFeedback();
-                  setCustomStream(v);
-                }}
-                resetListValue=""
-                placeholder={streamSelectDisabled ? 'Select degree first…' : 'Select stream…'}
-                disabledSelect={streamSelectDisabled}
-              />
+              {pProfile === 'inschool' ? (
+                <AdminSelect
+                  label="Stream"
+                  value={pStream}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPStream(v);
+                  }}
+                  placeholder="Select stream…"
+                  items={inschoolOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      inschoolStreams: addUnique(customOptions.inschoolStreams, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPStream(next);
+                  }}
+                />
+              ) : null}
+              {pProfile === 'bachelors' ||
+              pProfile === 'bachelors_exp' ||
+              pProfile === 'masters' ||
+              pProfile === 'masters_exp' ||
+              pProfile === 'exp2plus' ? (
+                <AdminSelect
+                  label={
+                    pProfile === 'masters' || pProfile === 'masters_exp' || pProfile === 'exp2plus'
+                      ? 'Undergraduate degree'
+                      : 'Degree'
+                  }
+                  value={pUgDegree}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPUgDegree(v);
+                  }}
+                  placeholder="Select degree…"
+                  items={ugDegreeOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      ugDegrees: addUnique(customOptions.ugDegrees, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPUgDegree(next);
+                    setPUgSpec('');
+                  }}
+                />
+              ) : null}
+              {pUgDegree && ugSpecList && ugSpecList.length > 0 ? (
+                <AdminSelect
+                  label={
+                    pProfile === 'masters' || pProfile === 'masters_exp' || pProfile === 'exp2plus'
+                      ? 'UG specialisation'
+                      : 'Specialisation'
+                  }
+                  value={pUgSpec}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPUgSpec(v);
+                  }}
+                  placeholder="Select specialisation…"
+                  items={ugSpecList.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    if (!pUgDegree) return;
+                    const current = customOptions.specialisations[pUgDegree] || [];
+                    const updated = {
+                      ...customOptions,
+                      specialisations: {
+                        ...customOptions.specialisations,
+                        [pUgDegree]: addUnique(current, next),
+                      },
+                    };
+                    persistCustomOptions(updated);
+                    setPUgSpec(next);
+                  }}
+                />
+              ) : null}
+              {pProfile === 'exp2plus' && ugPathReadyAdmin ? (
+                <AdminSelect
+                  label="Beyond bachelor's"
+                  value={pExp2plusEdu}
+                  onChange={(v) => {
+                    clearFeedback();
+                    const t = v.trim();
+                    const next: Exp2PlusEducation | '' =
+                      t === 'bachelors_only' || t === 'masters' ? t : '';
+                    const prevEdu = pExp2plusEdu.trim();
+                    if (prevEdu !== '' && next !== '' && next !== prevEdu) setPRole('');
+                    setPExp2plusEdu(next);
+                  }}
+                  placeholder="Select education path…"
+                  items={[
+                    {
+                      value: 'bachelors_only',
+                      label: "Bachelor's only — no master's",
+                    },
+                    { value: 'masters', label: "I have a master's" },
+                  ]}
+                />
+              ) : null}
+              {pProfile === 'masters' ||
+              pProfile === 'masters_exp' ||
+              (pProfile === 'exp2plus' && pExp2plusEdu.trim() === 'masters') ? (
+                <AdminSelect
+                  label="Master's degree"
+                  value={pMastersDegree}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPMastersDegree(v);
+                  }}
+                  placeholder="Select master's degree…"
+                  disabled={!pUgDegree || Boolean(ugSpecList?.length && !pUgSpec)}
+                  items={mastersDegreeOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      mastersDegrees: addUnique(customOptions.mastersDegrees, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPMastersDegree(next);
+                    setPMastersSpec('');
+                  }}
+                />
+              ) : null}
+              {pMastersDegree && mastersSpecList && mastersSpecList.length > 0 ? (
+                <AdminSelect
+                  label="Master's specialisation"
+                  value={pMastersSpec}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPMastersSpec(v);
+                  }}
+                  placeholder="Select specialisation…"
+                  items={mastersSpecList.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    if (!pMastersDegree) return;
+                    const current = customOptions.specialisations[pMastersDegree] || [];
+                    const updated = {
+                      ...customOptions,
+                      specialisations: {
+                        ...customOptions.specialisations,
+                        [pMastersDegree]: addUnique(current, next),
+                      },
+                    };
+                    persistCustomOptions(updated);
+                    setPMastersSpec(next);
+                  }}
+                />
+              ) : null}
+              {pProfile === 'bachelors_exp' ? (
+                <AdminSelect
+                  label="Work domain"
+                  value={pDomain}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPDomain(v);
+                  }}
+                  placeholder="Select domain…"
+                  disabled={!ugPathReadyAdmin}
+                  items={workDomainOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      workDomains: addUnique(customOptions.workDomains, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPDomain(next);
+                  }}
+                />
+              ) : null}
+              {pProfile === 'masters_exp' ? (
+                <AdminSelect
+                  label="Work domain"
+                  value={pDomain}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPDomain(v);
+                  }}
+                  placeholder="Select domain…"
+                  disabled={!ugPathReadyAdmin || !mastersPathReadyAdmin}
+                  items={workDomainOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      workDomains: addUnique(customOptions.workDomains, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPDomain(next);
+                  }}
+                />
+              ) : null}
+              {pProfile === 'exp2plus' ? (
+                <AdminSelect
+                  label="Most recent role"
+                  value={pRole}
+                  onChange={(v) => {
+                    clearFeedback();
+                    setPRole(v.trim());
+                  }}
+                  placeholder="Select role…"
+                  disabled={
+                    !ugPathReadyAdmin ||
+                    pExp2plusEdu.trim() === '' ||
+                    (pExp2plusEdu.trim() === 'masters' && !mastersPathReadyAdmin)
+                  }
+                  items={seniorRoleOptions.map((s) => ({ value: s, label: s }))}
+                  allowCustom
+                  onCreateOption={(next) => {
+                    clearFeedback();
+                    const updated = {
+                      ...customOptions,
+                      seniorRoles: addUnique(customOptions.seniorRoles, next),
+                    };
+                    persistCustomOptions(updated);
+                    setPRole(next);
+                  }}
+                />
+              ) : null}
             </div>
+            {computedTreeId ? (
+              <div style={{ marginBottom: 14 }}>
+                <span style={adminLabelStyle()}>Generated tree id</span>
+                <code
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 13,
+                    display: 'block',
+                    wordBreak: 'break-all',
+                    color: 'var(--color-ink)',
+                  }}
+                >
+                  {computedTreeId}
+                </code>
+              </div>
+            ) : null}
             <button
               onClick={() => {
                 clearFeedback();
                 handleGeneratePrompt();
               }}
+              disabled={!metaComplete || duplicateLocked}
               className="btn-secondary"
-              style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '8px', padding: '10px', color: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '10px',
+                color: 'var(--color-accent)',
+                borderColor: 'var(--color-accent)',
+                opacity: !metaComplete || duplicateLocked ? 0.5 : 1,
+                cursor: !metaComplete || duplicateLocked ? 'not-allowed' : 'pointer',
+              }}
             >
               <Bot size={16} /> Generate AI Prompt
             </button>
@@ -812,30 +1322,48 @@ CATEGORY: Core Domain
               color: '#92400E',
             }}
           >
-            <strong>Metadata required.</strong> Choose level, country, degree, and stream above before
-            editing the tree. If your stream is not listed, pick <strong>Other…</strong> and type it.
+            <strong>Profile required.</strong> Select your profile type and answer the follow-up fields above
+            before editing the tree source.
+          </div>
+        )}
+        {!isEdit && duplicateLocked && (
+          <div
+            style={{
+              padding: '12px 24px',
+              background: '#FEF2F2',
+              borderBottom: '1px solid #FECACA',
+              fontFamily: 'var(--font-sans)',
+              fontSize: '12px',
+              lineHeight: 1.5,
+              color: '#991B1B',
+            }}
+          >
+            <strong>Tree already exists.</strong> Source editing and prompt generation are disabled for this
+            profile. Open it from the library and edit that tree instead.
           </div>
         )}
 
         <textarea
           value={text}
           onChange={(e) => {
-            if (!metaComplete) return;
+            if (!metaComplete || duplicateLocked) return;
             clearFeedback();
             setText(e.target.value);
           }}
           onPaste={(e) => {
-            if (!metaComplete) e.preventDefault();
+            if (!metaComplete || duplicateLocked) e.preventDefault();
           }}
           onDrop={(e) => {
-            if (!metaComplete) e.preventDefault();
+            if (!metaComplete || duplicateLocked) e.preventDefault();
           }}
-          readOnly={!metaComplete}
-          aria-readonly={!metaComplete}
+          readOnly={!metaComplete || duplicateLocked}
+          aria-readonly={!metaComplete || duplicateLocked}
           placeholder={
-            metaComplete
-              ? 'TREE: B.Tech — Computer Science | India | undergraduate&#10;CATEGORY: Software Development&#10;  DESC: ...&#10;'
-              : 'Complete level, country, degree, and stream above to edit the tree source…'
+            duplicateLocked
+              ? 'This profile already has a tree. Open existing tree from the library to edit.'
+              : metaComplete
+              ? 'TREE: B.Tech — Computer Science | undergraduate&#10;CATEGORY: Software Development&#10;  DESC: ...&#10;'
+              : 'Complete profile selections above to edit the tree source…'
           }
           style={{
             flex: 1,
@@ -848,9 +1376,9 @@ CATEGORY: Core Domain
             border: 'none',
             resize: 'none',
             outline: 'none',
-            background: metaComplete ? 'white' : 'var(--color-paper)',
-            color: metaComplete ? 'var(--color-ink)' : 'var(--color-ink-muted)',
-            cursor: metaComplete ? 'text' : 'not-allowed',
+            background: metaComplete && !duplicateLocked ? 'white' : 'var(--color-paper)',
+            color: metaComplete && !duplicateLocked ? 'var(--color-ink)' : 'var(--color-ink-muted)',
+            cursor: metaComplete && !duplicateLocked ? 'text' : 'not-allowed',
             whiteSpace: 'pre',
           }}
           spellCheck={false}

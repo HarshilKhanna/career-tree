@@ -5,10 +5,22 @@ export interface CareerNode {
   name: string;
   description: string;
   skills?: string[];
-  salaryRange?: string; // e.g. "₹8L – ₹25L / yr"
+  salaryRange?: string; // headline line for card, e.g. "₹8L – ₹25L / yr"
   roadmap?: string;     // free-text or markdown
   depth?: number;       // injected at render time, not stored
   children: CareerNode[];
+
+  // Extended detail arrays — present on intermediary (non-leaf) nodes only.
+  // Each string is a self-contained bullet line.
+  what_it_is?: string[];
+  who_its_not_for?: string[];
+  work_lifestyle?: string[];
+  entry_route?: string[];
+  timeline?: string[];
+  salary_range?: string[];          // detailed bands (coexists with salaryRange headline)
+  growth_and_progression?: string[];
+  demand_and_outlook?: string[];
+  honest_caveat?: string[];
 }
 
 export interface CareerTree {
@@ -16,6 +28,10 @@ export interface CareerTree {
   level: EducationLevel;
   degree: string;      // e.g. "B.Tech"
   stream: string | null;
+  /** UG degree when `level` is masters and the profile encodes UG separately (admin masters flows). */
+  ugDegree?: string | null;
+  /** UG specialization; same semantics as `ugDegree`. */
+  ugStream?: string | null;
   country: string;     // e.g. "India"
   createdAt: string;   // ISO date string
   updatedAt: string;
@@ -27,6 +43,8 @@ export interface TreeMetadata {
   level: EducationLevel;
   degree: string;
   stream: string | null;
+  ugDegree?: string | null;
+  ugStream?: string | null;
   country: string;
   createdAt: string;
   updatedAt: string;

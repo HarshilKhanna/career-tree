@@ -23,6 +23,8 @@ export async function GET() {
     level: t.level,
     degree: t.degree,
     stream: t.stream,
+    ugDegree: t.ugDegree ?? null,
+    ugStream: t.ugStream ?? null,
     country: t.country,
     createdAt: t.createdAt,
     updatedAt: t.updatedAt,

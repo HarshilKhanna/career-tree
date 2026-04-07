@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json,sys; data=json.load\\(sys.stdin\\); print\\(f'Trees: {len\\(data\\)}'\\); [print\\(f'{t[\\\\\"id\\\\\"]}: {sum\\(1 for _ in __import__\\(\\\\\"itertools\\\\\"\\).chain\\([t[\\\\\"root\\\\\"]], *\\([n[\\\\\"children\\\\\"] for n in [t[\\\\\"root\\\\\"]]]\\)\\)}'\\) for t in data]\")",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(python3:*)",
+      "Read(//c/Windows/**)",
+      "Bash(node -e \"const fs=require\\('fs'\\); const data=JSON.parse\\(fs.readFileSync\\('E:/aiblocks/careertree/data/trees.json'\\)\\); console.log\\(data.length\\)\")",
+      "Bash(python -c \"import json,sys; data=json.load\\(sys.stdin\\); print\\(f'Total trees: {len\\(data\\)}'\\); [print\\(f'  - {t[\\\\\"id\\\\\"]}'\\) for t in data]\")",
+      "Bash(python -c ':*)",
+      "Bash(python:*)"
+    ]
+  }
+}
