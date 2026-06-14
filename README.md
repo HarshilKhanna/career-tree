@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CareerTree: Career Path Visualizer
 
-## Getting Started
+## Overview
 
-First, run the development server:
+CareerTree is an interactive web application designed to help users explore potential career paths stemming from various degrees or starting points. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**What problem it solves:**
+Traditional career guidance often relies on static lists or linear progression models. CareerTree solves this by providing a dynamic, visual, and branching map of how different roles connect—from entry-level positions all the way to career peaks. It helps users easily understand prerequisites, lateral moves, and potential long-term trajectories.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Why this approach:**
+We chose a node-based interactive tree visualization because it naturally represents branching career paths. It allows users to explore complex progressions intuitively, collapsing or expanding paths as needed to avoid information overload.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Technologies Used:**
+- **Next.js (App Router) & React:** Core framework for a robust and fast web application.
+- **@xyflow/react (React Flow):** For rendering the interactive nodes, edges, and panning/zooming canvas.
+- **Dagre:** Provides the algorithm for automatic, clean hierarchical layout of the career nodes.
+- **Framer Motion:** Used for smooth animations and transitions to create a polished user experience.
+- **Tailwind CSS:** For styling, ensuring a responsive and consistent design.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Run the Project Locally
 
-## Learn More
+### Prerequisites
+- Node.js (v18 or higher)
+- A package manager (npm, yarn, pnpm, or bun)
 
-To learn more about Next.js, take a look at the following resources:
+### Setup Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+3. **View the application:**
+   Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure Highlights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/page.tsx`: The main landing page where users select their degree to start the flow.
+- `app/tree/`: The core visualization page where the interactive career tree is rendered.
+- `app/admin/`: A built-in admin dashboard used to easily manage and update tree content (nodes and connections) without needing to modify the codebase directly.
+- `components/`: Contains reusable UI components, including the canvas viewer (`TreeViewer.tsx`) and node editor (`AdminNodeEditor.tsx`).
